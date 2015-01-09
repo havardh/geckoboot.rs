@@ -31,4 +31,4 @@ Credits
   * C source for inspiration: https://github.com/EnergyMicro/EFM32GG_STK3700
   * emlib for EFM32GG: https://github.com/EnergyMicro/emlib
   * CMSIS: https://github.com/EnergyMicro/CMSIS
-  * target triple: https://github.com/kevinmehall/rust-tessel
+  * target triple: https://github.com/hackndev/zinc
