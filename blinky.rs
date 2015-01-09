@@ -59,7 +59,7 @@ pub extern "C" fn main()
 
         // Blink loop
         loop {
-            let mut j = 0u;
+            let mut j = 0us;
             *gpioEDOUTTGL = settgl;
             while j < 1000000 {
                 j += 1;

@@ -9,7 +9,7 @@ Requirements:
 -------------
   * arm-none-eabi toolchain
   * llvm-3.6 (nightly) toolchain
-  * rustc (requires Rust 0.12)
+  * rustc (tested on "rustc 1.0.0-nightly (44a287e6e 2015-01-08 17:03:40 -0800)")
 
 Compiling:
 ----------
@@ -31,3 +31,4 @@ Credits
   * C source for inspiration: https://github.com/EnergyMicro/EFM32GG_STK3700
   * emlib for EFM32GG: https://github.com/EnergyMicro/emlib
   * CMSIS: https://github.com/EnergyMicro/CMSIS
+  * target triple: https://github.com/kevinmehall/rust-tessel

@@ -1,6 +1,6 @@
 #[lang="fail_bounds_check"]
-fn fail_bounds_check(_: &(&'static str, uint),
-                     _: uint, _: uint) -> ! {
+fn fail_bounds_check(_: &(&'static str, usize),
+                     _: usize, _: usize) -> ! {
     loop{}
 }
 
@@ -13,3 +13,5 @@ pub extern "C" fn __aeabi_unwind_cpp_pr0() {
 #[lang="sized"]
 trait Sized {}
 
+#[lang="copy"]
+trait Copy {}
