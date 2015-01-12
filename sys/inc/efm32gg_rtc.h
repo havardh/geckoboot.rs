@@ -1,11 +1,10 @@
 /**************************************************************************//**
- * @file
- * @brief efm32gg_rtc Register and Bit Field definitions
- * @author Energy Micro AS
- * @version 3.20.0
+ * @file efm32gg_rtc.h
+ * @brief EFM32GG_RTC register and bit field definitions
+ * @version 3.20.7
  ******************************************************************************
  * @section License
- * <b>(C) Copyright 2012 Energy Micro AS, http://www.energymicro.com</b>
+ * <b>(C) Copyright 2014 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -13,21 +12,21 @@
  * freely, subject to the following restrictions:
  *
  * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software.
+ *    claim that you wrote the original software.@n
  * 2. Altered source versions must be plainly marked as such, and must not be
- *    misrepresented as being the original software.
+ *    misrepresented as being the original software.@n
  * 3. This notice may not be removed or altered from any source distribution.
  *
- * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Energy Micro AS has no
- * obligation to support this Software. Energy Micro AS is providing the
- * Software "AS IS", with no express or implied warranties of any kind,
- * including, but not limited to, any implied warranties of merchantability
- * or fitness for any particular purpose or warranties against infringement
- * of any proprietary rights of a third party.
+ * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Silicon Laboratories, Inc.
+ * has no obligation to support this Software. Silicon Laboratories, Inc. is
+ * providing the Software "AS IS", with no express or implied warranties of any
+ * kind, including, but not limited to, any implied warranties of
+ * merchantability or fitness for any particular purpose or warranties against
+ * infringement of any proprietary rights of a third party.
  *
- * Energy Micro AS will not be liable for any consequential, incidental, or
- * special damages, or any other relief, or for any claim by any third party,
- * arising from your use of this Software.
+ * Silicon Laboratories, Inc. will not be liable for any consequential,
+ * incidental, or special damages, or any other relief, or for any claim by
+ * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
 /**************************************************************************//**
@@ -194,17 +193,17 @@ typedef struct
 /* Bit fields for RTC SYNCBUSY */
 #define _RTC_SYNCBUSY_RESETVALUE         0x00000000UL                       /**< Default value for RTC_SYNCBUSY */
 #define _RTC_SYNCBUSY_MASK               0x00000007UL                       /**< Mask for RTC_SYNCBUSY */
-#define RTC_SYNCBUSY_CTRL                (0x1UL << 0)                       /**< RTC_CTRL Register Busy */
+#define RTC_SYNCBUSY_CTRL                (0x1UL << 0)                       /**< CTRL Register Busy */
 #define _RTC_SYNCBUSY_CTRL_SHIFT         0                                  /**< Shift value for RTC_CTRL */
 #define _RTC_SYNCBUSY_CTRL_MASK          0x1UL                              /**< Bit mask for RTC_CTRL */
 #define _RTC_SYNCBUSY_CTRL_DEFAULT       0x00000000UL                       /**< Mode DEFAULT for RTC_SYNCBUSY */
 #define RTC_SYNCBUSY_CTRL_DEFAULT        (_RTC_SYNCBUSY_CTRL_DEFAULT << 0)  /**< Shifted mode DEFAULT for RTC_SYNCBUSY */
-#define RTC_SYNCBUSY_COMP0               (0x1UL << 1)                       /**< RTC_COMP0 Register Busy */
+#define RTC_SYNCBUSY_COMP0               (0x1UL << 1)                       /**< COMP0 Register Busy */
 #define _RTC_SYNCBUSY_COMP0_SHIFT        1                                  /**< Shift value for RTC_COMP0 */
 #define _RTC_SYNCBUSY_COMP0_MASK         0x2UL                              /**< Bit mask for RTC_COMP0 */
 #define _RTC_SYNCBUSY_COMP0_DEFAULT      0x00000000UL                       /**< Mode DEFAULT for RTC_SYNCBUSY */
 #define RTC_SYNCBUSY_COMP0_DEFAULT       (_RTC_SYNCBUSY_COMP0_DEFAULT << 1) /**< Shifted mode DEFAULT for RTC_SYNCBUSY */
-#define RTC_SYNCBUSY_COMP1               (0x1UL << 2)                       /**< RTC_COMP1 Register Busy */
+#define RTC_SYNCBUSY_COMP1               (0x1UL << 2)                       /**< COMP1 Register Busy */
 #define _RTC_SYNCBUSY_COMP1_SHIFT        2                                  /**< Shift value for RTC_COMP1 */
 #define _RTC_SYNCBUSY_COMP1_MASK         0x4UL                              /**< Bit mask for RTC_COMP1 */
 #define _RTC_SYNCBUSY_COMP1_DEFAULT      0x00000000UL                       /**< Mode DEFAULT for RTC_SYNCBUSY */

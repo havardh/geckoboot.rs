@@ -1,18 +1,19 @@
 /**************************************************************************//**
- * @file
- * @brief CMSIS Cortex-M Peripheral Access Layer for Energy Micro devices
+ * @file em_device.h
+ * @brief CMSIS Cortex-M Peripheral Access Layer for Silicon Laboratories
+ *        microcontroller devices
  *
  * This is a convenience header file for defining the part number on the
  * build command line, instead of specifying the part specific header file.
+ *
  * @verbatim
  * Example: Add "-DEFM32G890F128" to your build options, to define part
  *          Add "#include "em_device.h" to your source files
  * @endverbatim
- * @author Energy Micro AS
- * @version 3.20.0
+ * @version 3.20.7
  ******************************************************************************
  * @section License
- * <b>(C) Copyright 2012 Energy Micro AS, http://www.energymicro.com</b>
+ * <b>(C) Copyright 2014 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -20,28 +21,27 @@
  * freely, subject to the following restrictions:
  *
  * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software.
+ *    claim that you wrote the original software.@n
  * 2. Altered source versions must be plainly marked as such, and must not be
- *    misrepresented as being the original software.
+ *    misrepresented as being the original software.@n
  * 3. This notice may not be removed or altered from any source distribution.
  *
- * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Energy Micro AS has no
- * obligation to support this Software. Energy Micro AS is providing the
- * Software "AS IS", with no express or implied warranties of any kind,
- * including, but not limited to, any implied warranties of merchantability
- * or fitness for any particular purpose or warranties against infringement
- * of any proprietary rights of a third party.
+ * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Silicon Laboratories, Inc.
+ * has no obligation to support this Software. Silicon Laboratories, Inc. is
+ * providing the Software "AS IS", with no express or implied warranties of any
+ * kind, including, but not limited to, any implied warranties of
+ * merchantability or fitness for any particular purpose or warranties against
+ * infringement of any proprietary rights of a third party.
  *
- * Energy Micro AS will not be liable for any consequential, incidental, or
- * special damages, or any other relief, or for any claim by any third party,
- * arising from your use of this Software.
+ * Silicon Laboratories, Inc. will not be liable for any consequential,
+ * incidental, or special damages, or any other relief, or for any claim by
+ * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
 
 #ifndef __EM_DEVICE_H
 #define __EM_DEVICE_H
 
-#define EFM32GG990F1024
 
 #if defined(EFM32GG230F1024)
 #include "efm32gg230f1024.h"
@@ -132,6 +132,12 @@
 
 #elif defined(EFM32GG895F512)
 #include "efm32gg895f512.h"
+
+#elif defined(EFM32GG900F1024)
+#include "efm32gg900f1024.h"
+
+#elif defined(EFM32GG900F512)
+#include "efm32gg900f512.h"
 
 #elif defined(EFM32GG940F1024)
 #include "efm32gg940f1024.h"

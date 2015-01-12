@@ -1,11 +1,10 @@
 /**************************************************************************//**
- * @file
- * @brief efm32gg_gpio Register and Bit Field definitions
- * @author Energy Micro AS
- * @version 3.20.0
+ * @file efm32gg_gpio.h
+ * @brief EFM32GG_GPIO register and bit field definitions
+ * @version 3.20.7
  ******************************************************************************
  * @section License
- * <b>(C) Copyright 2012 Energy Micro AS, http://www.energymicro.com</b>
+ * <b>(C) Copyright 2014 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -13,21 +12,21 @@
  * freely, subject to the following restrictions:
  *
  * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software.
+ *    claim that you wrote the original software.@n
  * 2. Altered source versions must be plainly marked as such, and must not be
- *    misrepresented as being the original software.
+ *    misrepresented as being the original software.@n
  * 3. This notice may not be removed or altered from any source distribution.
  *
- * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Energy Micro AS has no
- * obligation to support this Software. Energy Micro AS is providing the
- * Software "AS IS", with no express or implied warranties of any kind,
- * including, but not limited to, any implied warranties of merchantability
- * or fitness for any particular purpose or warranties against infringement
- * of any proprietary rights of a third party.
+ * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Silicon Laboratories, Inc.
+ * has no obligation to support this Software. Silicon Laboratories, Inc. is
+ * providing the Software "AS IS", with no express or implied warranties of any
+ * kind, including, but not limited to, any implied warranties of
+ * merchantability or fitness for any particular purpose or warranties against
+ * infringement of any proprietary rights of a third party.
  *
- * Energy Micro AS will not be liable for any consequential, incidental, or
- * special damages, or any other relief, or for any claim by any third party,
- * arising from your use of this Software.
+ * Silicon Laboratories, Inc. will not be liable for any consequential,
+ * incidental, or special damages, or any other relief, or for any claim by
+ * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
 /**************************************************************************//**
@@ -1025,68 +1024,72 @@ typedef struct
 #define GPIO_IFC_EXT_DEFAULT                              (_GPIO_IFC_EXT_DEFAULT << 0) /**< Shifted mode DEFAULT for GPIO_IFC */
 
 /* Bit fields for GPIO ROUTE */
-#define _GPIO_ROUTE_RESETVALUE                            0x00000003UL                         /**< Default value for GPIO_ROUTE */
-#define _GPIO_ROUTE_MASK                                  0x0301F307UL                         /**< Mask for GPIO_ROUTE */
-#define GPIO_ROUTE_SWCLKPEN                               (0x1UL << 0)                         /**< Serial Wire Clock Pin Enable */
-#define _GPIO_ROUTE_SWCLKPEN_SHIFT                        0                                    /**< Shift value for GPIO_SWCLKPEN */
-#define _GPIO_ROUTE_SWCLKPEN_MASK                         0x1UL                                /**< Bit mask for GPIO_SWCLKPEN */
-#define _GPIO_ROUTE_SWCLKPEN_DEFAULT                      0x00000001UL                         /**< Mode DEFAULT for GPIO_ROUTE */
-#define GPIO_ROUTE_SWCLKPEN_DEFAULT                       (_GPIO_ROUTE_SWCLKPEN_DEFAULT << 0)  /**< Shifted mode DEFAULT for GPIO_ROUTE */
-#define GPIO_ROUTE_SWDIOPEN                               (0x1UL << 1)                         /**< Serial Wire Data Pin Enable */
-#define _GPIO_ROUTE_SWDIOPEN_SHIFT                        1                                    /**< Shift value for GPIO_SWDIOPEN */
-#define _GPIO_ROUTE_SWDIOPEN_MASK                         0x2UL                                /**< Bit mask for GPIO_SWDIOPEN */
-#define _GPIO_ROUTE_SWDIOPEN_DEFAULT                      0x00000001UL                         /**< Mode DEFAULT for GPIO_ROUTE */
-#define GPIO_ROUTE_SWDIOPEN_DEFAULT                       (_GPIO_ROUTE_SWDIOPEN_DEFAULT << 1)  /**< Shifted mode DEFAULT for GPIO_ROUTE */
-#define GPIO_ROUTE_SWOPEN                                 (0x1UL << 2)                         /**< Serial Wire Viewer Output Pin Enable */
-#define _GPIO_ROUTE_SWOPEN_SHIFT                          2                                    /**< Shift value for GPIO_SWOPEN */
-#define _GPIO_ROUTE_SWOPEN_MASK                           0x4UL                                /**< Bit mask for GPIO_SWOPEN */
-#define _GPIO_ROUTE_SWOPEN_DEFAULT                        0x00000000UL                         /**< Mode DEFAULT for GPIO_ROUTE */
-#define GPIO_ROUTE_SWOPEN_DEFAULT                         (_GPIO_ROUTE_SWOPEN_DEFAULT << 2)    /**< Shifted mode DEFAULT for GPIO_ROUTE */
-#define _GPIO_ROUTE_SWLOCATION_SHIFT                      8                                    /**< Shift value for GPIO_SWLOCATION */
-#define _GPIO_ROUTE_SWLOCATION_MASK                       0x300UL                              /**< Bit mask for GPIO_SWLOCATION */
-#define _GPIO_ROUTE_SWLOCATION_LOC0                       0x00000000UL                         /**< Mode LOC0 for GPIO_ROUTE */
-#define _GPIO_ROUTE_SWLOCATION_LOC1                       0x00000001UL                         /**< Mode LOC1 for GPIO_ROUTE */
-#define _GPIO_ROUTE_SWLOCATION_LOC2                       0x00000002UL                         /**< Mode LOC2 for GPIO_ROUTE */
-#define _GPIO_ROUTE_SWLOCATION_LOC3                       0x00000003UL                         /**< Mode LOC3 for GPIO_ROUTE */
-#define GPIO_ROUTE_SWLOCATION_LOC0                        (_GPIO_ROUTE_SWLOCATION_LOC0 << 8)   /**< Shifted mode LOC0 for GPIO_ROUTE */
-#define GPIO_ROUTE_SWLOCATION_LOC1                        (_GPIO_ROUTE_SWLOCATION_LOC1 << 8)   /**< Shifted mode LOC1 for GPIO_ROUTE */
-#define GPIO_ROUTE_SWLOCATION_LOC2                        (_GPIO_ROUTE_SWLOCATION_LOC2 << 8)   /**< Shifted mode LOC2 for GPIO_ROUTE */
-#define GPIO_ROUTE_SWLOCATION_LOC3                        (_GPIO_ROUTE_SWLOCATION_LOC3 << 8)   /**< Shifted mode LOC3 for GPIO_ROUTE */
-#define GPIO_ROUTE_TCLKPEN                                (0x1UL << 12)                        /**< ETM Trace Clock Pin Enable */
-#define _GPIO_ROUTE_TCLKPEN_SHIFT                         12                                   /**< Shift value for GPIO_TCLKPEN */
-#define _GPIO_ROUTE_TCLKPEN_MASK                          0x1000UL                             /**< Bit mask for GPIO_TCLKPEN */
-#define _GPIO_ROUTE_TCLKPEN_DEFAULT                       0x00000000UL                         /**< Mode DEFAULT for GPIO_ROUTE */
-#define GPIO_ROUTE_TCLKPEN_DEFAULT                        (_GPIO_ROUTE_TCLKPEN_DEFAULT << 12)  /**< Shifted mode DEFAULT for GPIO_ROUTE */
-#define GPIO_ROUTE_TD0PEN                                 (0x1UL << 13)                        /**< ETM Trace Data Pin Enable */
-#define _GPIO_ROUTE_TD0PEN_SHIFT                          13                                   /**< Shift value for GPIO_TD0PEN */
-#define _GPIO_ROUTE_TD0PEN_MASK                           0x2000UL                             /**< Bit mask for GPIO_TD0PEN */
-#define _GPIO_ROUTE_TD0PEN_DEFAULT                        0x00000000UL                         /**< Mode DEFAULT for GPIO_ROUTE */
-#define GPIO_ROUTE_TD0PEN_DEFAULT                         (_GPIO_ROUTE_TD0PEN_DEFAULT << 13)   /**< Shifted mode DEFAULT for GPIO_ROUTE */
-#define GPIO_ROUTE_TD1PEN                                 (0x1UL << 14)                        /**< ETM Trace Data Pin Enable */
-#define _GPIO_ROUTE_TD1PEN_SHIFT                          14                                   /**< Shift value for GPIO_TD1PEN */
-#define _GPIO_ROUTE_TD1PEN_MASK                           0x4000UL                             /**< Bit mask for GPIO_TD1PEN */
-#define _GPIO_ROUTE_TD1PEN_DEFAULT                        0x00000000UL                         /**< Mode DEFAULT for GPIO_ROUTE */
-#define GPIO_ROUTE_TD1PEN_DEFAULT                         (_GPIO_ROUTE_TD1PEN_DEFAULT << 14)   /**< Shifted mode DEFAULT for GPIO_ROUTE */
-#define GPIO_ROUTE_TD2PEN                                 (0x1UL << 15)                        /**< ETM Trace Data Pin Enable */
-#define _GPIO_ROUTE_TD2PEN_SHIFT                          15                                   /**< Shift value for GPIO_TD2PEN */
-#define _GPIO_ROUTE_TD2PEN_MASK                           0x8000UL                             /**< Bit mask for GPIO_TD2PEN */
-#define _GPIO_ROUTE_TD2PEN_DEFAULT                        0x00000000UL                         /**< Mode DEFAULT for GPIO_ROUTE */
-#define GPIO_ROUTE_TD2PEN_DEFAULT                         (_GPIO_ROUTE_TD2PEN_DEFAULT << 15)   /**< Shifted mode DEFAULT for GPIO_ROUTE */
-#define GPIO_ROUTE_TD3PEN                                 (0x1UL << 16)                        /**< ETM Trace Data Pin Enable */
-#define _GPIO_ROUTE_TD3PEN_SHIFT                          16                                   /**< Shift value for GPIO_TD3PEN */
-#define _GPIO_ROUTE_TD3PEN_MASK                           0x10000UL                            /**< Bit mask for GPIO_TD3PEN */
-#define _GPIO_ROUTE_TD3PEN_DEFAULT                        0x00000000UL                         /**< Mode DEFAULT for GPIO_ROUTE */
-#define GPIO_ROUTE_TD3PEN_DEFAULT                         (_GPIO_ROUTE_TD3PEN_DEFAULT << 16)   /**< Shifted mode DEFAULT for GPIO_ROUTE */
-#define _GPIO_ROUTE_ETMLOCATION_SHIFT                     24                                   /**< Shift value for GPIO_ETMLOCATION */
-#define _GPIO_ROUTE_ETMLOCATION_MASK                      0x3000000UL                          /**< Bit mask for GPIO_ETMLOCATION */
-#define _GPIO_ROUTE_ETMLOCATION_LOC0                      0x00000000UL                         /**< Mode LOC0 for GPIO_ROUTE */
-#define _GPIO_ROUTE_ETMLOCATION_LOC1                      0x00000001UL                         /**< Mode LOC1 for GPIO_ROUTE */
-#define _GPIO_ROUTE_ETMLOCATION_LOC2                      0x00000002UL                         /**< Mode LOC2 for GPIO_ROUTE */
-#define _GPIO_ROUTE_ETMLOCATION_LOC3                      0x00000003UL                         /**< Mode LOC3 for GPIO_ROUTE */
-#define GPIO_ROUTE_ETMLOCATION_LOC0                       (_GPIO_ROUTE_ETMLOCATION_LOC0 << 24) /**< Shifted mode LOC0 for GPIO_ROUTE */
-#define GPIO_ROUTE_ETMLOCATION_LOC1                       (_GPIO_ROUTE_ETMLOCATION_LOC1 << 24) /**< Shifted mode LOC1 for GPIO_ROUTE */
-#define GPIO_ROUTE_ETMLOCATION_LOC2                       (_GPIO_ROUTE_ETMLOCATION_LOC2 << 24) /**< Shifted mode LOC2 for GPIO_ROUTE */
-#define GPIO_ROUTE_ETMLOCATION_LOC3                       (_GPIO_ROUTE_ETMLOCATION_LOC3 << 24) /**< Shifted mode LOC3 for GPIO_ROUTE */
+#define _GPIO_ROUTE_RESETVALUE                            0x00000003UL                            /**< Default value for GPIO_ROUTE */
+#define _GPIO_ROUTE_MASK                                  0x0301F307UL                            /**< Mask for GPIO_ROUTE */
+#define GPIO_ROUTE_SWCLKPEN                               (0x1UL << 0)                            /**< Serial Wire Clock Pin Enable */
+#define _GPIO_ROUTE_SWCLKPEN_SHIFT                        0                                       /**< Shift value for GPIO_SWCLKPEN */
+#define _GPIO_ROUTE_SWCLKPEN_MASK                         0x1UL                                   /**< Bit mask for GPIO_SWCLKPEN */
+#define _GPIO_ROUTE_SWCLKPEN_DEFAULT                      0x00000001UL                            /**< Mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_SWCLKPEN_DEFAULT                       (_GPIO_ROUTE_SWCLKPEN_DEFAULT << 0)     /**< Shifted mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_SWDIOPEN                               (0x1UL << 1)                            /**< Serial Wire Data Pin Enable */
+#define _GPIO_ROUTE_SWDIOPEN_SHIFT                        1                                       /**< Shift value for GPIO_SWDIOPEN */
+#define _GPIO_ROUTE_SWDIOPEN_MASK                         0x2UL                                   /**< Bit mask for GPIO_SWDIOPEN */
+#define _GPIO_ROUTE_SWDIOPEN_DEFAULT                      0x00000001UL                            /**< Mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_SWDIOPEN_DEFAULT                       (_GPIO_ROUTE_SWDIOPEN_DEFAULT << 1)     /**< Shifted mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_SWOPEN                                 (0x1UL << 2)                            /**< Serial Wire Viewer Output Pin Enable */
+#define _GPIO_ROUTE_SWOPEN_SHIFT                          2                                       /**< Shift value for GPIO_SWOPEN */
+#define _GPIO_ROUTE_SWOPEN_MASK                           0x4UL                                   /**< Bit mask for GPIO_SWOPEN */
+#define _GPIO_ROUTE_SWOPEN_DEFAULT                        0x00000000UL                            /**< Mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_SWOPEN_DEFAULT                         (_GPIO_ROUTE_SWOPEN_DEFAULT << 2)       /**< Shifted mode DEFAULT for GPIO_ROUTE */
+#define _GPIO_ROUTE_SWLOCATION_SHIFT                      8                                       /**< Shift value for GPIO_SWLOCATION */
+#define _GPIO_ROUTE_SWLOCATION_MASK                       0x300UL                                 /**< Bit mask for GPIO_SWLOCATION */
+#define _GPIO_ROUTE_SWLOCATION_LOC0                       0x00000000UL                            /**< Mode LOC0 for GPIO_ROUTE */
+#define _GPIO_ROUTE_SWLOCATION_DEFAULT                    0x00000000UL                            /**< Mode DEFAULT for GPIO_ROUTE */
+#define _GPIO_ROUTE_SWLOCATION_LOC1                       0x00000001UL                            /**< Mode LOC1 for GPIO_ROUTE */
+#define _GPIO_ROUTE_SWLOCATION_LOC2                       0x00000002UL                            /**< Mode LOC2 for GPIO_ROUTE */
+#define _GPIO_ROUTE_SWLOCATION_LOC3                       0x00000003UL                            /**< Mode LOC3 for GPIO_ROUTE */
+#define GPIO_ROUTE_SWLOCATION_LOC0                        (_GPIO_ROUTE_SWLOCATION_LOC0 << 8)      /**< Shifted mode LOC0 for GPIO_ROUTE */
+#define GPIO_ROUTE_SWLOCATION_DEFAULT                     (_GPIO_ROUTE_SWLOCATION_DEFAULT << 8)   /**< Shifted mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_SWLOCATION_LOC1                        (_GPIO_ROUTE_SWLOCATION_LOC1 << 8)      /**< Shifted mode LOC1 for GPIO_ROUTE */
+#define GPIO_ROUTE_SWLOCATION_LOC2                        (_GPIO_ROUTE_SWLOCATION_LOC2 << 8)      /**< Shifted mode LOC2 for GPIO_ROUTE */
+#define GPIO_ROUTE_SWLOCATION_LOC3                        (_GPIO_ROUTE_SWLOCATION_LOC3 << 8)      /**< Shifted mode LOC3 for GPIO_ROUTE */
+#define GPIO_ROUTE_TCLKPEN                                (0x1UL << 12)                           /**< ETM Trace Clock Pin Enable */
+#define _GPIO_ROUTE_TCLKPEN_SHIFT                         12                                      /**< Shift value for GPIO_TCLKPEN */
+#define _GPIO_ROUTE_TCLKPEN_MASK                          0x1000UL                                /**< Bit mask for GPIO_TCLKPEN */
+#define _GPIO_ROUTE_TCLKPEN_DEFAULT                       0x00000000UL                            /**< Mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_TCLKPEN_DEFAULT                        (_GPIO_ROUTE_TCLKPEN_DEFAULT << 12)     /**< Shifted mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_TD0PEN                                 (0x1UL << 13)                           /**< ETM Trace Data Pin Enable */
+#define _GPIO_ROUTE_TD0PEN_SHIFT                          13                                      /**< Shift value for GPIO_TD0PEN */
+#define _GPIO_ROUTE_TD0PEN_MASK                           0x2000UL                                /**< Bit mask for GPIO_TD0PEN */
+#define _GPIO_ROUTE_TD0PEN_DEFAULT                        0x00000000UL                            /**< Mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_TD0PEN_DEFAULT                         (_GPIO_ROUTE_TD0PEN_DEFAULT << 13)      /**< Shifted mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_TD1PEN                                 (0x1UL << 14)                           /**< ETM Trace Data Pin Enable */
+#define _GPIO_ROUTE_TD1PEN_SHIFT                          14                                      /**< Shift value for GPIO_TD1PEN */
+#define _GPIO_ROUTE_TD1PEN_MASK                           0x4000UL                                /**< Bit mask for GPIO_TD1PEN */
+#define _GPIO_ROUTE_TD1PEN_DEFAULT                        0x00000000UL                            /**< Mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_TD1PEN_DEFAULT                         (_GPIO_ROUTE_TD1PEN_DEFAULT << 14)      /**< Shifted mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_TD2PEN                                 (0x1UL << 15)                           /**< ETM Trace Data Pin Enable */
+#define _GPIO_ROUTE_TD2PEN_SHIFT                          15                                      /**< Shift value for GPIO_TD2PEN */
+#define _GPIO_ROUTE_TD2PEN_MASK                           0x8000UL                                /**< Bit mask for GPIO_TD2PEN */
+#define _GPIO_ROUTE_TD2PEN_DEFAULT                        0x00000000UL                            /**< Mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_TD2PEN_DEFAULT                         (_GPIO_ROUTE_TD2PEN_DEFAULT << 15)      /**< Shifted mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_TD3PEN                                 (0x1UL << 16)                           /**< ETM Trace Data Pin Enable */
+#define _GPIO_ROUTE_TD3PEN_SHIFT                          16                                      /**< Shift value for GPIO_TD3PEN */
+#define _GPIO_ROUTE_TD3PEN_MASK                           0x10000UL                               /**< Bit mask for GPIO_TD3PEN */
+#define _GPIO_ROUTE_TD3PEN_DEFAULT                        0x00000000UL                            /**< Mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_TD3PEN_DEFAULT                         (_GPIO_ROUTE_TD3PEN_DEFAULT << 16)      /**< Shifted mode DEFAULT for GPIO_ROUTE */
+#define _GPIO_ROUTE_ETMLOCATION_SHIFT                     24                                      /**< Shift value for GPIO_ETMLOCATION */
+#define _GPIO_ROUTE_ETMLOCATION_MASK                      0x3000000UL                             /**< Bit mask for GPIO_ETMLOCATION */
+#define _GPIO_ROUTE_ETMLOCATION_LOC0                      0x00000000UL                            /**< Mode LOC0 for GPIO_ROUTE */
+#define _GPIO_ROUTE_ETMLOCATION_DEFAULT                   0x00000000UL                            /**< Mode DEFAULT for GPIO_ROUTE */
+#define _GPIO_ROUTE_ETMLOCATION_LOC1                      0x00000001UL                            /**< Mode LOC1 for GPIO_ROUTE */
+#define _GPIO_ROUTE_ETMLOCATION_LOC2                      0x00000002UL                            /**< Mode LOC2 for GPIO_ROUTE */
+#define _GPIO_ROUTE_ETMLOCATION_LOC3                      0x00000003UL                            /**< Mode LOC3 for GPIO_ROUTE */
+#define GPIO_ROUTE_ETMLOCATION_LOC0                       (_GPIO_ROUTE_ETMLOCATION_LOC0 << 24)    /**< Shifted mode LOC0 for GPIO_ROUTE */
+#define GPIO_ROUTE_ETMLOCATION_DEFAULT                    (_GPIO_ROUTE_ETMLOCATION_DEFAULT << 24) /**< Shifted mode DEFAULT for GPIO_ROUTE */
+#define GPIO_ROUTE_ETMLOCATION_LOC1                       (_GPIO_ROUTE_ETMLOCATION_LOC1 << 24)    /**< Shifted mode LOC1 for GPIO_ROUTE */
+#define GPIO_ROUTE_ETMLOCATION_LOC2                       (_GPIO_ROUTE_ETMLOCATION_LOC2 << 24)    /**< Shifted mode LOC2 for GPIO_ROUTE */
+#define GPIO_ROUTE_ETMLOCATION_LOC3                       (_GPIO_ROUTE_ETMLOCATION_LOC3 << 24)    /**< Shifted mode LOC3 for GPIO_ROUTE */
 
 /* Bit fields for GPIO INSENSE */
 #define _GPIO_INSENSE_RESETVALUE                          0x00000003UL                     /**< Default value for GPIO_INSENSE */

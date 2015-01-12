@@ -1,11 +1,10 @@
 /**************************************************************************//**
- * @file
- * @brief efm32gg_devinfo Register and Bit Field definitions
- * @author Energy Micro AS
- * @version 3.20.0
+ * @file efm32gg_devinfo.h
+ * @brief EFM32GG_DEVINFO register and bit field definitions
+ * @version 3.20.7
  ******************************************************************************
  * @section License
- * <b>(C) Copyright 2012 Energy Micro AS, http://www.energymicro.com</b>
+ * <b>(C) Copyright 2014 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -13,21 +12,21 @@
  * freely, subject to the following restrictions:
  *
  * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software.
+ *    claim that you wrote the original software.@n
  * 2. Altered source versions must be plainly marked as such, and must not be
- *    misrepresented as being the original software.
+ *    misrepresented as being the original software.@n
  * 3. This notice may not be removed or altered from any source distribution.
  *
- * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Energy Micro AS has no
- * obligation to support this Software. Energy Micro AS is providing the
- * Software "AS IS", with no express or implied warranties of any kind,
- * including, but not limited to, any implied warranties of merchantability
- * or fitness for any particular purpose or warranties against infringement
- * of any proprietary rights of a third party.
+ * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Silicon Laboratories, Inc.
+ * has no obligation to support this Software. Silicon Laboratories, Inc. is
+ * providing the Software "AS IS", with no express or implied warranties of any
+ * kind, including, but not limited to, any implied warranties of
+ * merchantability or fitness for any particular purpose or warranties against
+ * infringement of any proprietary rights of a third party.
  *
- * Energy Micro AS will not be liable for any consequential, incidental, or
- * special damages, or any other relief, or for any claim by any third party,
- * arising from your use of this Software.
+ * Silicon Laboratories, Inc. will not be liable for any consequential,
+ * incidental, or special damages, or any other relief, or for any claim by
+ * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
 /**************************************************************************//**
@@ -48,7 +47,8 @@ typedef struct
   __I uint32_t AUXHFRCOCAL1; /**< AUXHFRCO calibration register 1 */
   __I uint32_t HFRCOCAL0;    /**< HFRCO calibration register 0 */
   __I uint32_t HFRCOCAL1;    /**< HFRCO calibration register 1 */
-  uint32_t     RESERVED2[3]; /**< Reserved */
+  __I uint32_t MEMINFO;      /**< Memory information */
+  uint32_t     RESERVED2[2]; /**< Reserved */
   __I uint32_t UNIQUEL;      /**< Low 32 bits of device unique number */
   __I uint32_t UNIQUEH;      /**< High 32 bits of device unique number */
   __I uint32_t MSIZE;        /**< Flash and SRAM Memory size in KiloBytes */
@@ -126,6 +126,8 @@ typedef struct
 #define _DEVINFO_HFRCOCAL1_BAND21_SHIFT            0            /**< 21MHz tuning value for HFRCO, shift */
 #define _DEVINFO_HFRCOCAL1_BAND28_MASK             0x0000FF00UL /**< 28MHz tuning value for HFRCO, shift */
 #define _DEVINFO_HFRCOCAL1_BAND28_SHIFT            8            /**< 28MHz tuning value for HFRCO, mask */
+#define _DEVINFO_MEMINFO_FLASH_PAGE_SIZE_MASK      0xFF000000UL /**< Flash page size (refer to ref.man for encoding) mask */
+#define _DEVINFO_MEMINFO_FLASH_PAGE_SIZE_SHIFT     24           /**< Flash page size shift */
 #define _DEVINFO_UNIQUEL_MASK                      0xFFFFFFFFUL /**< Lower part of  64-bit device unique number */
 #define _DEVINFO_UNIQUEL_SHIFT                     0            /**< Unique Low 32-bit shift */
 #define _DEVINFO_UNIQUEH_MASK                      0xFFFFFFFFUL /**< High part of  64-bit device unique number */

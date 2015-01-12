@@ -1,11 +1,10 @@
 /**************************************************************************//**
- * @file
- * @brief efm32gg_rmu Register and Bit Field definitions
- * @author Energy Micro AS
- * @version 3.20.0
+ * @file efm32gg_rmu.h
+ * @brief EFM32GG_RMU register and bit field definitions
+ * @version 3.20.7
  ******************************************************************************
  * @section License
- * <b>(C) Copyright 2012 Energy Micro AS, http://www.energymicro.com</b>
+ * <b>(C) Copyright 2014 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -13,21 +12,21 @@
  * freely, subject to the following restrictions:
  *
  * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software.
+ *    claim that you wrote the original software.@n
  * 2. Altered source versions must be plainly marked as such, and must not be
- *    misrepresented as being the original software.
+ *    misrepresented as being the original software.@n
  * 3. This notice may not be removed or altered from any source distribution.
  *
- * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Energy Micro AS has no
- * obligation to support this Software. Energy Micro AS is providing the
- * Software "AS IS", with no express or implied warranties of any kind,
- * including, but not limited to, any implied warranties of merchantability
- * or fitness for any particular purpose or warranties against infringement
- * of any proprietary rights of a third party.
+ * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Silicon Laboratories, Inc.
+ * has no obligation to support this Software. Silicon Laboratories, Inc. is
+ * providing the Software "AS IS", with no express or implied warranties of any
+ * kind, including, but not limited to, any implied warranties of
+ * merchantability or fitness for any particular purpose or warranties against
+ * infringement of any proprietary rights of a third party.
  *
- * Energy Micro AS will not be liable for any consequential, incidental, or
- * special damages, or any other relief, or for any claim by any third party,
- * arising from your use of this Software.
+ * Silicon Laboratories, Inc. will not be liable for any consequential,
+ * incidental, or special damages, or any other relief, or for any claim by
+ * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
 /**************************************************************************//**
@@ -55,7 +54,7 @@ typedef struct
 #define _RMU_CTRL_LOCKUPRDIS_MASK             0x1UL                               /**< Bit mask for RMU_LOCKUPRDIS */
 #define _RMU_CTRL_LOCKUPRDIS_DEFAULT          0x00000000UL                        /**< Mode DEFAULT for RMU_CTRL */
 #define RMU_CTRL_LOCKUPRDIS_DEFAULT           (_RMU_CTRL_LOCKUPRDIS_DEFAULT << 0) /**< Shifted mode DEFAULT for RMU_CTRL */
-#define RMU_CTRL_BURSTEN                      (0x1UL << 1)                        /**< Backup domain reset enable. */
+#define RMU_CTRL_BURSTEN                      (0x1UL << 1)                        /**< Backup domain reset enable */
 #define _RMU_CTRL_BURSTEN_SHIFT               1                                   /**< Shift value for RMU_BURSTEN */
 #define _RMU_CTRL_BURSTEN_MASK                0x2UL                               /**< Bit mask for RMU_BURSTEN */
 #define _RMU_CTRL_BURSTEN_DEFAULT             0x00000001UL                        /**< Mode DEFAULT for RMU_CTRL */
@@ -109,12 +108,12 @@ typedef struct
 #define _RMU_RSTCAUSE_EM4WURST_MASK           0x100UL                                    /**< Bit mask for RMU_EM4WURST */
 #define _RMU_RSTCAUSE_EM4WURST_DEFAULT        0x00000000UL                               /**< Mode DEFAULT for RMU_RSTCAUSE */
 #define RMU_RSTCAUSE_EM4WURST_DEFAULT         (_RMU_RSTCAUSE_EM4WURST_DEFAULT << 8)      /**< Shifted mode DEFAULT for RMU_RSTCAUSE */
-#define RMU_RSTCAUSE_BODAVDD0                 (0x1UL << 9)                               /**< AVDD0 Bod Reset. */
+#define RMU_RSTCAUSE_BODAVDD0                 (0x1UL << 9)                               /**< AVDD0 Bod Reset */
 #define _RMU_RSTCAUSE_BODAVDD0_SHIFT          9                                          /**< Shift value for RMU_BODAVDD0 */
 #define _RMU_RSTCAUSE_BODAVDD0_MASK           0x200UL                                    /**< Bit mask for RMU_BODAVDD0 */
 #define _RMU_RSTCAUSE_BODAVDD0_DEFAULT        0x00000000UL                               /**< Mode DEFAULT for RMU_RSTCAUSE */
 #define RMU_RSTCAUSE_BODAVDD0_DEFAULT         (_RMU_RSTCAUSE_BODAVDD0_DEFAULT << 9)      /**< Shifted mode DEFAULT for RMU_RSTCAUSE */
-#define RMU_RSTCAUSE_BODAVDD1                 (0x1UL << 10)                              /**< AVDD1 Bod Reset. */
+#define RMU_RSTCAUSE_BODAVDD1                 (0x1UL << 10)                              /**< AVDD1 Bod Reset */
 #define _RMU_RSTCAUSE_BODAVDD1_SHIFT          10                                         /**< Shift value for RMU_BODAVDD1 */
 #define _RMU_RSTCAUSE_BODAVDD1_MASK           0x400UL                                    /**< Bit mask for RMU_BODAVDD1 */
 #define _RMU_RSTCAUSE_BODAVDD1_DEFAULT        0x00000000UL                               /**< Mode DEFAULT for RMU_RSTCAUSE */

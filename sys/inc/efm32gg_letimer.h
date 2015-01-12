@@ -1,11 +1,10 @@
 /**************************************************************************//**
- * @file
- * @brief efm32gg_letimer Register and Bit Field definitions
- * @author Energy Micro AS
- * @version 3.20.0
+ * @file efm32gg_letimer.h
+ * @brief EFM32GG_LETIMER register and bit field definitions
+ * @version 3.20.7
  ******************************************************************************
  * @section License
- * <b>(C) Copyright 2012 Energy Micro AS, http://www.energymicro.com</b>
+ * <b>(C) Copyright 2014 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -13,21 +12,21 @@
  * freely, subject to the following restrictions:
  *
  * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software.
+ *    claim that you wrote the original software.@n
  * 2. Altered source versions must be plainly marked as such, and must not be
- *    misrepresented as being the original software.
+ *    misrepresented as being the original software.@n
  * 3. This notice may not be removed or altered from any source distribution.
  *
- * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Energy Micro AS has no
- * obligation to support this Software. Energy Micro AS is providing the
- * Software "AS IS", with no express or implied warranties of any kind,
- * including, but not limited to, any implied warranties of merchantability
- * or fitness for any particular purpose or warranties against infringement
- * of any proprietary rights of a third party.
+ * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Silicon Laboratories, Inc.
+ * has no obligation to support this Software. Silicon Laboratories, Inc. is
+ * providing the Software "AS IS", with no express or implied warranties of any
+ * kind, including, but not limited to, any implied warranties of
+ * merchantability or fitness for any particular purpose or warranties against
+ * infringement of any proprietary rights of a third party.
  *
- * Energy Micro AS will not be liable for any consequential, incidental, or
- * special damages, or any other relief, or for any claim by any third party,
- * arising from your use of this Software.
+ * Silicon Laboratories, Inc. will not be liable for any consequential,
+ * incidental, or special damages, or any other relief, or for any claim by
+ * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
 /**************************************************************************//**
@@ -347,60 +346,62 @@ typedef struct
 /* Bit fields for LETIMER SYNCBUSY */
 #define _LETIMER_SYNCBUSY_RESETVALUE         0x00000000UL                           /**< Default value for LETIMER_SYNCBUSY */
 #define _LETIMER_SYNCBUSY_MASK               0x0000003FUL                           /**< Mask for LETIMER_SYNCBUSY */
-#define LETIMER_SYNCBUSY_CTRL                (0x1UL << 0)                           /**< LETIMERn_CTRL Register Busy */
+#define LETIMER_SYNCBUSY_CTRL                (0x1UL << 0)                           /**< CTRL Register Busy */
 #define _LETIMER_SYNCBUSY_CTRL_SHIFT         0                                      /**< Shift value for LETIMER_CTRL */
 #define _LETIMER_SYNCBUSY_CTRL_MASK          0x1UL                                  /**< Bit mask for LETIMER_CTRL */
 #define _LETIMER_SYNCBUSY_CTRL_DEFAULT       0x00000000UL                           /**< Mode DEFAULT for LETIMER_SYNCBUSY */
 #define LETIMER_SYNCBUSY_CTRL_DEFAULT        (_LETIMER_SYNCBUSY_CTRL_DEFAULT << 0)  /**< Shifted mode DEFAULT for LETIMER_SYNCBUSY */
-#define LETIMER_SYNCBUSY_CMD                 (0x1UL << 1)                           /**< LETIMERn_CMD Register Busy */
+#define LETIMER_SYNCBUSY_CMD                 (0x1UL << 1)                           /**< CMD Register Busy */
 #define _LETIMER_SYNCBUSY_CMD_SHIFT          1                                      /**< Shift value for LETIMER_CMD */
 #define _LETIMER_SYNCBUSY_CMD_MASK           0x2UL                                  /**< Bit mask for LETIMER_CMD */
 #define _LETIMER_SYNCBUSY_CMD_DEFAULT        0x00000000UL                           /**< Mode DEFAULT for LETIMER_SYNCBUSY */
 #define LETIMER_SYNCBUSY_CMD_DEFAULT         (_LETIMER_SYNCBUSY_CMD_DEFAULT << 1)   /**< Shifted mode DEFAULT for LETIMER_SYNCBUSY */
-#define LETIMER_SYNCBUSY_COMP0               (0x1UL << 2)                           /**< LETIMERn_COMP0 Register Busy */
+#define LETIMER_SYNCBUSY_COMP0               (0x1UL << 2)                           /**< COMP0 Register Busy */
 #define _LETIMER_SYNCBUSY_COMP0_SHIFT        2                                      /**< Shift value for LETIMER_COMP0 */
 #define _LETIMER_SYNCBUSY_COMP0_MASK         0x4UL                                  /**< Bit mask for LETIMER_COMP0 */
 #define _LETIMER_SYNCBUSY_COMP0_DEFAULT      0x00000000UL                           /**< Mode DEFAULT for LETIMER_SYNCBUSY */
 #define LETIMER_SYNCBUSY_COMP0_DEFAULT       (_LETIMER_SYNCBUSY_COMP0_DEFAULT << 2) /**< Shifted mode DEFAULT for LETIMER_SYNCBUSY */
-#define LETIMER_SYNCBUSY_COMP1               (0x1UL << 3)                           /**< LETIMERn_COMP1 Register Busy */
+#define LETIMER_SYNCBUSY_COMP1               (0x1UL << 3)                           /**< COMP1 Register Busy */
 #define _LETIMER_SYNCBUSY_COMP1_SHIFT        3                                      /**< Shift value for LETIMER_COMP1 */
 #define _LETIMER_SYNCBUSY_COMP1_MASK         0x8UL                                  /**< Bit mask for LETIMER_COMP1 */
 #define _LETIMER_SYNCBUSY_COMP1_DEFAULT      0x00000000UL                           /**< Mode DEFAULT for LETIMER_SYNCBUSY */
 #define LETIMER_SYNCBUSY_COMP1_DEFAULT       (_LETIMER_SYNCBUSY_COMP1_DEFAULT << 3) /**< Shifted mode DEFAULT for LETIMER_SYNCBUSY */
-#define LETIMER_SYNCBUSY_REP0                (0x1UL << 4)                           /**< LETIMERn_REP0 Register Busy */
+#define LETIMER_SYNCBUSY_REP0                (0x1UL << 4)                           /**< REP0 Register Busy */
 #define _LETIMER_SYNCBUSY_REP0_SHIFT         4                                      /**< Shift value for LETIMER_REP0 */
 #define _LETIMER_SYNCBUSY_REP0_MASK          0x10UL                                 /**< Bit mask for LETIMER_REP0 */
 #define _LETIMER_SYNCBUSY_REP0_DEFAULT       0x00000000UL                           /**< Mode DEFAULT for LETIMER_SYNCBUSY */
 #define LETIMER_SYNCBUSY_REP0_DEFAULT        (_LETIMER_SYNCBUSY_REP0_DEFAULT << 4)  /**< Shifted mode DEFAULT for LETIMER_SYNCBUSY */
-#define LETIMER_SYNCBUSY_REP1                (0x1UL << 5)                           /**< LETIMERn_REP1 Register Busy */
+#define LETIMER_SYNCBUSY_REP1                (0x1UL << 5)                           /**< REP1 Register Busy */
 #define _LETIMER_SYNCBUSY_REP1_SHIFT         5                                      /**< Shift value for LETIMER_REP1 */
 #define _LETIMER_SYNCBUSY_REP1_MASK          0x20UL                                 /**< Bit mask for LETIMER_REP1 */
 #define _LETIMER_SYNCBUSY_REP1_DEFAULT       0x00000000UL                           /**< Mode DEFAULT for LETIMER_SYNCBUSY */
 #define LETIMER_SYNCBUSY_REP1_DEFAULT        (_LETIMER_SYNCBUSY_REP1_DEFAULT << 5)  /**< Shifted mode DEFAULT for LETIMER_SYNCBUSY */
 
 /* Bit fields for LETIMER ROUTE */
-#define _LETIMER_ROUTE_RESETVALUE            0x00000000UL                          /**< Default value for LETIMER_ROUTE */
-#define _LETIMER_ROUTE_MASK                  0x00000703UL                          /**< Mask for LETIMER_ROUTE */
-#define LETIMER_ROUTE_OUT0PEN                (0x1UL << 0)                          /**< Output 0 Pin Enable */
-#define _LETIMER_ROUTE_OUT0PEN_SHIFT         0                                     /**< Shift value for LETIMER_OUT0PEN */
-#define _LETIMER_ROUTE_OUT0PEN_MASK          0x1UL                                 /**< Bit mask for LETIMER_OUT0PEN */
-#define _LETIMER_ROUTE_OUT0PEN_DEFAULT       0x00000000UL                          /**< Mode DEFAULT for LETIMER_ROUTE */
-#define LETIMER_ROUTE_OUT0PEN_DEFAULT        (_LETIMER_ROUTE_OUT0PEN_DEFAULT << 0) /**< Shifted mode DEFAULT for LETIMER_ROUTE */
-#define LETIMER_ROUTE_OUT1PEN                (0x1UL << 1)                          /**< Output 1 Pin Enable */
-#define _LETIMER_ROUTE_OUT1PEN_SHIFT         1                                     /**< Shift value for LETIMER_OUT1PEN */
-#define _LETIMER_ROUTE_OUT1PEN_MASK          0x2UL                                 /**< Bit mask for LETIMER_OUT1PEN */
-#define _LETIMER_ROUTE_OUT1PEN_DEFAULT       0x00000000UL                          /**< Mode DEFAULT for LETIMER_ROUTE */
-#define LETIMER_ROUTE_OUT1PEN_DEFAULT        (_LETIMER_ROUTE_OUT1PEN_DEFAULT << 1) /**< Shifted mode DEFAULT for LETIMER_ROUTE */
-#define _LETIMER_ROUTE_LOCATION_SHIFT        8                                     /**< Shift value for LETIMER_LOCATION */
-#define _LETIMER_ROUTE_LOCATION_MASK         0x700UL                               /**< Bit mask for LETIMER_LOCATION */
-#define _LETIMER_ROUTE_LOCATION_LOC0         0x00000000UL                          /**< Mode LOC0 for LETIMER_ROUTE */
-#define _LETIMER_ROUTE_LOCATION_LOC1         0x00000001UL                          /**< Mode LOC1 for LETIMER_ROUTE */
-#define _LETIMER_ROUTE_LOCATION_LOC2         0x00000002UL                          /**< Mode LOC2 for LETIMER_ROUTE */
-#define _LETIMER_ROUTE_LOCATION_LOC3         0x00000003UL                          /**< Mode LOC3 for LETIMER_ROUTE */
-#define LETIMER_ROUTE_LOCATION_LOC0          (_LETIMER_ROUTE_LOCATION_LOC0 << 8)   /**< Shifted mode LOC0 for LETIMER_ROUTE */
-#define LETIMER_ROUTE_LOCATION_LOC1          (_LETIMER_ROUTE_LOCATION_LOC1 << 8)   /**< Shifted mode LOC1 for LETIMER_ROUTE */
-#define LETIMER_ROUTE_LOCATION_LOC2          (_LETIMER_ROUTE_LOCATION_LOC2 << 8)   /**< Shifted mode LOC2 for LETIMER_ROUTE */
-#define LETIMER_ROUTE_LOCATION_LOC3          (_LETIMER_ROUTE_LOCATION_LOC3 << 8)   /**< Shifted mode LOC3 for LETIMER_ROUTE */
+#define _LETIMER_ROUTE_RESETVALUE            0x00000000UL                           /**< Default value for LETIMER_ROUTE */
+#define _LETIMER_ROUTE_MASK                  0x00000703UL                           /**< Mask for LETIMER_ROUTE */
+#define LETIMER_ROUTE_OUT0PEN                (0x1UL << 0)                           /**< Output 0 Pin Enable */
+#define _LETIMER_ROUTE_OUT0PEN_SHIFT         0                                      /**< Shift value for LETIMER_OUT0PEN */
+#define _LETIMER_ROUTE_OUT0PEN_MASK          0x1UL                                  /**< Bit mask for LETIMER_OUT0PEN */
+#define _LETIMER_ROUTE_OUT0PEN_DEFAULT       0x00000000UL                           /**< Mode DEFAULT for LETIMER_ROUTE */
+#define LETIMER_ROUTE_OUT0PEN_DEFAULT        (_LETIMER_ROUTE_OUT0PEN_DEFAULT << 0)  /**< Shifted mode DEFAULT for LETIMER_ROUTE */
+#define LETIMER_ROUTE_OUT1PEN                (0x1UL << 1)                           /**< Output 1 Pin Enable */
+#define _LETIMER_ROUTE_OUT1PEN_SHIFT         1                                      /**< Shift value for LETIMER_OUT1PEN */
+#define _LETIMER_ROUTE_OUT1PEN_MASK          0x2UL                                  /**< Bit mask for LETIMER_OUT1PEN */
+#define _LETIMER_ROUTE_OUT1PEN_DEFAULT       0x00000000UL                           /**< Mode DEFAULT for LETIMER_ROUTE */
+#define LETIMER_ROUTE_OUT1PEN_DEFAULT        (_LETIMER_ROUTE_OUT1PEN_DEFAULT << 1)  /**< Shifted mode DEFAULT for LETIMER_ROUTE */
+#define _LETIMER_ROUTE_LOCATION_SHIFT        8                                      /**< Shift value for LETIMER_LOCATION */
+#define _LETIMER_ROUTE_LOCATION_MASK         0x700UL                                /**< Bit mask for LETIMER_LOCATION */
+#define _LETIMER_ROUTE_LOCATION_LOC0         0x00000000UL                           /**< Mode LOC0 for LETIMER_ROUTE */
+#define _LETIMER_ROUTE_LOCATION_DEFAULT      0x00000000UL                           /**< Mode DEFAULT for LETIMER_ROUTE */
+#define _LETIMER_ROUTE_LOCATION_LOC1         0x00000001UL                           /**< Mode LOC1 for LETIMER_ROUTE */
+#define _LETIMER_ROUTE_LOCATION_LOC2         0x00000002UL                           /**< Mode LOC2 for LETIMER_ROUTE */
+#define _LETIMER_ROUTE_LOCATION_LOC3         0x00000003UL                           /**< Mode LOC3 for LETIMER_ROUTE */
+#define LETIMER_ROUTE_LOCATION_LOC0          (_LETIMER_ROUTE_LOCATION_LOC0 << 8)    /**< Shifted mode LOC0 for LETIMER_ROUTE */
+#define LETIMER_ROUTE_LOCATION_DEFAULT       (_LETIMER_ROUTE_LOCATION_DEFAULT << 8) /**< Shifted mode DEFAULT for LETIMER_ROUTE */
+#define LETIMER_ROUTE_LOCATION_LOC1          (_LETIMER_ROUTE_LOCATION_LOC1 << 8)    /**< Shifted mode LOC1 for LETIMER_ROUTE */
+#define LETIMER_ROUTE_LOCATION_LOC2          (_LETIMER_ROUTE_LOCATION_LOC2 << 8)    /**< Shifted mode LOC2 for LETIMER_ROUTE */
+#define LETIMER_ROUTE_LOCATION_LOC3          (_LETIMER_ROUTE_LOCATION_LOC3 << 8)    /**< Shifted mode LOC3 for LETIMER_ROUTE */
 
 /** @} End of group EFM32GG_LETIMER */
 

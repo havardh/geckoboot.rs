@@ -1,11 +1,10 @@
 /**************************************************************************//**
- * @file
- * @brief efm32gg_usb Register and Bit Field definitions
- * @author Energy Micro AS
- * @version 3.20.0
+ * @file efm32gg_usb.h
+ * @brief EFM32GG_USB register and bit field definitions
+ * @version 3.20.7
  ******************************************************************************
  * @section License
- * <b>(C) Copyright 2012 Energy Micro AS, http://www.energymicro.com</b>
+ * <b>(C) Copyright 2014 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -13,21 +12,21 @@
  * freely, subject to the following restrictions:
  *
  * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software.
+ *    claim that you wrote the original software.@n
  * 2. Altered source versions must be plainly marked as such, and must not be
- *    misrepresented as being the original software.
+ *    misrepresented as being the original software.@n
  * 3. This notice may not be removed or altered from any source distribution.
  *
- * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Energy Micro AS has no
- * obligation to support this Software. Energy Micro AS is providing the
- * Software "AS IS", with no express or implied warranties of any kind,
- * including, but not limited to, any implied warranties of merchantability
- * or fitness for any particular purpose or warranties against infringement
- * of any proprietary rights of a third party.
+ * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Silicon Laboratories, Inc.
+ * has no obligation to support this Software. Silicon Laboratories, Inc. is
+ * providing the Software "AS IS", with no express or implied warranties of any
+ * kind, including, but not limited to, any implied warranties of
+ * merchantability or fitness for any particular purpose or warranties against
+ * infringement of any proprietary rights of a third party.
  *
- * Energy Micro AS will not be liable for any consequential, incidental, or
- * special damages, or any other relief, or for any claim by any third party,
- * arising from your use of this Software.
+ * Silicon Laboratories, Inc. will not be liable for any consequential,
+ * incidental, or special damages, or any other relief, or for any claim by
+ * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
 /**************************************************************************//**
@@ -82,7 +81,6 @@ typedef struct
   __IO uint32_t    HPRT;              /**< Host Port Control and Status Register  */
 
   uint32_t         RESERVED6[47];     /**< Reserved registers */
-
   USB_HC_TypeDef   HC[14];            /**< Host Channel Registers */
 
   uint32_t         RESERVED7[80];     /**< Reserved for future use **/
@@ -111,7 +109,6 @@ typedef struct
   __I uint32_t     DIEP0TXFSTS;       /**< Device IN Endpoint 0 Transmit FIFO Status Register  */
 
   uint32_t         RESERVED14[1];     /**< Reserved registers */
-
   USB_DIEP_TypeDef DIEP[6];           /**< Device IN Endpoint x+1 Registers */
 
   uint32_t         RESERVED15[72];    /**< Reserved for future use **/
@@ -123,70 +120,54 @@ typedef struct
   __IO uint32_t    DOEP0DMAADDR;      /**< Device OUT Endpoint 0 DMA Address Register  */
 
   uint32_t         RESERVED18[2];     /**< Reserved registers */
-
   USB_DOEP_TypeDef DOEP[6];           /**< Device OUT Endpoint x+1 Registers */
 
   uint32_t         RESERVED19[136];   /**< Reserved for future use **/
   __IO uint32_t    PCGCCTL;           /**< Power and Clock Gating Control Register  */
 
   uint32_t         RESERVED20[127];   /**< Reserved registers */
-
   __IO uint32_t    FIFO0D[512];       /**< Device EP 0/Host Channel 0 FIFO  */
 
   uint32_t         RESERVED21[512];   /**< Reserved registers */
-
   __IO uint32_t    FIFO1D[512];       /**< Device EP 1/Host Channel 1 FIFO  */
 
   uint32_t         RESERVED22[512];   /**< Reserved registers */
-
   __IO uint32_t    FIFO2D[512];       /**< Device EP 2/Host Channel 2 FIFO  */
 
   uint32_t         RESERVED23[512];   /**< Reserved registers */
-
   __IO uint32_t    FIFO3D[512];       /**< Device EP 3/Host Channel 3 FIFO  */
 
   uint32_t         RESERVED24[512];   /**< Reserved registers */
-
   __IO uint32_t    FIFO4D[512];       /**< Device EP 4/Host Channel 4 FIFO  */
 
   uint32_t         RESERVED25[512];   /**< Reserved registers */
-
   __IO uint32_t    FIFO5D[512];       /**< Device EP 5/Host Channel 5 FIFO  */
 
   uint32_t         RESERVED26[512];   /**< Reserved registers */
-
   __IO uint32_t    FIFO6D[512];       /**< Device EP 6/Host Channel 6 FIFO  */
 
   uint32_t         RESERVED27[512];   /**< Reserved registers */
-
   __IO uint32_t    FIFO7D[512];       /**< Host Channel 7 FIFO  */
 
   uint32_t         RESERVED28[512];   /**< Reserved registers */
-
   __IO uint32_t    FIFO8D[512];       /**< Host Channel 8 FIFO  */
 
   uint32_t         RESERVED29[512];   /**< Reserved registers */
-
   __IO uint32_t    FIFO9D[512];       /**< Host Channel 9 FIFO  */
 
   uint32_t         RESERVED30[512];   /**< Reserved registers */
-
   __IO uint32_t    FIFO10D[512];      /**< Host Channel 10 FIFO  */
 
   uint32_t         RESERVED31[512];   /**< Reserved registers */
-
   __IO uint32_t    FIFO11D[512];      /**< Host Channel 11 FIFO  */
 
   uint32_t         RESERVED32[512];   /**< Reserved registers */
-
   __IO uint32_t    FIFO12D[512];      /**< Host Channel 12 FIFO  */
 
   uint32_t         RESERVED33[512];   /**< Reserved registers */
-
   __IO uint32_t    FIFO13D[512];      /**< Host Channel 13 FIFO  */
 
   uint32_t         RESERVED34[17920]; /**< Reserved registers */
-
   __IO uint32_t    FIFORAM[512];      /**< Direct Access to Data FIFO RAM for Debugging (2 KB)  */
 } USB_TypeDef;                        /** @} */
 
@@ -2537,125 +2518,125 @@ typedef struct
 #define _USB_PCGCCTL_RESETAFTERSUSP_DEFAULT        0x00000000UL                               /**< Mode DEFAULT for USB_PCGCCTL */
 #define USB_PCGCCTL_RESETAFTERSUSP_DEFAULT         (_USB_PCGCCTL_RESETAFTERSUSP_DEFAULT << 8) /**< Shifted mode DEFAULT for USB_PCGCCTL */
 
-/* Bit fields for USB FIFO0D_FIFO0D */
-#define _USB_FIFO0D_FIFO0D_RESETVALUE              0x00000000UL                             /**< Default value for USB_FIFO0D_FIFO0D */
-#define _USB_FIFO0D_FIFO0D_MASK                    0xFFFFFFFFUL                             /**< Mask for USB_FIFO0D_FIFO0D */
-#define _USB_FIFO0D_FIFO0D_FIFO0D_SHIFT            0                                        /**< Shift value for USB_FIFO0D */
-#define _USB_FIFO0D_FIFO0D_FIFO0D_MASK             0xFFFFFFFFUL                             /**< Bit mask for USB_FIFO0D */
-#define _USB_FIFO0D_FIFO0D_FIFO0D_DEFAULT          0x00000000UL                             /**< Mode DEFAULT for USB_FIFO0D_FIFO0D */
-#define USB_FIFO0D_FIFO0D_FIFO0D_DEFAULT           (_USB_FIFO0D_FIFO0D_FIFO0D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO0D_FIFO0D */
+/* Bit fields for USB FIFO0D */
+#define _USB_FIFO0D_RESETVALUE                     0x00000000UL                      /**< Default value for USB_FIFO0D */
+#define _USB_FIFO0D_MASK                           0xFFFFFFFFUL                      /**< Mask for USB_FIFO0D */
+#define _USB_FIFO0D_FIFO0D_SHIFT                   0                                 /**< Shift value for USB_FIFO0D */
+#define _USB_FIFO0D_FIFO0D_MASK                    0xFFFFFFFFUL                      /**< Bit mask for USB_FIFO0D */
+#define _USB_FIFO0D_FIFO0D_DEFAULT                 0x00000000UL                      /**< Mode DEFAULT for USB_FIFO0D */
+#define USB_FIFO0D_FIFO0D_DEFAULT                  (_USB_FIFO0D_FIFO0D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO0D */
 
-/* Bit fields for USB FIFO1D_FIFO1D */
-#define _USB_FIFO1D_FIFO1D_RESETVALUE              0x00000000UL                             /**< Default value for USB_FIFO1D_FIFO1D */
-#define _USB_FIFO1D_FIFO1D_MASK                    0xFFFFFFFFUL                             /**< Mask for USB_FIFO1D_FIFO1D */
-#define _USB_FIFO1D_FIFO1D_FIFO1D_SHIFT            0                                        /**< Shift value for USB_FIFO1D */
-#define _USB_FIFO1D_FIFO1D_FIFO1D_MASK             0xFFFFFFFFUL                             /**< Bit mask for USB_FIFO1D */
-#define _USB_FIFO1D_FIFO1D_FIFO1D_DEFAULT          0x00000000UL                             /**< Mode DEFAULT for USB_FIFO1D_FIFO1D */
-#define USB_FIFO1D_FIFO1D_FIFO1D_DEFAULT           (_USB_FIFO1D_FIFO1D_FIFO1D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO1D_FIFO1D */
+/* Bit fields for USB FIFO1D */
+#define _USB_FIFO1D_RESETVALUE                     0x00000000UL                      /**< Default value for USB_FIFO1D */
+#define _USB_FIFO1D_MASK                           0xFFFFFFFFUL                      /**< Mask for USB_FIFO1D */
+#define _USB_FIFO1D_FIFO1D_SHIFT                   0                                 /**< Shift value for USB_FIFO1D */
+#define _USB_FIFO1D_FIFO1D_MASK                    0xFFFFFFFFUL                      /**< Bit mask for USB_FIFO1D */
+#define _USB_FIFO1D_FIFO1D_DEFAULT                 0x00000000UL                      /**< Mode DEFAULT for USB_FIFO1D */
+#define USB_FIFO1D_FIFO1D_DEFAULT                  (_USB_FIFO1D_FIFO1D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO1D */
 
-/* Bit fields for USB FIFO2D_FIFO2D */
-#define _USB_FIFO2D_FIFO2D_RESETVALUE              0x00000000UL                             /**< Default value for USB_FIFO2D_FIFO2D */
-#define _USB_FIFO2D_FIFO2D_MASK                    0xFFFFFFFFUL                             /**< Mask for USB_FIFO2D_FIFO2D */
-#define _USB_FIFO2D_FIFO2D_FIFO2D_SHIFT            0                                        /**< Shift value for USB_FIFO2D */
-#define _USB_FIFO2D_FIFO2D_FIFO2D_MASK             0xFFFFFFFFUL                             /**< Bit mask for USB_FIFO2D */
-#define _USB_FIFO2D_FIFO2D_FIFO2D_DEFAULT          0x00000000UL                             /**< Mode DEFAULT for USB_FIFO2D_FIFO2D */
-#define USB_FIFO2D_FIFO2D_FIFO2D_DEFAULT           (_USB_FIFO2D_FIFO2D_FIFO2D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO2D_FIFO2D */
+/* Bit fields for USB FIFO2D */
+#define _USB_FIFO2D_RESETVALUE                     0x00000000UL                      /**< Default value for USB_FIFO2D */
+#define _USB_FIFO2D_MASK                           0xFFFFFFFFUL                      /**< Mask for USB_FIFO2D */
+#define _USB_FIFO2D_FIFO2D_SHIFT                   0                                 /**< Shift value for USB_FIFO2D */
+#define _USB_FIFO2D_FIFO2D_MASK                    0xFFFFFFFFUL                      /**< Bit mask for USB_FIFO2D */
+#define _USB_FIFO2D_FIFO2D_DEFAULT                 0x00000000UL                      /**< Mode DEFAULT for USB_FIFO2D */
+#define USB_FIFO2D_FIFO2D_DEFAULT                  (_USB_FIFO2D_FIFO2D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO2D */
 
-/* Bit fields for USB FIFO3D_FIFO3D */
-#define _USB_FIFO3D_FIFO3D_RESETVALUE              0x00000000UL                             /**< Default value for USB_FIFO3D_FIFO3D */
-#define _USB_FIFO3D_FIFO3D_MASK                    0xFFFFFFFFUL                             /**< Mask for USB_FIFO3D_FIFO3D */
-#define _USB_FIFO3D_FIFO3D_FIFO3D_SHIFT            0                                        /**< Shift value for USB_FIFO3D */
-#define _USB_FIFO3D_FIFO3D_FIFO3D_MASK             0xFFFFFFFFUL                             /**< Bit mask for USB_FIFO3D */
-#define _USB_FIFO3D_FIFO3D_FIFO3D_DEFAULT          0x00000000UL                             /**< Mode DEFAULT for USB_FIFO3D_FIFO3D */
-#define USB_FIFO3D_FIFO3D_FIFO3D_DEFAULT           (_USB_FIFO3D_FIFO3D_FIFO3D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO3D_FIFO3D */
+/* Bit fields for USB FIFO3D */
+#define _USB_FIFO3D_RESETVALUE                     0x00000000UL                      /**< Default value for USB_FIFO3D */
+#define _USB_FIFO3D_MASK                           0xFFFFFFFFUL                      /**< Mask for USB_FIFO3D */
+#define _USB_FIFO3D_FIFO3D_SHIFT                   0                                 /**< Shift value for USB_FIFO3D */
+#define _USB_FIFO3D_FIFO3D_MASK                    0xFFFFFFFFUL                      /**< Bit mask for USB_FIFO3D */
+#define _USB_FIFO3D_FIFO3D_DEFAULT                 0x00000000UL                      /**< Mode DEFAULT for USB_FIFO3D */
+#define USB_FIFO3D_FIFO3D_DEFAULT                  (_USB_FIFO3D_FIFO3D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO3D */
 
-/* Bit fields for USB FIFO4D_FIFO4D */
-#define _USB_FIFO4D_FIFO4D_RESETVALUE              0x00000000UL                             /**< Default value for USB_FIFO4D_FIFO4D */
-#define _USB_FIFO4D_FIFO4D_MASK                    0xFFFFFFFFUL                             /**< Mask for USB_FIFO4D_FIFO4D */
-#define _USB_FIFO4D_FIFO4D_FIFO4D_SHIFT            0                                        /**< Shift value for USB_FIFO4D */
-#define _USB_FIFO4D_FIFO4D_FIFO4D_MASK             0xFFFFFFFFUL                             /**< Bit mask for USB_FIFO4D */
-#define _USB_FIFO4D_FIFO4D_FIFO4D_DEFAULT          0x00000000UL                             /**< Mode DEFAULT for USB_FIFO4D_FIFO4D */
-#define USB_FIFO4D_FIFO4D_FIFO4D_DEFAULT           (_USB_FIFO4D_FIFO4D_FIFO4D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO4D_FIFO4D */
+/* Bit fields for USB FIFO4D */
+#define _USB_FIFO4D_RESETVALUE                     0x00000000UL                      /**< Default value for USB_FIFO4D */
+#define _USB_FIFO4D_MASK                           0xFFFFFFFFUL                      /**< Mask for USB_FIFO4D */
+#define _USB_FIFO4D_FIFO4D_SHIFT                   0                                 /**< Shift value for USB_FIFO4D */
+#define _USB_FIFO4D_FIFO4D_MASK                    0xFFFFFFFFUL                      /**< Bit mask for USB_FIFO4D */
+#define _USB_FIFO4D_FIFO4D_DEFAULT                 0x00000000UL                      /**< Mode DEFAULT for USB_FIFO4D */
+#define USB_FIFO4D_FIFO4D_DEFAULT                  (_USB_FIFO4D_FIFO4D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO4D */
 
-/* Bit fields for USB FIFO5D_FIFO5D */
-#define _USB_FIFO5D_FIFO5D_RESETVALUE              0x00000000UL                             /**< Default value for USB_FIFO5D_FIFO5D */
-#define _USB_FIFO5D_FIFO5D_MASK                    0xFFFFFFFFUL                             /**< Mask for USB_FIFO5D_FIFO5D */
-#define _USB_FIFO5D_FIFO5D_FIFO5D_SHIFT            0                                        /**< Shift value for USB_FIFO5D */
-#define _USB_FIFO5D_FIFO5D_FIFO5D_MASK             0xFFFFFFFFUL                             /**< Bit mask for USB_FIFO5D */
-#define _USB_FIFO5D_FIFO5D_FIFO5D_DEFAULT          0x00000000UL                             /**< Mode DEFAULT for USB_FIFO5D_FIFO5D */
-#define USB_FIFO5D_FIFO5D_FIFO5D_DEFAULT           (_USB_FIFO5D_FIFO5D_FIFO5D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO5D_FIFO5D */
+/* Bit fields for USB FIFO5D */
+#define _USB_FIFO5D_RESETVALUE                     0x00000000UL                      /**< Default value for USB_FIFO5D */
+#define _USB_FIFO5D_MASK                           0xFFFFFFFFUL                      /**< Mask for USB_FIFO5D */
+#define _USB_FIFO5D_FIFO5D_SHIFT                   0                                 /**< Shift value for USB_FIFO5D */
+#define _USB_FIFO5D_FIFO5D_MASK                    0xFFFFFFFFUL                      /**< Bit mask for USB_FIFO5D */
+#define _USB_FIFO5D_FIFO5D_DEFAULT                 0x00000000UL                      /**< Mode DEFAULT for USB_FIFO5D */
+#define USB_FIFO5D_FIFO5D_DEFAULT                  (_USB_FIFO5D_FIFO5D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO5D */
 
-/* Bit fields for USB FIFO6D_FIFO6D */
-#define _USB_FIFO6D_FIFO6D_RESETVALUE              0x00000000UL                             /**< Default value for USB_FIFO6D_FIFO6D */
-#define _USB_FIFO6D_FIFO6D_MASK                    0xFFFFFFFFUL                             /**< Mask for USB_FIFO6D_FIFO6D */
-#define _USB_FIFO6D_FIFO6D_FIFO6D_SHIFT            0                                        /**< Shift value for USB_FIFO6D */
-#define _USB_FIFO6D_FIFO6D_FIFO6D_MASK             0xFFFFFFFFUL                             /**< Bit mask for USB_FIFO6D */
-#define _USB_FIFO6D_FIFO6D_FIFO6D_DEFAULT          0x00000000UL                             /**< Mode DEFAULT for USB_FIFO6D_FIFO6D */
-#define USB_FIFO6D_FIFO6D_FIFO6D_DEFAULT           (_USB_FIFO6D_FIFO6D_FIFO6D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO6D_FIFO6D */
+/* Bit fields for USB FIFO6D */
+#define _USB_FIFO6D_RESETVALUE                     0x00000000UL                      /**< Default value for USB_FIFO6D */
+#define _USB_FIFO6D_MASK                           0xFFFFFFFFUL                      /**< Mask for USB_FIFO6D */
+#define _USB_FIFO6D_FIFO6D_SHIFT                   0                                 /**< Shift value for USB_FIFO6D */
+#define _USB_FIFO6D_FIFO6D_MASK                    0xFFFFFFFFUL                      /**< Bit mask for USB_FIFO6D */
+#define _USB_FIFO6D_FIFO6D_DEFAULT                 0x00000000UL                      /**< Mode DEFAULT for USB_FIFO6D */
+#define USB_FIFO6D_FIFO6D_DEFAULT                  (_USB_FIFO6D_FIFO6D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO6D */
 
-/* Bit fields for USB FIFO7D_FIFO7D */
-#define _USB_FIFO7D_FIFO7D_RESETVALUE              0x00000000UL                             /**< Default value for USB_FIFO7D_FIFO7D */
-#define _USB_FIFO7D_FIFO7D_MASK                    0xFFFFFFFFUL                             /**< Mask for USB_FIFO7D_FIFO7D */
-#define _USB_FIFO7D_FIFO7D_FIFO7D_SHIFT            0                                        /**< Shift value for USB_FIFO7D */
-#define _USB_FIFO7D_FIFO7D_FIFO7D_MASK             0xFFFFFFFFUL                             /**< Bit mask for USB_FIFO7D */
-#define _USB_FIFO7D_FIFO7D_FIFO7D_DEFAULT          0x00000000UL                             /**< Mode DEFAULT for USB_FIFO7D_FIFO7D */
-#define USB_FIFO7D_FIFO7D_FIFO7D_DEFAULT           (_USB_FIFO7D_FIFO7D_FIFO7D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO7D_FIFO7D */
+/* Bit fields for USB FIFO7D */
+#define _USB_FIFO7D_RESETVALUE                     0x00000000UL                      /**< Default value for USB_FIFO7D */
+#define _USB_FIFO7D_MASK                           0xFFFFFFFFUL                      /**< Mask for USB_FIFO7D */
+#define _USB_FIFO7D_FIFO7D_SHIFT                   0                                 /**< Shift value for USB_FIFO7D */
+#define _USB_FIFO7D_FIFO7D_MASK                    0xFFFFFFFFUL                      /**< Bit mask for USB_FIFO7D */
+#define _USB_FIFO7D_FIFO7D_DEFAULT                 0x00000000UL                      /**< Mode DEFAULT for USB_FIFO7D */
+#define USB_FIFO7D_FIFO7D_DEFAULT                  (_USB_FIFO7D_FIFO7D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO7D */
 
-/* Bit fields for USB FIFO8D_FIFO8D */
-#define _USB_FIFO8D_FIFO8D_RESETVALUE              0x00000000UL                             /**< Default value for USB_FIFO8D_FIFO8D */
-#define _USB_FIFO8D_FIFO8D_MASK                    0xFFFFFFFFUL                             /**< Mask for USB_FIFO8D_FIFO8D */
-#define _USB_FIFO8D_FIFO8D_FIFO8D_SHIFT            0                                        /**< Shift value for USB_FIFO8D */
-#define _USB_FIFO8D_FIFO8D_FIFO8D_MASK             0xFFFFFFFFUL                             /**< Bit mask for USB_FIFO8D */
-#define _USB_FIFO8D_FIFO8D_FIFO8D_DEFAULT          0x00000000UL                             /**< Mode DEFAULT for USB_FIFO8D_FIFO8D */
-#define USB_FIFO8D_FIFO8D_FIFO8D_DEFAULT           (_USB_FIFO8D_FIFO8D_FIFO8D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO8D_FIFO8D */
+/* Bit fields for USB FIFO8D */
+#define _USB_FIFO8D_RESETVALUE                     0x00000000UL                      /**< Default value for USB_FIFO8D */
+#define _USB_FIFO8D_MASK                           0xFFFFFFFFUL                      /**< Mask for USB_FIFO8D */
+#define _USB_FIFO8D_FIFO8D_SHIFT                   0                                 /**< Shift value for USB_FIFO8D */
+#define _USB_FIFO8D_FIFO8D_MASK                    0xFFFFFFFFUL                      /**< Bit mask for USB_FIFO8D */
+#define _USB_FIFO8D_FIFO8D_DEFAULT                 0x00000000UL                      /**< Mode DEFAULT for USB_FIFO8D */
+#define USB_FIFO8D_FIFO8D_DEFAULT                  (_USB_FIFO8D_FIFO8D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO8D */
 
-/* Bit fields for USB FIFO9D_FIFO9D */
-#define _USB_FIFO9D_FIFO9D_RESETVALUE              0x00000000UL                             /**< Default value for USB_FIFO9D_FIFO9D */
-#define _USB_FIFO9D_FIFO9D_MASK                    0xFFFFFFFFUL                             /**< Mask for USB_FIFO9D_FIFO9D */
-#define _USB_FIFO9D_FIFO9D_FIFO9D_SHIFT            0                                        /**< Shift value for USB_FIFO9D */
-#define _USB_FIFO9D_FIFO9D_FIFO9D_MASK             0xFFFFFFFFUL                             /**< Bit mask for USB_FIFO9D */
-#define _USB_FIFO9D_FIFO9D_FIFO9D_DEFAULT          0x00000000UL                             /**< Mode DEFAULT for USB_FIFO9D_FIFO9D */
-#define USB_FIFO9D_FIFO9D_FIFO9D_DEFAULT           (_USB_FIFO9D_FIFO9D_FIFO9D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO9D_FIFO9D */
+/* Bit fields for USB FIFO9D */
+#define _USB_FIFO9D_RESETVALUE                     0x00000000UL                      /**< Default value for USB_FIFO9D */
+#define _USB_FIFO9D_MASK                           0xFFFFFFFFUL                      /**< Mask for USB_FIFO9D */
+#define _USB_FIFO9D_FIFO9D_SHIFT                   0                                 /**< Shift value for USB_FIFO9D */
+#define _USB_FIFO9D_FIFO9D_MASK                    0xFFFFFFFFUL                      /**< Bit mask for USB_FIFO9D */
+#define _USB_FIFO9D_FIFO9D_DEFAULT                 0x00000000UL                      /**< Mode DEFAULT for USB_FIFO9D */
+#define USB_FIFO9D_FIFO9D_DEFAULT                  (_USB_FIFO9D_FIFO9D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO9D */
 
-/* Bit fields for USB FIFO10D_FIFO10D */
-#define _USB_FIFO10D_FIFO10D_RESETVALUE            0x00000000UL                                /**< Default value for USB_FIFO10D_FIFO10D */
-#define _USB_FIFO10D_FIFO10D_MASK                  0xFFFFFFFFUL                                /**< Mask for USB_FIFO10D_FIFO10D */
-#define _USB_FIFO10D_FIFO10D_FIFO10D_SHIFT         0                                           /**< Shift value for USB_FIFO10D */
-#define _USB_FIFO10D_FIFO10D_FIFO10D_MASK          0xFFFFFFFFUL                                /**< Bit mask for USB_FIFO10D */
-#define _USB_FIFO10D_FIFO10D_FIFO10D_DEFAULT       0x00000000UL                                /**< Mode DEFAULT for USB_FIFO10D_FIFO10D */
-#define USB_FIFO10D_FIFO10D_FIFO10D_DEFAULT        (_USB_FIFO10D_FIFO10D_FIFO10D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO10D_FIFO10D */
+/* Bit fields for USB FIFO10D */
+#define _USB_FIFO10D_RESETVALUE                    0x00000000UL                        /**< Default value for USB_FIFO10D */
+#define _USB_FIFO10D_MASK                          0xFFFFFFFFUL                        /**< Mask for USB_FIFO10D */
+#define _USB_FIFO10D_FIFO10D_SHIFT                 0                                   /**< Shift value for USB_FIFO10D */
+#define _USB_FIFO10D_FIFO10D_MASK                  0xFFFFFFFFUL                        /**< Bit mask for USB_FIFO10D */
+#define _USB_FIFO10D_FIFO10D_DEFAULT               0x00000000UL                        /**< Mode DEFAULT for USB_FIFO10D */
+#define USB_FIFO10D_FIFO10D_DEFAULT                (_USB_FIFO10D_FIFO10D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO10D */
 
-/* Bit fields for USB FIFO11D_FIFO11D */
-#define _USB_FIFO11D_FIFO11D_RESETVALUE            0x00000000UL                                /**< Default value for USB_FIFO11D_FIFO11D */
-#define _USB_FIFO11D_FIFO11D_MASK                  0xFFFFFFFFUL                                /**< Mask for USB_FIFO11D_FIFO11D */
-#define _USB_FIFO11D_FIFO11D_FIFO11D_SHIFT         0                                           /**< Shift value for USB_FIFO11D */
-#define _USB_FIFO11D_FIFO11D_FIFO11D_MASK          0xFFFFFFFFUL                                /**< Bit mask for USB_FIFO11D */
-#define _USB_FIFO11D_FIFO11D_FIFO11D_DEFAULT       0x00000000UL                                /**< Mode DEFAULT for USB_FIFO11D_FIFO11D */
-#define USB_FIFO11D_FIFO11D_FIFO11D_DEFAULT        (_USB_FIFO11D_FIFO11D_FIFO11D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO11D_FIFO11D */
+/* Bit fields for USB FIFO11D */
+#define _USB_FIFO11D_RESETVALUE                    0x00000000UL                        /**< Default value for USB_FIFO11D */
+#define _USB_FIFO11D_MASK                          0xFFFFFFFFUL                        /**< Mask for USB_FIFO11D */
+#define _USB_FIFO11D_FIFO11D_SHIFT                 0                                   /**< Shift value for USB_FIFO11D */
+#define _USB_FIFO11D_FIFO11D_MASK                  0xFFFFFFFFUL                        /**< Bit mask for USB_FIFO11D */
+#define _USB_FIFO11D_FIFO11D_DEFAULT               0x00000000UL                        /**< Mode DEFAULT for USB_FIFO11D */
+#define USB_FIFO11D_FIFO11D_DEFAULT                (_USB_FIFO11D_FIFO11D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO11D */
 
-/* Bit fields for USB FIFO12D_FIFO12D */
-#define _USB_FIFO12D_FIFO12D_RESETVALUE            0x00000000UL                                /**< Default value for USB_FIFO12D_FIFO12D */
-#define _USB_FIFO12D_FIFO12D_MASK                  0xFFFFFFFFUL                                /**< Mask for USB_FIFO12D_FIFO12D */
-#define _USB_FIFO12D_FIFO12D_FIFO12D_SHIFT         0                                           /**< Shift value for USB_FIFO12D */
-#define _USB_FIFO12D_FIFO12D_FIFO12D_MASK          0xFFFFFFFFUL                                /**< Bit mask for USB_FIFO12D */
-#define _USB_FIFO12D_FIFO12D_FIFO12D_DEFAULT       0x00000000UL                                /**< Mode DEFAULT for USB_FIFO12D_FIFO12D */
-#define USB_FIFO12D_FIFO12D_FIFO12D_DEFAULT        (_USB_FIFO12D_FIFO12D_FIFO12D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO12D_FIFO12D */
+/* Bit fields for USB FIFO12D */
+#define _USB_FIFO12D_RESETVALUE                    0x00000000UL                        /**< Default value for USB_FIFO12D */
+#define _USB_FIFO12D_MASK                          0xFFFFFFFFUL                        /**< Mask for USB_FIFO12D */
+#define _USB_FIFO12D_FIFO12D_SHIFT                 0                                   /**< Shift value for USB_FIFO12D */
+#define _USB_FIFO12D_FIFO12D_MASK                  0xFFFFFFFFUL                        /**< Bit mask for USB_FIFO12D */
+#define _USB_FIFO12D_FIFO12D_DEFAULT               0x00000000UL                        /**< Mode DEFAULT for USB_FIFO12D */
+#define USB_FIFO12D_FIFO12D_DEFAULT                (_USB_FIFO12D_FIFO12D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO12D */
 
-/* Bit fields for USB FIFO13D_FIFO13D */
-#define _USB_FIFO13D_FIFO13D_RESETVALUE            0x00000000UL                                /**< Default value for USB_FIFO13D_FIFO13D */
-#define _USB_FIFO13D_FIFO13D_MASK                  0xFFFFFFFFUL                                /**< Mask for USB_FIFO13D_FIFO13D */
-#define _USB_FIFO13D_FIFO13D_FIFO13D_SHIFT         0                                           /**< Shift value for USB_FIFO13D */
-#define _USB_FIFO13D_FIFO13D_FIFO13D_MASK          0xFFFFFFFFUL                                /**< Bit mask for USB_FIFO13D */
-#define _USB_FIFO13D_FIFO13D_FIFO13D_DEFAULT       0x00000000UL                                /**< Mode DEFAULT for USB_FIFO13D_FIFO13D */
-#define USB_FIFO13D_FIFO13D_FIFO13D_DEFAULT        (_USB_FIFO13D_FIFO13D_FIFO13D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO13D_FIFO13D */
+/* Bit fields for USB FIFO13D */
+#define _USB_FIFO13D_RESETVALUE                    0x00000000UL                        /**< Default value for USB_FIFO13D */
+#define _USB_FIFO13D_MASK                          0xFFFFFFFFUL                        /**< Mask for USB_FIFO13D */
+#define _USB_FIFO13D_FIFO13D_SHIFT                 0                                   /**< Shift value for USB_FIFO13D */
+#define _USB_FIFO13D_FIFO13D_MASK                  0xFFFFFFFFUL                        /**< Bit mask for USB_FIFO13D */
+#define _USB_FIFO13D_FIFO13D_DEFAULT               0x00000000UL                        /**< Mode DEFAULT for USB_FIFO13D */
+#define USB_FIFO13D_FIFO13D_DEFAULT                (_USB_FIFO13D_FIFO13D_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFO13D */
 
-/* Bit fields for USB FIFORAM_FIFORAM */
-#define _USB_FIFORAM_FIFORAM_RESETVALUE            0x00000000UL                                /**< Default value for USB_FIFORAM_FIFORAM */
-#define _USB_FIFORAM_FIFORAM_MASK                  0xFFFFFFFFUL                                /**< Mask for USB_FIFORAM_FIFORAM */
-#define _USB_FIFORAM_FIFORAM_FIFORAM_SHIFT         0                                           /**< Shift value for USB_FIFORAM */
-#define _USB_FIFORAM_FIFORAM_FIFORAM_MASK          0xFFFFFFFFUL                                /**< Bit mask for USB_FIFORAM */
-#define _USB_FIFORAM_FIFORAM_FIFORAM_DEFAULT       0x00000000UL                                /**< Mode DEFAULT for USB_FIFORAM_FIFORAM */
-#define USB_FIFORAM_FIFORAM_FIFORAM_DEFAULT        (_USB_FIFORAM_FIFORAM_FIFORAM_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFORAM_FIFORAM */
+/* Bit fields for USB FIFORAM */
+#define _USB_FIFORAM_RESETVALUE                    0x00000000UL                        /**< Default value for USB_FIFORAM */
+#define _USB_FIFORAM_MASK                          0xFFFFFFFFUL                        /**< Mask for USB_FIFORAM */
+#define _USB_FIFORAM_FIFORAM_SHIFT                 0                                   /**< Shift value for USB_FIFORAM */
+#define _USB_FIFORAM_FIFORAM_MASK                  0xFFFFFFFFUL                        /**< Bit mask for USB_FIFORAM */
+#define _USB_FIFORAM_FIFORAM_DEFAULT               0x00000000UL                        /**< Mode DEFAULT for USB_FIFORAM */
+#define USB_FIFORAM_FIFORAM_DEFAULT                (_USB_FIFORAM_FIFORAM_DEFAULT << 0) /**< Shifted mode DEFAULT for USB_FIFORAM */
 
 /** @} End of group EFM32GG_USB */
 

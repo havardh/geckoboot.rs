@@ -1,11 +1,10 @@
 /**************************************************************************//**
- * @file
- * @brief efm32gg_etm Register and Bit Field definitions
- * @author Energy Micro AS
- * @version 3.20.0
+ * @file efm32gg_etm.h
+ * @brief EFM32GG_ETM register and bit field definitions
+ * @version 3.20.7
  ******************************************************************************
  * @section License
- * <b>(C) Copyright 2012 Energy Micro AS, http://www.energymicro.com</b>
+ * <b>(C) Copyright 2014 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -13,21 +12,21 @@
  * freely, subject to the following restrictions:
  *
  * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software.
+ *    claim that you wrote the original software.@n
  * 2. Altered source versions must be plainly marked as such, and must not be
- *    misrepresented as being the original software.
+ *    misrepresented as being the original software.@n
  * 3. This notice may not be removed or altered from any source distribution.
  *
- * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Energy Micro AS has no
- * obligation to support this Software. Energy Micro AS is providing the
- * Software "AS IS", with no express or implied warranties of any kind,
- * including, but not limited to, any implied warranties of merchantability
- * or fitness for any particular purpose or warranties against infringement
- * of any proprietary rights of a third party.
+ * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Silicon Laboratories, Inc.
+ * has no obligation to support this Software. Silicon Laboratories, Inc. is
+ * providing the Software "AS IS", with no express or implied warranties of any
+ * kind, including, but not limited to, any implied warranties of
+ * merchantability or fitness for any particular purpose or warranties against
+ * infringement of any proprietary rights of a third party.
  *
- * Energy Micro AS will not be liable for any consequential, incidental, or
- * special damages, or any other relief, or for any claim by any third party,
- * arising from your use of this Software.
+ * Silicon Laboratories, Inc. will not be liable for any consequential,
+ * incidental, or special damages, or any other relief, or for any claim by
+ * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
 /**************************************************************************//**
@@ -37,7 +36,7 @@
  *****************************************************************************/
 typedef struct
 {
-  __IO uint32_t ETMMCR;          /**< Main Control Register  */
+  __IO uint32_t ETMCR;           /**< Main Control Register  */
   __I uint32_t  ETMCCR;          /**< Configuration Code Register  */
   __IO uint32_t ETMTRIGGER;      /**< ETM Trigger Event Register  */
   uint32_t      RESERVED0[1];    /**< Reserved for future use **/
@@ -102,65 +101,65 @@ typedef struct
  * @{
  *****************************************************************************/
 
-/* Bit fields for ETM ETMMCR */
-#define _ETM_ETMMCR_RESETVALUE                        0x00000411UL                            /**< Default value for ETM_ETMMCR */
-#define _ETM_ETMMCR_MASK                              0x10632FF1UL                            /**< Mask for ETM_ETMMCR */
-#define ETM_ETMMCR_POWERDWN                           (0x1UL << 0)                            /**< ETM Control in low power mode */
-#define _ETM_ETMMCR_POWERDWN_SHIFT                    0                                       /**< Shift value for ETM_POWERDWN */
-#define _ETM_ETMMCR_POWERDWN_MASK                     0x1UL                                   /**< Bit mask for ETM_POWERDWN */
-#define _ETM_ETMMCR_POWERDWN_DEFAULT                  0x00000001UL                            /**< Mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_POWERDWN_DEFAULT                   (_ETM_ETMMCR_POWERDWN_DEFAULT << 0)     /**< Shifted mode DEFAULT for ETM_ETMMCR */
-#define _ETM_ETMMCR_PORTSIZE_SHIFT                    4                                       /**< Shift value for ETM_PORTSIZE */
-#define _ETM_ETMMCR_PORTSIZE_MASK                     0x70UL                                  /**< Bit mask for ETM_PORTSIZE */
-#define _ETM_ETMMCR_PORTSIZE_DEFAULT                  0x00000001UL                            /**< Mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_PORTSIZE_DEFAULT                   (_ETM_ETMMCR_PORTSIZE_DEFAULT << 4)     /**< Shifted mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_STALL                              (0x1UL << 7)                            /**< Stall Processor */
-#define _ETM_ETMMCR_STALL_SHIFT                       7                                       /**< Shift value for ETM_STALL */
-#define _ETM_ETMMCR_STALL_MASK                        0x80UL                                  /**< Bit mask for ETM_STALL */
-#define _ETM_ETMMCR_STALL_DEFAULT                     0x00000000UL                            /**< Mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_STALL_DEFAULT                      (_ETM_ETMMCR_STALL_DEFAULT << 7)        /**< Shifted mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_BRANCHOUTPUT                       (0x1UL << 8)                            /**< Branch Output */
-#define _ETM_ETMMCR_BRANCHOUTPUT_SHIFT                8                                       /**< Shift value for ETM_BRANCHOUTPUT */
-#define _ETM_ETMMCR_BRANCHOUTPUT_MASK                 0x100UL                                 /**< Bit mask for ETM_BRANCHOUTPUT */
-#define _ETM_ETMMCR_BRANCHOUTPUT_DEFAULT              0x00000000UL                            /**< Mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_BRANCHOUTPUT_DEFAULT               (_ETM_ETMMCR_BRANCHOUTPUT_DEFAULT << 8) /**< Shifted mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_DBGREQCTRL                         (0x1UL << 9)                            /**< Debug Request Control */
-#define _ETM_ETMMCR_DBGREQCTRL_SHIFT                  9                                       /**< Shift value for ETM_DBGREQCTRL */
-#define _ETM_ETMMCR_DBGREQCTRL_MASK                   0x200UL                                 /**< Bit mask for ETM_DBGREQCTRL */
-#define _ETM_ETMMCR_DBGREQCTRL_DEFAULT                0x00000000UL                            /**< Mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_DBGREQCTRL_DEFAULT                 (_ETM_ETMMCR_DBGREQCTRL_DEFAULT << 9)   /**< Shifted mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_ETMPROG                            (0x1UL << 10)                           /**< ETM Programming */
-#define _ETM_ETMMCR_ETMPROG_SHIFT                     10                                      /**< Shift value for ETM_ETMPROG */
-#define _ETM_ETMMCR_ETMPROG_MASK                      0x400UL                                 /**< Bit mask for ETM_ETMPROG */
-#define _ETM_ETMMCR_ETMPROG_DEFAULT                   0x00000001UL                            /**< Mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_ETMPROG_DEFAULT                    (_ETM_ETMMCR_ETMPROG_DEFAULT << 10)     /**< Shifted mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_ETMPORTSEL                         (0x1UL << 11)                           /**< ETM Port Selection */
-#define _ETM_ETMMCR_ETMPORTSEL_SHIFT                  11                                      /**< Shift value for ETM_ETMPORTSEL */
-#define _ETM_ETMMCR_ETMPORTSEL_MASK                   0x800UL                                 /**< Bit mask for ETM_ETMPORTSEL */
-#define _ETM_ETMMCR_ETMPORTSEL_DEFAULT                0x00000000UL                            /**< Mode DEFAULT for ETM_ETMMCR */
-#define _ETM_ETMMCR_ETMPORTSEL_ETMLOW                 0x00000000UL                            /**< Mode ETMLOW for ETM_ETMMCR */
-#define _ETM_ETMMCR_ETMPORTSEL_ETMHIGH                0x00000001UL                            /**< Mode ETMHIGH for ETM_ETMMCR */
-#define ETM_ETMMCR_ETMPORTSEL_DEFAULT                 (_ETM_ETMMCR_ETMPORTSEL_DEFAULT << 11)  /**< Shifted mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_ETMPORTSEL_ETMLOW                  (_ETM_ETMMCR_ETMPORTSEL_ETMLOW << 11)   /**< Shifted mode ETMLOW for ETM_ETMMCR */
-#define ETM_ETMMCR_ETMPORTSEL_ETMHIGH                 (_ETM_ETMMCR_ETMPORTSEL_ETMHIGH << 11)  /**< Shifted mode ETMHIGH for ETM_ETMMCR */
-#define ETM_ETMMCR_PORTMODE2                          (0x1UL << 13)                           /**< Port Mode[2] */
-#define _ETM_ETMMCR_PORTMODE2_SHIFT                   13                                      /**< Shift value for ETM_PORTMODE2 */
-#define _ETM_ETMMCR_PORTMODE2_MASK                    0x2000UL                                /**< Bit mask for ETM_PORTMODE2 */
-#define _ETM_ETMMCR_PORTMODE2_DEFAULT                 0x00000000UL                            /**< Mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_PORTMODE2_DEFAULT                  (_ETM_ETMMCR_PORTMODE2_DEFAULT << 13)   /**< Shifted mode DEFAULT for ETM_ETMMCR */
-#define _ETM_ETMMCR_PORTMODE_SHIFT                    16                                      /**< Shift value for ETM_PORTMODE */
-#define _ETM_ETMMCR_PORTMODE_MASK                     0x30000UL                               /**< Bit mask for ETM_PORTMODE */
-#define _ETM_ETMMCR_PORTMODE_DEFAULT                  0x00000000UL                            /**< Mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_PORTMODE_DEFAULT                   (_ETM_ETMMCR_PORTMODE_DEFAULT << 16)    /**< Shifted mode DEFAULT for ETM_ETMMCR */
-#define _ETM_ETMMCR_EPORTSIZE_SHIFT                   21                                      /**< Shift value for ETM_EPORTSIZE */
-#define _ETM_ETMMCR_EPORTSIZE_MASK                    0x600000UL                              /**< Bit mask for ETM_EPORTSIZE */
-#define _ETM_ETMMCR_EPORTSIZE_DEFAULT                 0x00000000UL                            /**< Mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_EPORTSIZE_DEFAULT                  (_ETM_ETMMCR_EPORTSIZE_DEFAULT << 21)   /**< Shifted mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_TSTAMPEN                           (0x1UL << 28)                           /**< Time Stamp Enable */
-#define _ETM_ETMMCR_TSTAMPEN_SHIFT                    28                                      /**< Shift value for ETM_TSTAMPEN */
-#define _ETM_ETMMCR_TSTAMPEN_MASK                     0x10000000UL                            /**< Bit mask for ETM_TSTAMPEN */
-#define _ETM_ETMMCR_TSTAMPEN_DEFAULT                  0x00000000UL                            /**< Mode DEFAULT for ETM_ETMMCR */
-#define ETM_ETMMCR_TSTAMPEN_DEFAULT                   (_ETM_ETMMCR_TSTAMPEN_DEFAULT << 28)    /**< Shifted mode DEFAULT for ETM_ETMMCR */
+/* Bit fields for ETM ETMCR */
+#define _ETM_ETMCR_RESETVALUE                         0x00000411UL                           /**< Default value for ETM_ETMCR */
+#define _ETM_ETMCR_MASK                               0x10632FF1UL                           /**< Mask for ETM_ETMCR */
+#define ETM_ETMCR_POWERDWN                            (0x1UL << 0)                           /**< ETM Control in low power mode */
+#define _ETM_ETMCR_POWERDWN_SHIFT                     0                                      /**< Shift value for ETM_POWERDWN */
+#define _ETM_ETMCR_POWERDWN_MASK                      0x1UL                                  /**< Bit mask for ETM_POWERDWN */
+#define _ETM_ETMCR_POWERDWN_DEFAULT                   0x00000001UL                           /**< Mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_POWERDWN_DEFAULT                    (_ETM_ETMCR_POWERDWN_DEFAULT << 0)     /**< Shifted mode DEFAULT for ETM_ETMCR */
+#define _ETM_ETMCR_PORTSIZE_SHIFT                     4                                      /**< Shift value for ETM_PORTSIZE */
+#define _ETM_ETMCR_PORTSIZE_MASK                      0x70UL                                 /**< Bit mask for ETM_PORTSIZE */
+#define _ETM_ETMCR_PORTSIZE_DEFAULT                   0x00000001UL                           /**< Mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_PORTSIZE_DEFAULT                    (_ETM_ETMCR_PORTSIZE_DEFAULT << 4)     /**< Shifted mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_STALL                               (0x1UL << 7)                           /**< Stall Processor */
+#define _ETM_ETMCR_STALL_SHIFT                        7                                      /**< Shift value for ETM_STALL */
+#define _ETM_ETMCR_STALL_MASK                         0x80UL                                 /**< Bit mask for ETM_STALL */
+#define _ETM_ETMCR_STALL_DEFAULT                      0x00000000UL                           /**< Mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_STALL_DEFAULT                       (_ETM_ETMCR_STALL_DEFAULT << 7)        /**< Shifted mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_BRANCHOUTPUT                        (0x1UL << 8)                           /**< Branch Output */
+#define _ETM_ETMCR_BRANCHOUTPUT_SHIFT                 8                                      /**< Shift value for ETM_BRANCHOUTPUT */
+#define _ETM_ETMCR_BRANCHOUTPUT_MASK                  0x100UL                                /**< Bit mask for ETM_BRANCHOUTPUT */
+#define _ETM_ETMCR_BRANCHOUTPUT_DEFAULT               0x00000000UL                           /**< Mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_BRANCHOUTPUT_DEFAULT                (_ETM_ETMCR_BRANCHOUTPUT_DEFAULT << 8) /**< Shifted mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_DBGREQCTRL                          (0x1UL << 9)                           /**< Debug Request Control */
+#define _ETM_ETMCR_DBGREQCTRL_SHIFT                   9                                      /**< Shift value for ETM_DBGREQCTRL */
+#define _ETM_ETMCR_DBGREQCTRL_MASK                    0x200UL                                /**< Bit mask for ETM_DBGREQCTRL */
+#define _ETM_ETMCR_DBGREQCTRL_DEFAULT                 0x00000000UL                           /**< Mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_DBGREQCTRL_DEFAULT                  (_ETM_ETMCR_DBGREQCTRL_DEFAULT << 9)   /**< Shifted mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_ETMPROG                             (0x1UL << 10)                          /**< ETM Programming */
+#define _ETM_ETMCR_ETMPROG_SHIFT                      10                                     /**< Shift value for ETM_ETMPROG */
+#define _ETM_ETMCR_ETMPROG_MASK                       0x400UL                                /**< Bit mask for ETM_ETMPROG */
+#define _ETM_ETMCR_ETMPROG_DEFAULT                    0x00000001UL                           /**< Mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_ETMPROG_DEFAULT                     (_ETM_ETMCR_ETMPROG_DEFAULT << 10)     /**< Shifted mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_ETMPORTSEL                          (0x1UL << 11)                          /**< ETM Port Selection */
+#define _ETM_ETMCR_ETMPORTSEL_SHIFT                   11                                     /**< Shift value for ETM_ETMPORTSEL */
+#define _ETM_ETMCR_ETMPORTSEL_MASK                    0x800UL                                /**< Bit mask for ETM_ETMPORTSEL */
+#define _ETM_ETMCR_ETMPORTSEL_DEFAULT                 0x00000000UL                           /**< Mode DEFAULT for ETM_ETMCR */
+#define _ETM_ETMCR_ETMPORTSEL_ETMLOW                  0x00000000UL                           /**< Mode ETMLOW for ETM_ETMCR */
+#define _ETM_ETMCR_ETMPORTSEL_ETMHIGH                 0x00000001UL                           /**< Mode ETMHIGH for ETM_ETMCR */
+#define ETM_ETMCR_ETMPORTSEL_DEFAULT                  (_ETM_ETMCR_ETMPORTSEL_DEFAULT << 11)  /**< Shifted mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_ETMPORTSEL_ETMLOW                   (_ETM_ETMCR_ETMPORTSEL_ETMLOW << 11)   /**< Shifted mode ETMLOW for ETM_ETMCR */
+#define ETM_ETMCR_ETMPORTSEL_ETMHIGH                  (_ETM_ETMCR_ETMPORTSEL_ETMHIGH << 11)  /**< Shifted mode ETMHIGH for ETM_ETMCR */
+#define ETM_ETMCR_PORTMODE2                           (0x1UL << 13)                          /**< Port Mode[2] */
+#define _ETM_ETMCR_PORTMODE2_SHIFT                    13                                     /**< Shift value for ETM_PORTMODE2 */
+#define _ETM_ETMCR_PORTMODE2_MASK                     0x2000UL                               /**< Bit mask for ETM_PORTMODE2 */
+#define _ETM_ETMCR_PORTMODE2_DEFAULT                  0x00000000UL                           /**< Mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_PORTMODE2_DEFAULT                   (_ETM_ETMCR_PORTMODE2_DEFAULT << 13)   /**< Shifted mode DEFAULT for ETM_ETMCR */
+#define _ETM_ETMCR_PORTMODE_SHIFT                     16                                     /**< Shift value for ETM_PORTMODE */
+#define _ETM_ETMCR_PORTMODE_MASK                      0x30000UL                              /**< Bit mask for ETM_PORTMODE */
+#define _ETM_ETMCR_PORTMODE_DEFAULT                   0x00000000UL                           /**< Mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_PORTMODE_DEFAULT                    (_ETM_ETMCR_PORTMODE_DEFAULT << 16)    /**< Shifted mode DEFAULT for ETM_ETMCR */
+#define _ETM_ETMCR_EPORTSIZE_SHIFT                    21                                     /**< Shift value for ETM_EPORTSIZE */
+#define _ETM_ETMCR_EPORTSIZE_MASK                     0x600000UL                             /**< Bit mask for ETM_EPORTSIZE */
+#define _ETM_ETMCR_EPORTSIZE_DEFAULT                  0x00000000UL                           /**< Mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_EPORTSIZE_DEFAULT                   (_ETM_ETMCR_EPORTSIZE_DEFAULT << 21)   /**< Shifted mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_TSTAMPEN                            (0x1UL << 28)                          /**< Time Stamp Enable */
+#define _ETM_ETMCR_TSTAMPEN_SHIFT                     28                                     /**< Shift value for ETM_TSTAMPEN */
+#define _ETM_ETMCR_TSTAMPEN_MASK                      0x10000000UL                           /**< Bit mask for ETM_TSTAMPEN */
+#define _ETM_ETMCR_TSTAMPEN_DEFAULT                   0x00000000UL                           /**< Mode DEFAULT for ETM_ETMCR */
+#define ETM_ETMCR_TSTAMPEN_DEFAULT                    (_ETM_ETMCR_TSTAMPEN_DEFAULT << 28)    /**< Shifted mode DEFAULT for ETM_ETMCR */
 
 /* Bit fields for ETM ETMCCR */
 #define _ETM_ETMCCR_RESETVALUE                        0x8C802000UL                             /**< Default value for ETM_ETMCCR */

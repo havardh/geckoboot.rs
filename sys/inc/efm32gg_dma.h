@@ -1,11 +1,10 @@
 /**************************************************************************//**
- * @file
- * @brief efm32gg_dma Register and Bit Field definitions
- * @author Energy Micro AS
- * @version 3.20.0
+ * @file efm32gg_dma.h
+ * @brief EFM32GG_DMA register and bit field definitions
+ * @version 3.20.7
  ******************************************************************************
  * @section License
- * <b>(C) Copyright 2012 Energy Micro AS, http://www.energymicro.com</b>
+ * <b>(C) Copyright 2014 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -13,21 +12,21 @@
  * freely, subject to the following restrictions:
  *
  * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software.
+ *    claim that you wrote the original software.@n
  * 2. Altered source versions must be plainly marked as such, and must not be
- *    misrepresented as being the original software.
+ *    misrepresented as being the original software.@n
  * 3. This notice may not be removed or altered from any source distribution.
  *
- * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Energy Micro AS has no
- * obligation to support this Software. Energy Micro AS is providing the
- * Software "AS IS", with no express or implied warranties of any kind,
- * including, but not limited to, any implied warranties of merchantability
- * or fitness for any particular purpose or warranties against infringement
- * of any proprietary rights of a third party.
+ * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Silicon Laboratories, Inc.
+ * has no obligation to support this Software. Silicon Laboratories, Inc. is
+ * providing the Software "AS IS", with no express or implied warranties of any
+ * kind, including, but not limited to, any implied warranties of
+ * merchantability or fitness for any particular purpose or warranties against
+ * infringement of any proprietary rights of a third party.
  *
- * Energy Micro AS will not be liable for any consequential, incidental, or
- * special damages, or any other relief, or for any claim by any third party,
- * arising from your use of this Software.
+ * Silicon Laboratories, Inc. will not be liable for any consequential,
+ * incidental, or special damages, or any other relief, or for any claim by
+ * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
 /**************************************************************************//**
@@ -55,6 +54,7 @@ typedef struct
   __O uint32_t   CHPRIC;         /**< Channel Priority Clear Register  */
   uint32_t       RESERVED0[3];   /**< Reserved for future use **/
   __IO uint32_t  ERRORC;         /**< Bus Error Clear Register  */
+
   uint32_t       RESERVED1[880]; /**< Reserved for future use **/
   __I uint32_t   CHREQSTATUS;    /**< Channel Request Status  */
   uint32_t       RESERVED2[1];   /**< Reserved for future use **/
@@ -75,7 +75,6 @@ typedef struct
   __IO uint32_t  RECT0;          /**< Channel 0 Rectangle Register  */
 
   uint32_t       RESERVED6[39];  /**< Reserved registers */
-
   DMA_CH_TypeDef CH[12];         /**< Channel registers */
 } DMA_TypeDef;                   /** @} */
 
@@ -392,11 +391,11 @@ typedef struct
 #define _DMA_CHUSEBURSTC_CH7USEBURSTC_MASK              0x80UL                                         /**< Bit mask for DMA_CH7USEBURSTC */
 #define _DMA_CHUSEBURSTC_CH7USEBURSTC_DEFAULT           0x00000000UL                                   /**< Mode DEFAULT for DMA_CHUSEBURSTC */
 #define DMA_CHUSEBURSTC_CH7USEBURSTC_DEFAULT            (_DMA_CHUSEBURSTC_CH7USEBURSTC_DEFAULT << 7)   /**< Shifted mode DEFAULT for DMA_CHUSEBURSTC */
-#define DMA_CHUSEBURSTC_CH08SEBURSTC                    (0x1UL << 8)                                   /**< Channel 8 Useburst Clear */
-#define _DMA_CHUSEBURSTC_CH08SEBURSTC_SHIFT             8                                              /**< Shift value for DMA_CH08SEBURSTC */
-#define _DMA_CHUSEBURSTC_CH08SEBURSTC_MASK              0x100UL                                        /**< Bit mask for DMA_CH08SEBURSTC */
-#define _DMA_CHUSEBURSTC_CH08SEBURSTC_DEFAULT           0x00000000UL                                   /**< Mode DEFAULT for DMA_CHUSEBURSTC */
-#define DMA_CHUSEBURSTC_CH08SEBURSTC_DEFAULT            (_DMA_CHUSEBURSTC_CH08SEBURSTC_DEFAULT << 8)   /**< Shifted mode DEFAULT for DMA_CHUSEBURSTC */
+#define DMA_CHUSEBURSTC_CH08USEBURSTC                   (0x1UL << 8)                                   /**< Channel 8 Useburst Clear */
+#define _DMA_CHUSEBURSTC_CH08USEBURSTC_SHIFT            8                                              /**< Shift value for DMA_CH08USEBURSTC */
+#define _DMA_CHUSEBURSTC_CH08USEBURSTC_MASK             0x100UL                                        /**< Bit mask for DMA_CH08USEBURSTC */
+#define _DMA_CHUSEBURSTC_CH08USEBURSTC_DEFAULT          0x00000000UL                                   /**< Mode DEFAULT for DMA_CHUSEBURSTC */
+#define DMA_CHUSEBURSTC_CH08USEBURSTC_DEFAULT           (_DMA_CHUSEBURSTC_CH08USEBURSTC_DEFAULT << 8)  /**< Shifted mode DEFAULT for DMA_CHUSEBURSTC */
 #define DMA_CHUSEBURSTC_CH9USEBURSTC                    (0x1UL << 9)                                   /**< Channel 9 Useburst Clear */
 #define _DMA_CHUSEBURSTC_CH9USEBURSTC_SHIFT             9                                              /**< Shift value for DMA_CH9USEBURSTC */
 #define _DMA_CHUSEBURSTC_CH9USEBURSTC_MASK              0x200UL                                        /**< Bit mask for DMA_CH9USEBURSTC */

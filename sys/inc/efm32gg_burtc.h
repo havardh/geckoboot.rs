@@ -1,11 +1,10 @@
 /**************************************************************************//**
- * @file
- * @brief efm32gg_burtc Register and Bit Field definitions
- * @author Energy Micro AS
- * @version 3.20.0
+ * @file efm32gg_burtc.h
+ * @brief EFM32GG_BURTC register and bit field definitions
+ * @version 3.20.7
  ******************************************************************************
  * @section License
- * <b>(C) Copyright 2012 Energy Micro AS, http://www.energymicro.com</b>
+ * <b>(C) Copyright 2014 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -13,21 +12,21 @@
  * freely, subject to the following restrictions:
  *
  * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software.
+ *    claim that you wrote the original software.@n
  * 2. Altered source versions must be plainly marked as such, and must not be
- *    misrepresented as being the original software.
+ *    misrepresented as being the original software.@n
  * 3. This notice may not be removed or altered from any source distribution.
  *
- * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Energy Micro AS has no
- * obligation to support this Software. Energy Micro AS is providing the
- * Software "AS IS", with no express or implied warranties of any kind,
- * including, but not limited to, any implied warranties of merchantability
- * or fitness for any particular purpose or warranties against infringement
- * of any proprietary rights of a third party.
+ * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Silicon Laboratories, Inc.
+ * has no obligation to support this Software. Silicon Laboratories, Inc. is
+ * providing the Software "AS IS", with no express or implied warranties of any
+ * kind, including, but not limited to, any implied warranties of
+ * merchantability or fitness for any particular purpose or warranties against
+ * infringement of any proprietary rights of a third party.
  *
- * Energy Micro AS will not be liable for any consequential, incidental, or
- * special damages, or any other relief, or for any claim by any third party,
- * arising from your use of this Software.
+ * Silicon Laboratories, Inc. will not be liable for any consequential,
+ * incidental, or special damages, or any other relief, or for any claim by
+ * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
 /**************************************************************************//**
@@ -43,9 +42,9 @@ typedef struct
   __IO uint32_t     COMP0;         /**< Counter Compare Value  */
   __I uint32_t      TIMESTAMP;     /**< Backup mode timestamp  */
   __IO uint32_t     LFXOFDET;      /**< LFXO   */
-  __I uint32_t      STATUS;        /**< Backup domain status  */
+  __I uint32_t      STATUS;        /**< Status Register  */
   __IO uint32_t     CMD;           /**< Command Register  */
-  __IO uint32_t     POWERDOWN;     /**< Retention RAM power-down resgister  */
+  __IO uint32_t     POWERDOWN;     /**< Retention RAM power-down Register  */
   __IO uint32_t     LOCK;          /**< Configuration Lock Register  */
   __I uint32_t      IF;            /**< Interrupt Flag Register  */
   __IO uint32_t     IFS;           /**< Interrupt Flag Set Register  */
@@ -56,7 +55,6 @@ typedef struct
   __I uint32_t      SYNCBUSY;      /**< Synchronization Busy Register  */
 
   uint32_t          RESERVED0[48]; /**< Reserved registers */
-
   BURTC_RET_TypeDef RET[128];      /**< RetentionReg */
 } BURTC_TypeDef;                   /** @} */
 
@@ -354,12 +352,12 @@ typedef struct
 /* Bit fields for BURTC SYNCBUSY */
 #define _BURTC_SYNCBUSY_RESETVALUE            0x00000000UL                          /**< Default value for BURTC_SYNCBUSY */
 #define _BURTC_SYNCBUSY_MASK                  0x00000003UL                          /**< Mask for BURTC_SYNCBUSY */
-#define BURTC_SYNCBUSY_LPMODE                 (0x1UL << 0)                          /**< BURTC_LPMODE Register Busy */
+#define BURTC_SYNCBUSY_LPMODE                 (0x1UL << 0)                          /**< LPMODE Register Busy */
 #define _BURTC_SYNCBUSY_LPMODE_SHIFT          0                                     /**< Shift value for BURTC_LPMODE */
 #define _BURTC_SYNCBUSY_LPMODE_MASK           0x1UL                                 /**< Bit mask for BURTC_LPMODE */
 #define _BURTC_SYNCBUSY_LPMODE_DEFAULT        0x00000000UL                          /**< Mode DEFAULT for BURTC_SYNCBUSY */
 #define BURTC_SYNCBUSY_LPMODE_DEFAULT         (_BURTC_SYNCBUSY_LPMODE_DEFAULT << 0) /**< Shifted mode DEFAULT for BURTC_SYNCBUSY */
-#define BURTC_SYNCBUSY_COMP0                  (0x1UL << 1)                          /**< BURTC_COMP0 Register Busy */
+#define BURTC_SYNCBUSY_COMP0                  (0x1UL << 1)                          /**< COMP0 Register Busy */
 #define _BURTC_SYNCBUSY_COMP0_SHIFT           1                                     /**< Shift value for BURTC_COMP0 */
 #define _BURTC_SYNCBUSY_COMP0_MASK            0x2UL                                 /**< Bit mask for BURTC_COMP0 */
 #define _BURTC_SYNCBUSY_COMP0_DEFAULT         0x00000000UL                          /**< Mode DEFAULT for BURTC_SYNCBUSY */

@@ -1,11 +1,10 @@
 /**************************************************************************//**
- * @file
- * @brief efm32gg_i2c Register and Bit Field definitions
- * @author Energy Micro AS
- * @version 3.20.0
+ * @file efm32gg_i2c.h
+ * @brief EFM32GG_I2C register and bit field definitions
+ * @version 3.20.7
  ******************************************************************************
  * @section License
- * <b>(C) Copyright 2012 Energy Micro AS, http://www.energymicro.com</b>
+ * <b>(C) Copyright 2014 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -13,21 +12,21 @@
  * freely, subject to the following restrictions:
  *
  * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software.
+ *    claim that you wrote the original software.@n
  * 2. Altered source versions must be plainly marked as such, and must not be
- *    misrepresented as being the original software.
+ *    misrepresented as being the original software.@n
  * 3. This notice may not be removed or altered from any source distribution.
  *
- * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Energy Micro AS has no
- * obligation to support this Software. Energy Micro AS is providing the
- * Software "AS IS", with no express or implied warranties of any kind,
- * including, but not limited to, any implied warranties of merchantability
- * or fitness for any particular purpose or warranties against infringement
- * of any proprietary rights of a third party.
+ * DISCLAIMER OF WARRANTY/LIMITATION OF REMEDIES: Silicon Laboratories, Inc.
+ * has no obligation to support this Software. Silicon Laboratories, Inc. is
+ * providing the Software "AS IS", with no express or implied warranties of any
+ * kind, including, but not limited to, any implied warranties of
+ * merchantability or fitness for any particular purpose or warranties against
+ * infringement of any proprietary rights of a third party.
  *
- * Energy Micro AS will not be liable for any consequential, incidental, or
- * special damages, or any other relief, or for any claim by any third party,
- * arising from your use of this Software.
+ * Silicon Laboratories, Inc. will not be liable for any consequential,
+ * incidental, or special damages, or any other relief, or for any claim by
+ * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
 /**************************************************************************//**
@@ -666,34 +665,36 @@ typedef struct
 #define I2C_IEN_SSTOP_DEFAULT             (_I2C_IEN_SSTOP_DEFAULT << 16)   /**< Shifted mode DEFAULT for I2C_IEN */
 
 /* Bit fields for I2C ROUTE */
-#define _I2C_ROUTE_RESETVALUE             0x00000000UL                     /**< Default value for I2C_ROUTE */
-#define _I2C_ROUTE_MASK                   0x00000703UL                     /**< Mask for I2C_ROUTE */
-#define I2C_ROUTE_SDAPEN                  (0x1UL << 0)                     /**< SDA Pin Enable */
-#define _I2C_ROUTE_SDAPEN_SHIFT           0                                /**< Shift value for I2C_SDAPEN */
-#define _I2C_ROUTE_SDAPEN_MASK            0x1UL                            /**< Bit mask for I2C_SDAPEN */
-#define _I2C_ROUTE_SDAPEN_DEFAULT         0x00000000UL                     /**< Mode DEFAULT for I2C_ROUTE */
-#define I2C_ROUTE_SDAPEN_DEFAULT          (_I2C_ROUTE_SDAPEN_DEFAULT << 0) /**< Shifted mode DEFAULT for I2C_ROUTE */
-#define I2C_ROUTE_SCLPEN                  (0x1UL << 1)                     /**< SCL Pin Enable */
-#define _I2C_ROUTE_SCLPEN_SHIFT           1                                /**< Shift value for I2C_SCLPEN */
-#define _I2C_ROUTE_SCLPEN_MASK            0x2UL                            /**< Bit mask for I2C_SCLPEN */
-#define _I2C_ROUTE_SCLPEN_DEFAULT         0x00000000UL                     /**< Mode DEFAULT for I2C_ROUTE */
-#define I2C_ROUTE_SCLPEN_DEFAULT          (_I2C_ROUTE_SCLPEN_DEFAULT << 1) /**< Shifted mode DEFAULT for I2C_ROUTE */
-#define _I2C_ROUTE_LOCATION_SHIFT         8                                /**< Shift value for I2C_LOCATION */
-#define _I2C_ROUTE_LOCATION_MASK          0x700UL                          /**< Bit mask for I2C_LOCATION */
-#define _I2C_ROUTE_LOCATION_LOC0          0x00000000UL                     /**< Mode LOC0 for I2C_ROUTE */
-#define _I2C_ROUTE_LOCATION_LOC1          0x00000001UL                     /**< Mode LOC1 for I2C_ROUTE */
-#define _I2C_ROUTE_LOCATION_LOC2          0x00000002UL                     /**< Mode LOC2 for I2C_ROUTE */
-#define _I2C_ROUTE_LOCATION_LOC3          0x00000003UL                     /**< Mode LOC3 for I2C_ROUTE */
-#define _I2C_ROUTE_LOCATION_LOC4          0x00000004UL                     /**< Mode LOC4 for I2C_ROUTE */
-#define _I2C_ROUTE_LOCATION_LOC5          0x00000005UL                     /**< Mode LOC5 for I2C_ROUTE */
-#define _I2C_ROUTE_LOCATION_LOC6          0x00000006UL                     /**< Mode LOC6 for I2C_ROUTE */
-#define I2C_ROUTE_LOCATION_LOC0           (_I2C_ROUTE_LOCATION_LOC0 << 8)  /**< Shifted mode LOC0 for I2C_ROUTE */
-#define I2C_ROUTE_LOCATION_LOC1           (_I2C_ROUTE_LOCATION_LOC1 << 8)  /**< Shifted mode LOC1 for I2C_ROUTE */
-#define I2C_ROUTE_LOCATION_LOC2           (_I2C_ROUTE_LOCATION_LOC2 << 8)  /**< Shifted mode LOC2 for I2C_ROUTE */
-#define I2C_ROUTE_LOCATION_LOC3           (_I2C_ROUTE_LOCATION_LOC3 << 8)  /**< Shifted mode LOC3 for I2C_ROUTE */
-#define I2C_ROUTE_LOCATION_LOC4           (_I2C_ROUTE_LOCATION_LOC4 << 8)  /**< Shifted mode LOC4 for I2C_ROUTE */
-#define I2C_ROUTE_LOCATION_LOC5           (_I2C_ROUTE_LOCATION_LOC5 << 8)  /**< Shifted mode LOC5 for I2C_ROUTE */
-#define I2C_ROUTE_LOCATION_LOC6           (_I2C_ROUTE_LOCATION_LOC6 << 8)  /**< Shifted mode LOC6 for I2C_ROUTE */
+#define _I2C_ROUTE_RESETVALUE             0x00000000UL                       /**< Default value for I2C_ROUTE */
+#define _I2C_ROUTE_MASK                   0x00000703UL                       /**< Mask for I2C_ROUTE */
+#define I2C_ROUTE_SDAPEN                  (0x1UL << 0)                       /**< SDA Pin Enable */
+#define _I2C_ROUTE_SDAPEN_SHIFT           0                                  /**< Shift value for I2C_SDAPEN */
+#define _I2C_ROUTE_SDAPEN_MASK            0x1UL                              /**< Bit mask for I2C_SDAPEN */
+#define _I2C_ROUTE_SDAPEN_DEFAULT         0x00000000UL                       /**< Mode DEFAULT for I2C_ROUTE */
+#define I2C_ROUTE_SDAPEN_DEFAULT          (_I2C_ROUTE_SDAPEN_DEFAULT << 0)   /**< Shifted mode DEFAULT for I2C_ROUTE */
+#define I2C_ROUTE_SCLPEN                  (0x1UL << 1)                       /**< SCL Pin Enable */
+#define _I2C_ROUTE_SCLPEN_SHIFT           1                                  /**< Shift value for I2C_SCLPEN */
+#define _I2C_ROUTE_SCLPEN_MASK            0x2UL                              /**< Bit mask for I2C_SCLPEN */
+#define _I2C_ROUTE_SCLPEN_DEFAULT         0x00000000UL                       /**< Mode DEFAULT for I2C_ROUTE */
+#define I2C_ROUTE_SCLPEN_DEFAULT          (_I2C_ROUTE_SCLPEN_DEFAULT << 1)   /**< Shifted mode DEFAULT for I2C_ROUTE */
+#define _I2C_ROUTE_LOCATION_SHIFT         8                                  /**< Shift value for I2C_LOCATION */
+#define _I2C_ROUTE_LOCATION_MASK          0x700UL                            /**< Bit mask for I2C_LOCATION */
+#define _I2C_ROUTE_LOCATION_LOC0          0x00000000UL                       /**< Mode LOC0 for I2C_ROUTE */
+#define _I2C_ROUTE_LOCATION_DEFAULT       0x00000000UL                       /**< Mode DEFAULT for I2C_ROUTE */
+#define _I2C_ROUTE_LOCATION_LOC1          0x00000001UL                       /**< Mode LOC1 for I2C_ROUTE */
+#define _I2C_ROUTE_LOCATION_LOC2          0x00000002UL                       /**< Mode LOC2 for I2C_ROUTE */
+#define _I2C_ROUTE_LOCATION_LOC3          0x00000003UL                       /**< Mode LOC3 for I2C_ROUTE */
+#define _I2C_ROUTE_LOCATION_LOC4          0x00000004UL                       /**< Mode LOC4 for I2C_ROUTE */
+#define _I2C_ROUTE_LOCATION_LOC5          0x00000005UL                       /**< Mode LOC5 for I2C_ROUTE */
+#define _I2C_ROUTE_LOCATION_LOC6          0x00000006UL                       /**< Mode LOC6 for I2C_ROUTE */
+#define I2C_ROUTE_LOCATION_LOC0           (_I2C_ROUTE_LOCATION_LOC0 << 8)    /**< Shifted mode LOC0 for I2C_ROUTE */
+#define I2C_ROUTE_LOCATION_DEFAULT        (_I2C_ROUTE_LOCATION_DEFAULT << 8) /**< Shifted mode DEFAULT for I2C_ROUTE */
+#define I2C_ROUTE_LOCATION_LOC1           (_I2C_ROUTE_LOCATION_LOC1 << 8)    /**< Shifted mode LOC1 for I2C_ROUTE */
+#define I2C_ROUTE_LOCATION_LOC2           (_I2C_ROUTE_LOCATION_LOC2 << 8)    /**< Shifted mode LOC2 for I2C_ROUTE */
+#define I2C_ROUTE_LOCATION_LOC3           (_I2C_ROUTE_LOCATION_LOC3 << 8)    /**< Shifted mode LOC3 for I2C_ROUTE */
+#define I2C_ROUTE_LOCATION_LOC4           (_I2C_ROUTE_LOCATION_LOC4 << 8)    /**< Shifted mode LOC4 for I2C_ROUTE */
+#define I2C_ROUTE_LOCATION_LOC5           (_I2C_ROUTE_LOCATION_LOC5 << 8)    /**< Shifted mode LOC5 for I2C_ROUTE */
+#define I2C_ROUTE_LOCATION_LOC6           (_I2C_ROUTE_LOCATION_LOC6 << 8)    /**< Shifted mode LOC6 for I2C_ROUTE */
 
 /** @} End of group EFM32GG_I2C */
 
