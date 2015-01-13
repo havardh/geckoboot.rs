@@ -1,69 +1,80 @@
 #![no_std]
 #![feature(lang_items)]
 
+extern crate core;
+
+use emlib::{
+    CMU_ClockEnable,
+    CMU_Clock_TypeDef,
+    CMU_ClockFreqGet,
+
+    SysTick_Config_,
+
+    GPIO_PinModeSet,
+    GPIO_Port_TypeDef,
+    GPIO_Mode_TypeDef,
+    GPIO_PinOutSet_,
+    GPIO_PinOutClear_,
+    GPIO_PinOutToggle_,
+
+};
+
+use core::intrinsics::{volatile_load, volatile_store};
+
 mod zero { pub mod zero; }
+pub mod emlib;
+
+static mut msTicks: u32 = 0;
 
 #[no_mangle]
-pub extern "C" fn _start() {
+pub unsafe extern fn _start() {
     main()
 }
 
+#[no_mangle]
+pub unsafe extern fn SysTick_Handler() {
+    let ticks = volatile_load(&msTicks as *const u32);
+    volatile_store(&mut msTicks as *mut u32, ticks + 1);
+}
+
+unsafe fn Delay(dlyTicks: u32) {
+    let curTicks = volatile_load(&msTicks as *const u32);
+    while volatile_load(&msTicks as *const u32) - curTicks < dlyTicks {}
+}
+
 #[no_mangle] 
-pub extern "C" fn main()
+pub unsafe extern fn main()
 {
-
-    unsafe {
-        
-        let BITBAND_PER_BASE = 0x42000000 as u32;
-        let PER_MEM_BASE = 0x40000000 as u32;
-        
-        // Setup Clocks
-        let hpfer_reg = 0x400c8008;
-        let hpfer_bit = 8;
-        let cmu_HPFER: *mut u32 = (BITBAND_PER_BASE + ((hpfer_reg - PER_MEM_BASE) * 32) + (hpfer_bit * 4)) as *mut u32;
-        *cmu_HPFER = 1 as u32;
-
-        let gpio_reg = 0x400c8044;
-        let gpio_bit = 13;
-        let cmu_GPIO: *mut u32 = (BITBAND_PER_BASE + ((gpio_reg - PER_MEM_BASE) * 32) + (gpio_bit * 4)) as *mut u32;
-        *cmu_GPIO = 1 as u32;
-        
-        // Setup LED
-        let gpio_base = 0x40006000 as u64;
-        let gpio_typedef_size = 9*4; // bytes
-        let gpioE = gpio_base + 4 * gpio_typedef_size;
-        let wordSize = 4;
-
-        let MODEL = 1;
-        let DOUTSET = 4;
-        let DOUTCLR = 5;
-        let DOUTTGL = 6;
-
-        let gpioEDOUTCLR: *mut u32  = (gpioE + DOUTCLR*wordSize) as *mut u32;
-        let setoutput = 0b1100 as u32;
-        *gpioEDOUTCLR = setoutput;
-
-        let pin = 3; // LED1 on stk3700 at gpio port E
-        let gpioModePushPull = 0x4 as u32;
-
-        let gpioEMODEL: *mut u32 = (gpioE + MODEL*wordSize) as *mut u32;
-        let setmodel = (0xF << (pin * 4)) | (gpioModePushPull << (pin * 4)) as u32;
-        *gpioEMODEL = setmodel;
-
-        let gpioEDOUTSET: *mut u32 = (gpioE + DOUTSET*wordSize) as *mut u32;
-        let setout = (1u32 << pin) as u32;
-        *gpioEDOUTSET = setout;
-
-        let gpioEDOUTTGL: *mut u32 = (gpioE + DOUTTGL*wordSize) as *mut u32;
-        let settgl = (1u32 << pin) as u32;
-
-        // Blink loop
-        loop {
-            let mut j = 0us;
-            *gpioEDOUTTGL = settgl;
-            while j < 1000000 {
-                j += 1;
-            }
-        }
+    let freq = CMU_ClockFreqGet(CMU_Clock_TypeDef::cmuClock_CORE);
+    
+    if SysTick_Config_(freq) != 0 {
+        loop {}
     }
+    
+    // Setup Clocks
+    CMU_ClockEnable(CMU_Clock_TypeDef::cmuClock_HFPER, true);
+    CMU_ClockEnable(CMU_Clock_TypeDef::cmuClock_GPIO, true);
+    
+    GPIO_PinModeSet(
+        GPIO_Port_TypeDef::gpioPortE, 2,
+        GPIO_Mode_TypeDef::gpioModePushPull, 0
+    );
+    
+    GPIO_PinModeSet(
+        GPIO_Port_TypeDef::gpioPortE, 3,
+        GPIO_Mode_TypeDef::gpioModePushPull, 0
+    );
+
+    GPIO_PinOutSet_(GPIO_Port_TypeDef::gpioPortE, 2);
+    GPIO_PinOutClear_(GPIO_Port_TypeDef::gpioPortE, 3);
+
+    // Blink loop
+    loop {
+        
+        GPIO_PinOutToggle_(GPIO_Port_TypeDef::gpioPortE, 2);
+        GPIO_PinOutToggle_(GPIO_Port_TypeDef::gpioPortE, 3);
+        
+        Delay(1);
+    }
+
 }

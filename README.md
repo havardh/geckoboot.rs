@@ -9,12 +9,13 @@ Requirements:
 -------------
   * arm-none-eabi toolchain
   * llvm-3.6 (nightly) toolchain
-  * rustc (tested on "rustc 1.0.0-nightly (44a287e6e 2015-01-08 17:03:40 -0800)")
+  * rustc (tested on "rustc 1.0.0-nightly (44a287e6 2015-01-08 17:03:40 -0800)")
+  * Rust libcore compiled for arm (tested at 44a287e6)
 
 Compiling:
 ----------
 
-Edit "Makefile" with the path to the rustc compiler, gcc-toolchain and llvm, and type "make".
+Edit "Makefile" with the path to the rust source, rustc compiler, gcc-toolchain and llvm, eACommander and type "make flash".
 
 Upload the resulting binary, blinky.bin, on the target with eACommander.
 

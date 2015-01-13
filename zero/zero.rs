@@ -9,9 +9,3 @@ fn fail_bounds_check(_: &(&'static str, usize),
 pub extern "C" fn __aeabi_unwind_cpp_pr0() {
     loop{}
 }
-
-#[lang="sized"]
-trait Sized {}
-
-#[lang="copy"]
-trait Copy {}
