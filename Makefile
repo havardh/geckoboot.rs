@@ -7,6 +7,7 @@ LLC=$(LLVM_36_HOME)/Debug+Asserts/bin/llc
 eACommander=/Applications/eACommander.app/Contents/MacOS/eACommander
 
 DEVICE=EFM32GG990F1024
+TARGET=thumbv7m-none-eabi
 
 # Put your source files here (or *.c, etc)
 SRCS=sys/system_efm32gg.c
@@ -53,7 +54,9 @@ PROJ_NAME=blinky
 #######################################################################################
 
 CC=$(ARM_GCC_TOOLCHAIN)/bin/arm-none-eabi-gcc
+GDB=$(ARM_GCC_TOOLCHAIN)/bin/arm-none-eabi-gdb
 OBJCOPY=$(ARM_GCC_TOOLCHAIN)/bin/arm-none-eabi-objcopy
+FLASH=$(eACommander)
 
 CFLAGS  = -g -O0 -Wall -Tsys/efm32gg.ld 
 CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m3
@@ -61,6 +64,24 @@ CFLAGS += -mfloat-abi=soft -mfpu=fpv4-sp-d16
 CFLAGS += -Isys/inc -Isys/inc/core
 CFLAGS += -D$(DEVICE)
 CFLAGS += -std=c99
+
+RUSTFLAGS = --target $(TARGET) \
+	--crate-type lib \
+	-L . --emit llvm-ir \
+	-A non_camel_case_types \
+	-A dead_code \
+	-A non_snake_case 
+
+LLCFLAGS = -mtriple arm-none-eabi \
+  -march=thumb \
+  -mattr=+thumb2 \
+  -mcpu=cortex-m3 \
+  --float-abi=soft \
+  --asm-verbose=false \
+  -O0
+
+# Note: A bug in the OSX eACommander requires at least two flags to run in cli mode
+FLASHFLAGS = --verify --reset
 
 # add startup file to build
 SRCS += sys/startup_efm32gg.s
@@ -73,11 +94,11 @@ all: clean proj
 proj: $(PROJ_NAME).elf
 
 blinky.s: blinky.rs libcore.rlib
-	$(RUSTC) --target thumbv7m-none-eabi --crate-type lib -L . --emit llvm-ir -A non_camel_case_types -A dead_code -A non_snake_case blinky.rs
-	$(LLC) -mtriple arm-none-eabi -march=thumb -mattr=+thumb2 -mcpu=cortex-m3 --float-abi=soft --asm-verbose=false blinky.ll -o=blinky.s -O0
+	$(RUSTC) $(RUSTFLAGS) $(PROJ_NAME).rs
+	$(LLC) $(LLCFLAGS) $(PROJ_NAME).ll -o=$(PROJ_NAME).s 
 
 libcore.rlib:
-	$(RUSTC) -O --target thumbv7m-none-eabi $(RUST_SRC)/src/libcore/lib.rs
+	$(RUSTC) -O --target $(TARGET) $(RUST_SRC)/src/libcore/lib.rs
 
 $(PROJ_NAME).elf: $(SRCS) blinky.s
 	$(CC) -O0 $(CFLAGS) $^ -o $@ 
@@ -86,12 +107,11 @@ $(PROJ_NAME).elf: $(SRCS) blinky.s
 
 .PHONY: flash
 flash: $(PROJ_NAME).elf
-	$(eACommander) --version --flash $(PROJ_NAME).bin --verify --reset
+	$(FLASH) $(FLASHFLAGS) --flash $(PROJ_NAME).bin
 
 .PHONY: debug
 debug: flash
-	JLinkGDBServer.command &
-	~/arm-cs-tools/bin/arm-none-eabi-gdb -x efm32gdbinit
+	$(GDB) -x efm32gdbinit
 
 clean:
 	rm -f *.o $(PROJ_NAME).elf $(PROJ_NAME).hex $(PROJ_NAME).bin $(PROJ_NAME).s $(PROJ_NAME).ll

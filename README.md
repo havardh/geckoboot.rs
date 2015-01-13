@@ -17,8 +17,6 @@ Compiling:
 
 Edit "Makefile" with the path to the rust source, rustc compiler, gcc-toolchain and llvm, eACommander and type "make flash".
 
-Upload the resulting binary, blinky.bin, on the target with eACommander.
-
 Structure
 ---------
   * blinky.rs - sample program (blinks the LED1 of the EFM32GG_STK3700 board)
