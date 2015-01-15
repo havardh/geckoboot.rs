@@ -3,26 +3,16 @@
 
 extern crate core;
 
-use emlib::{
-    CMU_ClockEnable,
-    CMU_Clock_TypeDef,
-    CMU_ClockFreqGet,
-
-    SysTick_Config_,
-
-    GPIO_PinModeSet,
-    GPIO_Port_TypeDef,
-    GPIO_Mode_TypeDef,
-    GPIO_PinOutSet_,
-    GPIO_PinOutClear_,
-    GPIO_PinOutToggle_,
-
-};
+use emlib::cmu;
+use emlib::gpio;
 
 use core::intrinsics::{volatile_load, volatile_store};
 
+mod emlib;
 mod zero { pub mod zero; }
-pub mod emlib;
+extern {
+    pub fn SysTick_Config_(ticks: u32) -> u32;
+}
 
 static mut msTicks: u32 = 0;
 
@@ -37,44 +27,36 @@ pub unsafe extern fn SysTick_Handler() {
     volatile_store(&mut msTicks as *mut u32, ticks + 1);
 }
 
-unsafe fn Delay(dlyTicks: u32) {
+unsafe fn delay(dlyTicks: u32) {
     let curTicks = volatile_load(&msTicks as *const u32);
     while volatile_load(&msTicks as *const u32) - curTicks < dlyTicks {}
 }
 
+const LED0: u32 = 2;
+const LED1: u32 = 3;
+
 #[no_mangle] 
 pub unsafe extern fn main()
 {
-    let freq = CMU_ClockFreqGet(CMU_Clock_TypeDef::cmuClock_CORE);
+    let freq = cmu::clock_freq_get(cmu::Clock::CORE);
     
     if SysTick_Config_(freq) != 0 {
         loop {}
     }
     
-    // Setup Clocks
-    CMU_ClockEnable(CMU_Clock_TypeDef::cmuClock_HFPER, true);
-    CMU_ClockEnable(CMU_Clock_TypeDef::cmuClock_GPIO, true);
+    cmu::clock_enable(cmu::Clock::HFPER, true);
+    cmu::clock_enable(cmu::Clock::GPIO, true);
     
-    GPIO_PinModeSet(
-        GPIO_Port_TypeDef::gpioPortE, 2,
-        GPIO_Mode_TypeDef::gpioModePushPull, 0
-    );
-    
-    GPIO_PinModeSet(
-        GPIO_Port_TypeDef::gpioPortE, 3,
-        GPIO_Mode_TypeDef::gpioModePushPull, 0
-    );
+    gpio::pin_mode_set(gpio::Port::E, LED0, gpio::Mode::PushPull, 0);
+    gpio::pin_mode_set(gpio::Port::E, LED1, gpio::Mode::PushPull, 0);
 
-    GPIO_PinOutSet_(GPIO_Port_TypeDef::gpioPortE, 2);
-    GPIO_PinOutClear_(GPIO_Port_TypeDef::gpioPortE, 3);
+    gpio::pin_out_set(gpio::Port::E, LED0);
+    gpio::pin_out_clear(gpio::Port::E, LED1);
 
-    // Blink loop
     loop {
-        
-        GPIO_PinOutToggle_(GPIO_Port_TypeDef::gpioPortE, 2);
-        GPIO_PinOutToggle_(GPIO_Port_TypeDef::gpioPortE, 3);
-        
-        Delay(1);
-    }
+        gpio::pin_out_toggle(gpio::Port::E, LED0);
+        gpio::pin_out_toggle(gpio::Port::E, LED1);
 
+        delay(1);
+    }
 }

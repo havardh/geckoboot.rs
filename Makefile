@@ -66,7 +66,7 @@ CFLAGS += -D$(DEVICE)
 CFLAGS += -std=c99
 
 RUSTFLAGS = --target $(TARGET) \
-	--crate-type lib \
+	--crate-type lib -g \
 	-L . --emit llvm-ir \
 	-A non_camel_case_types \
 	-A dead_code \
@@ -93,24 +93,24 @@ all: clean proj
 
 proj: $(PROJ_NAME).elf
 
-blinky.s: blinky.rs libcore.rlib
+$(PROJ_NAME).s: $(PROJ_NAME).rs libcore.rlib
 	$(RUSTC) $(RUSTFLAGS) $(PROJ_NAME).rs
-	$(LLC) $(LLCFLAGS) $(PROJ_NAME).ll -o=$(PROJ_NAME).s 
+	$(LLC) $(LLCFLAGS) $(PROJ_NAME).ll -o=$(PROJ_NAME).s
 
 libcore.rlib:
-	$(RUSTC) -O --target $(TARGET) $(RUST_SRC)/src/libcore/lib.rs
+	$(RUSTC) -O -g --target $(TARGET) $(RUST_SRC)/src/libcore/lib.rs
 
-$(PROJ_NAME).elf: $(SRCS) blinky.s
-	$(CC) -O0 $(CFLAGS) $^ -o $@ 
+$(PROJ_NAME).elf: $(SRCS) $(PROJ_NAME).s
+	$(CC) -O0 $(CFLAGS) $^ -o $@
 	$(OBJCOPY) -O ihex $(PROJ_NAME).elf $(PROJ_NAME).hex
 	$(OBJCOPY) -O binary $(PROJ_NAME).elf $(PROJ_NAME).bin
 
 .PHONY: flash
-flash: $(PROJ_NAME).elf
-	$(FLASH) $(FLASHFLAGS) --flash $(PROJ_NAME).bin
+flash: all
+	$(FLASH) --flash $(PROJ_NAME).bin $(FLASHFLAGS)
 
 .PHONY: debug
-debug: flash
+debug: 
 	$(GDB) -x efm32gdbinit
 
 clean:
