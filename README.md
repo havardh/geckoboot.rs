@@ -12,16 +12,28 @@ Requirements:
   * rustc (tested on "rustc 1.0.0-nightly (44a287e6 2015-01-08 17:03:40 -0800)")
   * Rust libcore compiled for arm (tested at 44a287e6)
 
+Setup:
+------
+
+Edit "Makefile" with the follow paths
+ - rust source
+ - rustc compiler
+ - gcc-toolchain
+ - llvm
+ - efm32 library code
+ - eACommander
+
 Compiling:
 ----------
 
-Edit "Makefile" with the path to the rust source, rustc compiler, gcc-toolchain and llvm, eACommander and type "make flash".
+´make flash PROJ_NAME=<filename>´ excluding .rs
 
 Structure
 ---------
-  * blinky.rs - sample program (blinks the LED1 of the EFM32GG_STK3700 board)
-  * sys/ - bootstrap code (boot loader and system initialization)
-  * zero/ - zero.rs
+  * blinky.rs - sample program (blinks LED1 and LED0 on the EFM32GG_STK3700 board)
+  * buttons.rs - sample program (hooks up PB0 and PB1 with LED0 and LED1 on the EFM32GG_STK3700 board)
+  * emlib/ - rust bindings for emlib
+  * emdrv/ - rust bindings for emdrv
 
 Credits
 -------

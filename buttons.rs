@@ -1,5 +1,4 @@
 #![no_std]
-#![feature(lang_items)]
 
 extern crate core;
 
@@ -7,7 +6,6 @@ use emlib::cmu;
 use emlib::gpio;
 
 mod emlib;
-mod zero { pub mod zero; }
 
 #[no_mangle]
 pub unsafe extern fn _start() {
