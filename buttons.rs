@@ -7,10 +7,7 @@ use emlib::gpio;
 
 mod emlib;
 
-#[no_mangle]
-pub unsafe extern fn _start() {
-    main()
-}
+#[no_mangle] pub extern fn _start() { main() }
 
 const LED0: u32 = 2;
 const LED1: u32 = 3;
@@ -18,8 +15,8 @@ const LED1: u32 = 3;
 const PB0: u32 = 9;
 const PB1: u32 = 10;
 
-#[no_mangle]
-pub unsafe extern fn main() {
+
+fn main() {
 
     cmu::clock_enable(cmu::Clock::HFPER, true);
     cmu::clock_enable(cmu::Clock::GPIO, true);
