@@ -26,6 +26,7 @@ INCLUDEPATHS += \
 
 SRCS = \
   $(LIB_PATH)/kits/common/drivers/retargetio.c \
+  $(LIB_PATH)/kits/common/drivers/segmentlcd.c \
   $(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/system_efm32gg.c \
   $(LIB_PATH)/kits/common/bsp/bsp_bcc.c \
   $(LIB_PATH)/kits/common/bsp/bsp_stk.c \
@@ -36,6 +37,7 @@ SRCS = \
   $(LIB_PATH)/emlib/src/em_ebi.c \
   $(LIB_PATH)/emlib/src/em_emu.c \
   $(LIB_PATH)/emlib/src/em_gpio.c \
+  $(LIB_PATH)/emlib/src/em_lcd.c \
   $(LIB_PATH)/emlib/src/em_int.c \
   $(LIB_PATH)/emlib/src/em_system.c \
   $(LIB_PATH)/emlib/src/em_usart.c \
