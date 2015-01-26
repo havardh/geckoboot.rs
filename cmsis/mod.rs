@@ -10,3 +10,4 @@ pub mod sys_tick {
 }
 
 pub mod itm;
+pub mod nvic;

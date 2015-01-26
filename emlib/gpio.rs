@@ -1,9 +1,11 @@
+#[derive(Copy)]
 #[repr(C)]
 pub enum Port {
     A = 0, B = 1, C = 2,
     D = 3, E = 4, F = 5,
 }
 
+#[derive(Copy)]
 #[repr(C)]
 pub enum DriveMode {
     Standard = 0x0,
@@ -12,6 +14,7 @@ pub enum DriveMode {
     Low      = 0x3,
 }
 
+#[derive(Copy)]
 #[repr(C)]
 pub enum Mode {
     Disabled                  = 0x0,
@@ -49,7 +52,7 @@ extern {
         out: u32
     );
 
-    pub fn GPIO_DriveModeSet(port: Port, mode: Mode);
+    pub fn GPIO_DriveModeSet(port: Port, mode: DriveMode);
     pub fn STATIC_INLINE_GPIO_DbgSWDClkEnable(enable: bool);
     pub fn STATIC_INLINE_GPIO_DbgSWDIOEnable(enable: bool);
     pub fn STATIC_INLINE_GPIO_DbgSWOEnable(enable: bool);
@@ -91,7 +94,7 @@ pub fn pin_mode_set(port: Port, pins: u32, mode: Mode, out: u32) {
     unsafe { GPIO_PinModeSet(port, pins, mode, out) }
 }
 
-pub fn drive_mode_set(port: Port, mode: Mode) {
+pub fn drive_mode_set(port: Port, mode: DriveMode) {
     unsafe { GPIO_DriveModeSet(port, mode) }
 }
 

@@ -14,8 +14,6 @@ mod cmsis;
 
 static mut msTicks: u32 = 0;
 
-#[no_mangle] pub extern fn _start() { main() }
-
 #[no_mangle]
 pub extern fn SysTick_Handler() {
     unsafe { 
@@ -34,7 +32,8 @@ fn delay(dlyTicks: u32) {
 const LED0: u32 = 2;
 const LED1: u32 = 3;
 
-fn main()
+#[no_mangle]
+pub extern fn main()
 {
     let freq = cmu::clock_freq_get(cmu::Clock::CORE);
 

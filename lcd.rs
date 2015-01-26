@@ -7,6 +7,13 @@ use core::intrinsics::transmute;
 
 mod cmsis;
 
+pub mod std {
+  pub use core::cmp;  // used for #[derive(Eq)] until fixed in rust.
+  pub use core::option;
+  pub use core::num;
+  pub use core::marker;
+}
+
 extern {
     pub fn STATIC_INLINE_CHIP_Init();
     pub fn SegmentLCD_Init(useBoost: bool);
@@ -16,12 +23,7 @@ extern {
 }
 
 #[no_mangle]
-pub extern fn _start() {
-    main()
-}
-
-
-fn main() {
+pub extern fn main() {
 
     unsafe {
         STATIC_INLINE_CHIP_Init();
@@ -29,8 +31,7 @@ fn main() {
         SegmentLCD_Init(false);
         SegmentLCD_AllOff();
 
-
-        let string = &[b'P' ,b'u',b's',b' ',b'<',b'3', b'\0'];
+        let string = &[b'R' ,b'u',b's',b't',b'y', b' ', b'G', b'e', b'c', b'k', b'o', b'\0'];
         SegmentLCD_Write(transmute(string));
     }
 
