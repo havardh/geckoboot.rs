@@ -1,4 +1,6 @@
 #![no_std]
+#![no_main]
+#![start]
 
 extern crate core;
 
@@ -16,14 +18,14 @@ static mut msTicks: u32 = 0;
 
 #[no_mangle]
 pub extern fn SysTick_Handler() {
-    unsafe { 
-        let ticks = volatile_load(&msTicks as *const u32); 
+    unsafe {
+        let ticks = volatile_load(&msTicks as *const u32);
         volatile_store(&mut msTicks as *mut u32, ticks + 1);
     }
 }
 
 fn delay(dlyTicks: u32) {
-    unsafe { 
+    unsafe {
         let curTicks = volatile_load(&msTicks as *const u32);
         while volatile_load(&msTicks as *const u32) - curTicks < dlyTicks {}
     }
@@ -43,7 +45,7 @@ pub extern fn main()
 
     cmu::clock_enable(cmu::Clock::HFPER, true);
     cmu::clock_enable(cmu::Clock::GPIO, true);
-    
+
     gpio::pin_mode_set(gpio::Port::E, LED0, gpio::Mode::PushPull, 0);
     gpio::pin_mode_set(gpio::Port::E, LED1, gpio::Mode::PushPull, 0);
 

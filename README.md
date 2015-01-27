@@ -23,6 +23,10 @@ Edit "Makefile" with the follow paths
  - efm32 library code
  - eACommander
 
+Linux Setup Notes
+-----------------
+
+
 Compiling:
 ----------
 

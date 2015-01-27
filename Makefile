@@ -1,15 +1,17 @@
 LLVM_36_HOME=../llvm
-ARM_GCC_TOOLCHAIN=/Applications/SimplicityStudio_v2/developer/toolchains/gnu_arm/4.8_2013q4/
+ARM_GCC_TOOLCHAIN=~/bin/SimplicityStudio_v2/developer/toolchains/gnu_arm/4.8_2013q4
 
-RUST_SRC=../rust
-RUSTC=rustc
-LLC=$(LLVM_36_HOME)/Debug+Asserts/bin/llc
-eACommander=/Applications/eACommander.app/Contents/MacOS/eACommander
+
+RUST_SRC=/home/sondre/src/rust
+RUSTC=/home/sondre/bin/rustc-nightly-x86_64-unknown-linux-gnu/bin/rustc
+# RUSTC=/home/sondre/bin/rustc-nightly-x86_64-unknown-linux-gnu/bin/rustc
+#LLC=$(LLVM_36_HOME)/Debug+Asserts/bin/llc
+#eACommander=/home/sondre/src/eACommander.app/Contents/MacOS/eACommander
 
 DEVICE=EFM32GG990F1024
 TARGET=thumbv7m-none-eabi
 
-SIMPLICITY_STUDIO=/Applications/SimplicityStudio_v2
+SIMPLICITY_STUDIO=/home/sondre/bin/SimplicityStudio_v2
 LIB_PATH=$(SIMPLICITY_STUDIO)/developer/sdks/efm32/v2/
 
 LIB_DIR=lib
@@ -32,7 +34,7 @@ SRCS = \
   $(LIB_PATH)/emlib/src/em_system.c \
   $(LIB_PATH)/emlib/src/em_int.c \
   $(LIB_PATH)/kits/common/drivers/retargetio.c \
-  $(LIB_PATH)/emdrv/gpiointerrupt/src/gpiointerrupt.c 
+  $(LIB_PATH)/emdrv/gpiointerrupt/src/gpiointerrupt.c
 
 #  $(LIB_PATH)/emlib/src/em_emu.c \
 #  $(LIB_PATH)/kits/common/drivers/segmentlcd.c \
@@ -46,13 +48,11 @@ SRCS = \
 
 #  $(LIB_PATH)/emlib/src/em_usart.c \
 
-
-
 SRCS += emlib/gpio.c \
+	emlib/emu.c \
 	emlib/chip.c \
 	cmsis/cmsis.c \
 	emlib/swo.c \
-	emlib/timer.c \
 	emdrv/gpiointerrupt.c \
 
 # Binaries will be generated with this name (.elf, .bin, .hex, etc)
@@ -66,12 +66,14 @@ GDB=$(ARM_GCC_TOOLCHAIN)/bin/arm-none-eabi-gdb
 OBJCOPY=$(ARM_GCC_TOOLCHAIN)/bin/arm-none-eabi-objcopy
 FLASH=$(eACommander)
 
-CFLAGS  = -g -O0 -Wall -T$(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/efm32gg.ld
+CFLAGS  = -O0 -Wall -T$(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/efm32gg.ld
 CFLAGS += -mthumb -mcpu=cortex-m3
 CFLAGS += $(INCLUDEPATHS)
 CFLAGS += -D$(DEVICE)
 CFLAGS += -std=c99 --specs=nano.specs
 CFLAGS += -Wl,--start-group -lgcc -lc -lnosys -Wl,--end-group
+
+#CFLAGS += -nostartfiles
 
 RUSTFLAGS = --target $(TARGET) \
 	--crate-type lib -g \
@@ -79,7 +81,7 @@ RUSTFLAGS = --target $(TARGET) \
 	--out-dir $(OUT_DIR) \
 	-A non_camel_case_types \
 	-A dead_code \
-	-A non_snake_case 
+	-A non_snake_case
 
 RUSTLIBFLAGS = -O -g --target $(TARGET) -L $(LIB_DIR) --cfg stage0 --out-dir $(LIB_DIR)
 
@@ -130,8 +132,11 @@ flash: all
 	$(FLASH) --flash $(OUT_DIR)/$(PROJ_NAME).bin $(FLASHFLAGS)
 
 .PHONY: debug
-debug: 
+debug:
 	$(GDB) -x efm32gdbinit
 
 clean:
 	rm -f out/*
+
+test.elf: test.c
+	arm-none-eabi-gcc -g $(INCLUDEPATHS) --specs=nosys.specs -D$(DEVICE) -mthumb -mcpu=cortex-m3 -mlittle-endian -T$(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/efm32gg.ld $(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/system_efm32gg.c  $(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/startup_efm32gg.s test.c -o test.elf
