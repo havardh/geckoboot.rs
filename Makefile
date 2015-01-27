@@ -24,7 +24,7 @@ SRCS = \
   $(LIB_PATH)/emlib/src/em_system.c \
   $(LIB_PATH)/emlib/src/em_int.c \
   $(LIB_PATH)/kits/common/drivers/retargetio.c \
-  $(LIB_PATH)/emdrv/gpiointerrupt/src/gpiointerrupt.c 
+  $(LIB_PATH)/emdrv/gpiointerrupt/src/gpiointerrupt.c
 
 #  $(LIB_PATH)/emlib/src/em_emu.c \
 #  $(LIB_PATH)/kits/common/drivers/segmentlcd.c \
@@ -41,7 +41,6 @@ SRCS += emlib/gpio.c \
 	emlib/chip.c \
 	cmsis/cmsis.c \
 	emlib/swo.c \
-	emlib/timer.c \
 	emdrv/gpiointerrupt.c \
 
 # Binaries will be generated with this name (.elf, .bin, .hex, etc)
@@ -50,18 +49,20 @@ PROJ_NAME=blinky
 # Normally you shouldn't need to change anything below this line!
 #######################################################################################
 
-RUSTC=rustc
+RUSTC=$(RUSTC_PATH)rustc
 CC=$(ARM_GCC_TOOLCHAIN)/bin/arm-none-eabi-gcc
 GDB=$(ARM_GCC_TOOLCHAIN)/bin/arm-none-eabi-gdb
 OBJCOPY=$(ARM_GCC_TOOLCHAIN)/bin/arm-none-eabi-objcopy
 FLASH=eACommander
 
-CFLAGS  = -g -O0 -Wall -T$(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/efm32gg.ld
+CFLAGS  = -O0 -Wall -T$(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/efm32gg.ld
 CFLAGS += -mthumb -mcpu=cortex-m3
 CFLAGS += $(INCLUDEPATHS)
 CFLAGS += -D$(DEVICE)
 CFLAGS += -std=c99 --specs=nano.specs
 CFLAGS += -Wl,--start-group -lgcc -lc -lnosys -Wl,--end-group
+
+#CFLAGS += -nostartfiles
 
 RUSTFLAGS = --target $(TARGET) \
 	--crate-type lib -g \
@@ -69,7 +70,7 @@ RUSTFLAGS = --target $(TARGET) \
 	--out-dir $(OUT_DIR) \
 	-A non_camel_case_types \
 	-A dead_code \
-	-A non_snake_case 
+	-A non_snake_case
 
 RUSTLIBFLAGS = -O -g --target $(TARGET) -L $(LIB_DIR) --cfg stage0 --out-dir $(LIB_DIR)
 
@@ -120,8 +121,11 @@ flash: all
 	$(FLASH) --flash $(OUT_DIR)/$(PROJ_NAME).bin $(FLASHFLAGS)
 
 .PHONY: debug
-debug: 
+debug:
 	$(GDB) -x efm32gdbinit
 
 clean:
 	rm -f out/*
+
+test.elf: test.c
+	arm-none-eabi-gcc -g $(INCLUDEPATHS) --specs=nosys.specs -D$(DEVICE) -mthumb -mcpu=cortex-m3 -mlittle-endian -T$(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/efm32gg.ld $(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/system_efm32gg.c  $(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/startup_efm32gg.s test.c -o test.elf
