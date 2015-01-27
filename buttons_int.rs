@@ -3,6 +3,7 @@
 
 extern crate core;
 
+use emlib::chip;
 use emlib::cmu;
 use emlib::gpio;
 use emdrv::gpioint;
@@ -21,7 +22,6 @@ pub mod std {
 }
 
 extern {
-    pub fn STATIC_INLINE_CHIP_Init();
     pub fn BSP_TraceSwoSetup();
 }
 
@@ -61,7 +61,7 @@ fn gpio_setup() {
 #[no_mangle]
 pub extern fn main() {
 
-    unsafe { STATIC_INLINE_CHIP_Init(); }
+    chip::init();
 
     gpio_setup();
     
