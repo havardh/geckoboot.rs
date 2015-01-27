@@ -1,16 +1,8 @@
-LLVM_36_HOME=../llvm
-ARM_GCC_TOOLCHAIN=/Applications/SimplicityStudio_v2/developer/toolchains/gnu_arm/4.8_2013q4/
-
-RUST_SRC=../rust
-RUSTC=rustc
-LLC=$(LLVM_36_HOME)/Debug+Asserts/bin/llc
-eACommander=/Applications/eACommander.app/Contents/MacOS/eACommander
-
 DEVICE=EFM32GG990F1024
 TARGET=thumbv7m-none-eabi
 
-SIMPLICITY_STUDIO=/Applications/SimplicityStudio_v2
-LIB_PATH=$(SIMPLICITY_STUDIO)/developer/sdks/efm32/v2/
+ARM_GCC_TOOLCHAIN=$(SIMPLICITY_STUDIO_HOME)/developer/toolchains/gnu_arm/4.8_2013q4/
+LIB_PATH=$(SIMPLICITY_STUDIO_HOME)/developer/sdks/efm32/v2/
 
 LIB_DIR=lib
 OUT_DIR=out
@@ -43,10 +35,7 @@ SRCS = \
 #  $(LIB_PATH)/emlib/src/em_assert.c \
 #  $(LIB_PATH)/emlib/src/em_ebi.c \
 #  $(LIB_PATH)/emlib/src/em_lcd.c \
-
 #  $(LIB_PATH)/emlib/src/em_usart.c \
-
-
 
 SRCS += emlib/gpio.c \
 	emlib/chip.c \
@@ -61,10 +50,11 @@ PROJ_NAME=blinky
 # Normally you shouldn't need to change anything below this line!
 #######################################################################################
 
+RUSTC=rustc
 CC=$(ARM_GCC_TOOLCHAIN)/bin/arm-none-eabi-gcc
 GDB=$(ARM_GCC_TOOLCHAIN)/bin/arm-none-eabi-gdb
 OBJCOPY=$(ARM_GCC_TOOLCHAIN)/bin/arm-none-eabi-objcopy
-FLASH=$(eACommander)
+FLASH=eACommander
 
 CFLAGS  = -g -O0 -Wall -T$(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/efm32gg.ld
 CFLAGS += -mthumb -mcpu=cortex-m3
@@ -109,20 +99,20 @@ $(OUT_DIR)/$(PROJ_NAME).elf: $(SRCS) $(OUT_DIR)/$(PROJ_NAME).s
 .PHONY: librust
 librust: $(OUT_DIR)/libcore.rlib $(OUT_DIR)/libcollections.rlib
 
-$(OUT_DIR)/libcore.rlib: $(RUST_SRC)/src/libcore/lib.rs
-	$(RUSTC) $(RUSTLIBFLAGS) $(RUST_SRC)/src/libcore/lib.rs
+$(OUT_DIR)/libcore.rlib: $(RUST_SRC_HOME)/src/libcore/lib.rs
+	$(RUSTC) $(RUSTLIBFLAGS) $(RUST_SRC_HOME)/src/libcore/lib.rs
 
-$(OUT_DIR)/libcollections.rlib: $(RUST_SRC)/src/libcollections/lib.rs $(OUT_DIR)/libunicode.rlib $(OUT_DIR)/liballoc.rlib
-	$(RUSTC) $(RUSTLIBFLAGS) $(RUST_SRC)/src/libcollections/lib.rs
+$(OUT_DIR)/libcollections.rlib: $(RUST_SRC_HOME)/src/libcollections/lib.rs $(OUT_DIR)/libunicode.rlib $(OUT_DIR)/liballoc.rlib
+	$(RUSTC) $(RUSTLIBFLAGS) $(RUST_SRC_HOME)/src/libcollections/lib.rs
 
-$(OUT_DIR)/libunicode.rlib: $(RUST_SRC)/src/libunicode/lib.rs
-	$(RUSTC) $(RUSTLIBFLAGS) $(RUST_SRC)/src/libunicode/lib.rs
+$(OUT_DIR)/libunicode.rlib: $(RUST_SRC_HOME)/src/libunicode/lib.rs
+	$(RUSTC) $(RUSTLIBFLAGS) $(RUST_SRC_HOME)/src/libunicode/lib.rs
 
-$(OUT_DIR)/liballoc.rlib: $(RUST_SRC)/src/liballoc/lib.rs $(OUT_DIR)/liblibc.rlib
-	$(RUSTC) $(RUSTLIBFLAGS) $(RUST_SRC)/src/liballoc/lib.rs
+$(OUT_DIR)/liballoc.rlib: $(RUST_SRC_HOME)/src/liballoc/lib.rs $(OUT_DIR)/liblibc.rlib
+	$(RUSTC) $(RUSTLIBFLAGS) $(RUST_SRC_HOME)/src/liballoc/lib.rs
 
-$(OUT_DIR)/liblibc.rlib: $(RUST_SRC)/src/liblibc/lib.rs
-	$(RUSTC) $(RUSTLIBFLAGS) $(RUST_SRC)/src/liblibc/lib.rs
+$(OUT_DIR)/liblibc.rlib: $(RUST_SRC_HOME)/src/liblibc/lib.rs
+	$(RUSTC) $(RUSTLIBFLAGS) $(RUST_SRC_HOME)/src/liblibc/lib.rs
 # Rust Library
 
 .PHONY: flash
