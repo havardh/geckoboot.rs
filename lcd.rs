@@ -5,6 +5,9 @@ extern crate core;
 use core::str::StrExt;
 use core::intrinsics::transmute;
 
+use emlib::chip;
+
+mod emlib;
 mod cmsis;
 
 pub mod std {
@@ -25,9 +28,10 @@ extern {
 #[no_mangle]
 pub extern fn main() {
 
+    chip::init();
+    
     unsafe {
-        STATIC_INLINE_CHIP_Init();
-
+        
         SegmentLCD_Init(false);
         SegmentLCD_AllOff();
 

@@ -15,13 +15,13 @@ Requirements:
 Setup:
 ------
 
-Edit "Makefile" with the follow paths
- - rust source
- - rustc compiler
- - gcc-toolchain
- - llvm
- - efm32 library code
- - eACommander
+The `rustc` command must be available on your path.
+Add the environment variables `SIMPLICITY_STUDIO_HOME` and `RUST_SRC_HOME` pointing to Silicon Labs Simplicity Studio and the Rust Source respectivly.
+For the `make flash` command to work the utility eACommander must be on your path.
+
+Linux Setup Notes
+-----------------
+
 
 Linux Setup Notes
 -----------------
@@ -30,7 +30,7 @@ Linux Setup Notes
 Compiling:
 ----------
 
-´make flash PROJ_NAME=<filename>´ excluding .rs
+`make flash PROJ_NAME=<filename>` excluding .rs
 
 Structure
 ---------
