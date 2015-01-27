@@ -38,6 +38,7 @@ SRCS = \
 #  $(LIB_PATH)/emlib/src/em_usart.c \
 
 SRCS += emlib/gpio.c \
+	emlib/emu.c \
 	emlib/chip.c \
 	cmsis/cmsis.c \
 	emlib/swo.c \
