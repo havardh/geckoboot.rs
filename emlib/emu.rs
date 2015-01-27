@@ -11,7 +11,7 @@ pub enum BodMode {
 pub enum Em4Oscillator {
     Ulfrco = 0x0,    // 0x0u64,
     Lfxo   = 0x2,    // 0x2u64,
-    Lfrco  = 0x1    // 0x1u64
+    Lfrco  = 0x1,    // 0x1u64
 }
 
 #[derive(Copy)]
@@ -21,6 +21,17 @@ pub struct Em4Init{
     oscillator: Em4Oscillator,
     bu_rtc_wakeup: bool,
     vreg: bool
+}
+
+impl Em4Init {
+    pub fn default() -> Em4Init {
+        Em4Init {
+            lock_config: false,
+            oscillator: Em4Oscillator::Ulfrco,
+            bu_rtc_wakeup: true,
+            vreg: true
+        }
+    }
 }
 
 #[derive(Copy)]
