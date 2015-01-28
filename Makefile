@@ -43,6 +43,7 @@ SRCS += emlib/gpio.c \
 	emlib/chip.c \
 	cmsis/cmsis.c \
 	emlib/swo.c \
+	emlib/timer.c \
 	emdrv/gpiointerrupt.c \
 
 # Binaries will be generated with this name (.elf, .bin, .hex, etc)

@@ -25,7 +25,8 @@ static TOP: u32 = 27342;
 
 #[no_mangle]
 pub extern fn TIMER0_IRQHandler() {
-    timer::int_clear(timer::TIMER0, timer::TIMER_IF_OF);
+    let timer0 = timer::Timer::new(timer::Idx::Timer0);
+    timer::int_clear(timer0, timer::TIMER_IF_OF);
 
     gpio::pin_out_toggle(gpio::Port::E, 2);
 }
@@ -58,10 +59,12 @@ pub extern fn main() {
         sync:         false
     };
 
-    timer::int_enable(timer::TIMER0, timer::TIMER_IF_OF);
+    let timer0 = timer::Timer::new(timer::Idx::Timer0);
+
+    timer::int_enable(timer0, timer::TIMER_IF_OF);
     nvic::enable_IRQ(nvic::IRQn::TIMER0);
-    timer::top_set(timer::TIMER0, TOP);
-    timer::init(timer::TIMER0, &timer_init);
+    timer::top_set(timer0, TOP);
+    timer::init(timer0, &timer_init);
 
     loop {}
 }

@@ -1,48 +1,58 @@
 use core::intrinsics::transmute;
 use core::default::Default;
 
-type Ptr = u32;
-
-mod Private {
-
-    #[repr(C)]
-    pub struct CC {
-        CTRL: u32,
-        CCV: u32,
-        CCVP: u32,
-        CCVN: u32,
-    }
-
-    #[repr(C)]
-    pub struct Timer {
-        CTRL: u32,
-        CMD: u32,
-        STATUS: u32,
-        IEN: u32,
-        IF: u32,
-        IFS: u32,
-        IFC: u32,
-        TOP: u32,
-        TOPB: u32,
-        CNT: u32,
-        ROUTE: u32,
-        RESERVED0: u32,
-        CC: [CC; 3],
-        RESERVED1: [u32; 4],
-        DTCTRL: u32,
-        DTTIME: u32,
-        DTFC: u32,
-        DTOGEN: u32,
-        DTFAULT: u32,
-        DTFAULTC: u32,
-        DTLOCK: u32,
-    }
+#[repr(C)]
+pub struct CC {
+    CTRL: u32,
+    CCV: u32,
+    CCVP: u32,
+    CCVN: u32,
 }
 
 #[repr(C)]
-#[derive(Copy)]
 pub struct Timer {
-    ptr: Ptr
+    CTRL: u32,
+    CMD: u32,
+    STATUS: u32,
+    IEN: u32,
+    IF: u32,
+    IFS: u32,
+    IFC: u32,
+    TOP: u32,
+    TOPB: u32,
+    CNT: u32,
+    ROUTE: u32,
+    RESERVED0: u32,
+    CC: [CC; 3],
+    RESERVED1: [u32; 4],
+    DTCTRL: u32,
+    DTTIME: u32,
+    DTFC: u32,
+    DTOGEN: u32,
+    DTFAULT: u32,
+    DTFAULTC: u32,
+    DTLOCK: u32,
+}
+
+pub enum Idx {
+    Timer0,
+    Timer1,
+    Timer2,
+    Timer3
+}
+
+impl Timer {
+    pub fn new(idx: Idx) -> &'static Timer {
+        unsafe {
+            match idx {
+                Idx::Timer0 => transmute(0x40010000),
+                Idx::Timer1 => transmute(0x40010400),
+                Idx::Timer2 => transmute(0x40010800),
+                Idx::Timer3 => transmute(0x40010C00)
+            }
+        }
+    }
+
 }
 
 #[repr(u8)]
@@ -269,133 +279,129 @@ impl Default for InitDTI {
 
 extern {
 
-    pub fn STATIC_INLINE_TIMER_CaptureGet(timer: *mut Private::Timer, ch: u32) -> u32;
-    pub fn STATIC_INLINE_TIMER_CompareBufSet(timer: *mut Private::Timer, ch: u32, val: u32);
-    pub fn STATIC_INLINE_TIMER_CompareSet(timer: *mut Private::Timer, ch: u32, val: u32);
-    pub fn STATIC_INLINE_TIMER_CounterGet(timer: *mut Private::Timer) -> u32;
-    pub fn STATIC_INLINE_TIMER_CounterSet(timer: *mut Private::Timer, val: u32);
-    pub fn STATIC_INLINE_TIMER_Enable(timer: *mut Private::Timer, enable: bool);
-    pub fn TIMER_Init(timer: *mut Private::Timer, init: *const Init);
-    pub fn TIMER_InitCC(timer: *mut Private::Timer, ch: u32, init: *const InitCC);
-    pub fn TIMER_InitDTI(timer: *mut Private::Timer, init: *const InitDTI);
-    pub fn STATIC_INLINE_TIMER_EnableDTI(timer: *mut Private::Timer, enable: bool);
-    pub fn STATIC_INLINE_TIMER_GetDTIFault(timer: *mut Private::Timer) -> u32;
-    pub fn STATIC_INLINE_TIMER_ClearDTIFault(timer: *mut Private::Timer, flags: u32);
-    pub fn STATIC_INLINE_TIMER_IntClear(timer: *mut Private::Timer, flags: u32);
-    pub fn STATIC_INLINE_TIMER_IntDisable(timer: *mut Private::Timer, flags: u32);
-    pub fn STATIC_INLINE_TIMER_IntEnable(timer: *mut Private::Timer, flags: u32);
-    pub fn STATIC_INLINE_TIMER_IntGet(timer: *mut Private::Timer) -> u32;
-    pub fn STATIC_INLINE_TIMER_IntGetEnabled(timer: *mut Private::Timer) -> u32;
-    pub fn STATIC_INLINE_TIMER_IntSet(timer: *mut Private::Timer, flags: u32);
-    pub fn STATIC_INLINE_TIMER_Lock(timer: *mut Private::Timer);
-    pub fn TIMER_Reset(timer: *mut Private::Timer);
-    pub fn STATIC_INLINE_TIMER_TopBufSet(timer: *mut Private::Timer, val: u32);
-    pub fn STATIC_INLINE_TIMER_TopGet(timer: *mut Private::Timer) -> u32;
-    pub fn STATIC_INLINE_TIMER_TopSet(timer: *mut Private::Timer, val: u32);
-    pub fn STATIC_INLINE_TIMER_Unlock(timer: *mut Private::Timer);
+    pub fn STATIC_INLINE_TIMER_CaptureGet(timer: *mut Timer, ch: u32) -> u32;
+    pub fn STATIC_INLINE_TIMER_CompareBufSet(timer: *mut Timer, ch: u32, val: u32);
+    pub fn STATIC_INLINE_TIMER_CompareSet(timer: *mut Timer, ch: u32, val: u32);
+    pub fn STATIC_INLINE_TIMER_CounterGet(timer: *mut Timer) -> u32;
+    pub fn STATIC_INLINE_TIMER_CounterSet(timer: *mut Timer, val: u32);
+    pub fn STATIC_INLINE_TIMER_Enable(timer: *mut Timer, enable: bool);
+    pub fn TIMER_Init(timer: *mut Timer, init: *const Init);
+    pub fn TIMER_InitCC(timer: *mut Timer, ch: u32, init: *const InitCC);
+    pub fn TIMER_InitDTI(timer: *mut Timer, init: *const InitDTI);
+    pub fn STATIC_INLINE_TIMER_EnableDTI(timer: *mut Timer, enable: bool);
+    pub fn STATIC_INLINE_TIMER_GetDTIFault(timer: *mut Timer) -> u32;
+    pub fn STATIC_INLINE_TIMER_ClearDTIFault(timer: *mut Timer, flags: u32);
+    pub fn STATIC_INLINE_TIMER_IntClear(timer: *mut Timer, flags: u32);
+    pub fn STATIC_INLINE_TIMER_IntDisable(timer: *mut Timer, flags: u32);
+    pub fn STATIC_INLINE_TIMER_IntEnable(timer: *mut Timer, flags: u32);
+    pub fn STATIC_INLINE_TIMER_IntGet(timer: *mut Timer) -> u32;
+    pub fn STATIC_INLINE_TIMER_IntGetEnabled(timer: *mut Timer) -> u32;
+    pub fn STATIC_INLINE_TIMER_IntSet(timer: *mut Timer, flags: u32);
+    pub fn STATIC_INLINE_TIMER_Lock(timer: *mut Timer);
+    pub fn TIMER_Reset(timer: *mut Timer);
+    pub fn STATIC_INLINE_TIMER_TopBufSet(timer: *mut Timer, val: u32);
+    pub fn STATIC_INLINE_TIMER_TopGet(timer: *mut Timer) -> u32;
+    pub fn STATIC_INLINE_TIMER_TopSet(timer: *mut Timer, val: u32);
+    pub fn STATIC_INLINE_TIMER_Unlock(timer: *mut Timer);
     
 }
 
-pub fn capture_get(timer: Timer, ch: u32) -> u32 {
-    unsafe { STATIC_INLINE_TIMER_CaptureGet(transmute(timer.ptr), ch) }
+pub fn capture_get(timer: &Timer, ch: u32) -> u32 {
+    unsafe { STATIC_INLINE_TIMER_CaptureGet(transmute(timer), ch) }
 }
 
-pub fn compare_buf_set(timer: Timer, ch: u32, val: u32) {
-    unsafe { STATIC_INLINE_TIMER_CompareBufSet(transmute(timer.ptr), ch, val) }
+pub fn compare_buf_set(timer: &Timer, ch: u32, val: u32) {
+    unsafe { STATIC_INLINE_TIMER_CompareBufSet(transmute(timer), ch, val) }
 }
 
-pub fn compare_set(timer: Timer, ch: u32, val: u32) {
+pub fn compare_set(timer: &Timer, ch: u32, val: u32) {
     unsafe { STATIC_INLINE_TIMER_CompareSet(transmute(timer), ch, val) }
 }
 
-pub fn counter_get(timer: Timer) -> u32 {
+pub fn counter_get(timer: &Timer) -> u32 {
     unsafe { STATIC_INLINE_TIMER_CounterGet(transmute(timer)) }
 }
 
-pub fn counter_set(timer: Timer, val: u32) {
+pub fn counter_set(timer: &Timer, val: u32) {
     unsafe { STATIC_INLINE_TIMER_CounterSet(transmute(timer), val) }
 }
 
-pub fn enable(timer: Timer, enable: bool) {
+pub fn enable(timer: &Timer, enable: bool) {
     unsafe { STATIC_INLINE_TIMER_Enable(transmute(timer), enable) }
 }
 
-pub fn init(timer: Timer, init: &Init) {
-    unsafe { TIMER_Init(transmute(timer.ptr), transmute(init)) }
+pub fn init(timer: &Timer, init: &Init) {
+    unsafe { TIMER_Init(transmute(timer), transmute(init)) }
 }
 
-pub fn init_cc(timer: Timer, ch: u32, init: InitCC) {
-    unsafe { TIMER_InitCC(transmute(timer.ptr), ch, transmute(&init)) }
+pub fn init_cc(timer: &Timer, ch: u32, init: InitCC) {
+    unsafe { TIMER_InitCC(transmute(timer), ch, transmute(&init)) }
 }
 
-pub fn init_dti(timer: Timer, init: InitDTI) {
-    unsafe { TIMER_InitDTI(transmute(timer.ptr), transmute(&init)) }
+pub fn init_dti(timer: &Timer, init: InitDTI) {
+    unsafe { TIMER_InitDTI(transmute(timer), transmute(&init)) }
 }
 
-pub fn enable_dti(timer: Timer, enable: bool) {
-    unsafe { STATIC_INLINE_TIMER_EnableDTI(transmute(timer.ptr), enable) }
+pub fn enable_dti(timer: &Timer, enable: bool) {
+    unsafe { STATIC_INLINE_TIMER_EnableDTI(transmute(timer), enable) }
 }
 
-pub fn get_dti_fault(timer: Timer) -> u32 {
-    unsafe { STATIC_INLINE_TIMER_GetDTIFault(transmute(timer.ptr)) }
+pub fn get_dti_fault(timer: &Timer) -> u32 {
+    unsafe { STATIC_INLINE_TIMER_GetDTIFault(transmute(timer)) }
 }
 
-pub fn clear_dti_fault(timer: Timer, flags: u32) {
-    unsafe { STATIC_INLINE_TIMER_ClearDTIFault(transmute(timer.ptr), flags) }
+pub fn clear_dti_fault(timer: &Timer, flags: u32) {
+    unsafe { STATIC_INLINE_TIMER_ClearDTIFault(transmute(timer), flags) }
 }
 
-pub fn int_clear(timer: Timer, flags: u32) {
-    unsafe { STATIC_INLINE_TIMER_IntClear(transmute(timer.ptr), flags) }
+pub fn int_clear(timer: &Timer, flags: u32) {
+    unsafe { STATIC_INLINE_TIMER_IntClear(transmute(timer), flags) }
 }
 
-pub fn int_disable(timer: Timer, flags: u32) {
-    unsafe { STATIC_INLINE_TIMER_IntDisable(transmute(timer.ptr), flags) }
+pub fn int_disable(timer: &Timer, flags: u32) {
+    unsafe { STATIC_INLINE_TIMER_IntDisable(transmute(timer), flags) }
 }
 
-pub fn int_enable(timer: Timer, flags: u32) {
-    unsafe { STATIC_INLINE_TIMER_IntEnable(transmute(timer.ptr), flags)}
+pub fn int_enable(timer: &Timer, flags: u32) {
+    unsafe { STATIC_INLINE_TIMER_IntEnable(transmute(timer), flags)}
 }
 
-pub fn int_get(timer: Timer) -> u32 {
-    unsafe { STATIC_INLINE_TIMER_IntGet(transmute(timer.ptr)) }
+pub fn int_get(timer: &Timer) -> u32 {
+    unsafe { STATIC_INLINE_TIMER_IntGet(transmute(timer)) }
 }
 
-pub fn int_get_enabled(timer: Timer) -> u32 {
-    unsafe { STATIC_INLINE_TIMER_IntGetEnabled(transmute(timer.ptr)) }
+pub fn int_get_enabled(timer: &Timer) -> u32 {
+    unsafe { STATIC_INLINE_TIMER_IntGetEnabled(transmute(timer)) }
 }
 
-pub fn int_set(timer: Timer, flags: u32) {
-    unsafe { STATIC_INLINE_TIMER_IntSet(transmute(timer.ptr), flags) }
+pub fn int_set(timer: &Timer, flags: u32) {
+    unsafe { STATIC_INLINE_TIMER_IntSet(transmute(timer), flags) }
 }
 
-pub fn lock(timer: Timer) {
-    unsafe { STATIC_INLINE_TIMER_Lock(transmute(timer.ptr)) }
+pub fn lock(timer: &Timer) {
+    unsafe { STATIC_INLINE_TIMER_Lock(transmute(timer)) }
 }
 
-pub fn reset(timer: Timer) {
-    unsafe { TIMER_Reset(transmute(timer.ptr)) }
+pub fn reset(timer: &Timer) {
+    unsafe { TIMER_Reset(transmute(timer)) }
 }
 
-pub fn top_buf_set(timer: Timer, val: u32) {
-    unsafe { STATIC_INLINE_TIMER_TopBufSet(transmute(timer.ptr), val) }
+pub fn top_buf_set(timer: &Timer, val: u32) {
+    unsafe { STATIC_INLINE_TIMER_TopBufSet(transmute(timer), val) }
 }
 
-pub fn top_get(timer: Timer) -> u32 {
-    unsafe { STATIC_INLINE_TIMER_TopGet(transmute(timer.ptr)) }
+pub fn top_get(timer: &Timer) -> u32 {
+    unsafe { STATIC_INLINE_TIMER_TopGet(transmute(timer)) }
 }
 
-pub fn top_set(timer: Timer, val: u32) {
-    unsafe { STATIC_INLINE_TIMER_TopSet(transmute(timer.ptr), val) }
+pub fn top_set(timer: &Timer, val: u32) {
+    unsafe { STATIC_INLINE_TIMER_TopSet(transmute(timer), val) }
 }
 
-pub fn unlock(timer: Timer) {
-    unsafe { STATIC_INLINE_TIMER_Unlock(transmute(timer.ptr)) }
+pub fn unlock(timer: &Timer) {
+    unsafe { STATIC_INLINE_TIMER_Unlock(transmute(timer)) }
 }
 
-pub static TIMER0: Timer = Timer { ptr: 0x40010000 };
-pub static TIMER1: Timer = Timer { ptr: 0x40010400 };
-pub static TIMER2: Timer = Timer { ptr: 0x40010800 };
-pub static TIMER3: Timer = Timer { ptr: 0x40010C00 };
 
 pub static TIMER_IF_OF: u32     = (0x1 << 0);
 pub static TIMER_IF_UF: u32     = (0x1 << 1);
