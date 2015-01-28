@@ -2,6 +2,7 @@
 pub enum Clock {
     CORE = 262176,
     HFPER = 164112,
+    TIMER0 = 152064,
     GPIO = 184832,
 }
 
