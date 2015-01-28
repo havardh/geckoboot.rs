@@ -42,14 +42,14 @@ pub enum Idx {
 }
 
 impl Timer {
+
+    #[inline]
     pub fn new(idx: Idx) -> &'static Timer {
-        unsafe {
-            match idx {
-                Idx::Timer0 => transmute(0x40010000),
-                Idx::Timer1 => transmute(0x40010400),
-                Idx::Timer2 => transmute(0x40010800),
-                Idx::Timer3 => transmute(0x40010C00)
-            }
+        match idx {
+            Idx::Timer0 => timer0(),
+            Idx::Timer1 => timer1(),
+            Idx::Timer2 => timer2(),
+            Idx::Timer3 => timer3()
         }
     }
 
@@ -279,6 +279,15 @@ impl Default for InitDTI {
 
 extern {
 
+    #[inline]
+    pub fn GET_TIMER0() -> *mut Timer;
+    #[inline]
+    pub fn GET_TIMER1() -> *mut Timer;
+    #[inline]
+    pub fn GET_TIMER2() -> *mut Timer;
+    #[inline]
+    pub fn GET_TIMER3() -> *mut Timer;
+
     pub fn STATIC_INLINE_TIMER_CaptureGet(timer: *mut Timer, ch: u32) -> u32;
     pub fn STATIC_INLINE_TIMER_CompareBufSet(timer: *mut Timer, ch: u32, val: u32);
     pub fn STATIC_INLINE_TIMER_CompareSet(timer: *mut Timer, ch: u32, val: u32);
@@ -303,7 +312,27 @@ extern {
     pub fn STATIC_INLINE_TIMER_TopGet(timer: *mut Timer) -> u32;
     pub fn STATIC_INLINE_TIMER_TopSet(timer: *mut Timer, val: u32);
     pub fn STATIC_INLINE_TIMER_Unlock(timer: *mut Timer);
-    
+
+}
+
+#[inline]
+fn timer0() -> &'static Timer {
+    unsafe { transmute(GET_TIMER0()) }
+}
+
+#[inline]
+fn timer1() -> &'static Timer {
+    unsafe { transmute(GET_TIMER1()) }
+}
+
+#[inline]
+fn timer2() -> &'static Timer {
+    unsafe { transmute(GET_TIMER2()) }
+}
+
+#[inline]
+fn timer3() -> &'static Timer {
+    unsafe { transmute(GET_TIMER3()) }
 }
 
 pub fn capture_get(timer: &Timer, ch: u32) -> u32 {
