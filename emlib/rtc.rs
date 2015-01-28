@@ -1,13 +1,14 @@
+use core::default::Default;
 
 #[repr(C)]
 pub struct Init {
-    enable: bool,
-    debug_run = bool,
-    comp0_top = bool
+    pub enable: bool,
+    pub debug_run: bool,
+    pub comp0_top: bool
 }
 
-impl Init {
-    pub fn default() -> Init {
+impl Default for Init {
+    fn default() -> Init {
         Init {
             enable: true,
             debug_run: false,
@@ -29,7 +30,7 @@ extern {
 
     pub fn RTC_Enable(enable: bool);
     pub fn RTC_FreezeEnable(enable: bool);
-    pub fn RTC_Init(init: &Init); // pub fn RTC_Init(const RTC_Init_TypeDef *init)
+    pub fn RTC_Init(init: &Init);
     pub fn RTC_CounterReset();
 }
 
@@ -69,14 +70,6 @@ pub fn reset() {
     unsafe { RTC_Reset() }
 }
 
-pub fn compare_get(comp: u32) -> u32 {
-    unsafe { RTC_CompareGet(comp: u32) }
-}
-
-pub fn compare_set(comp: u32, value: u32) {
-    unsafe { RTC_CompareSet(comp, value) }
-}
-
 pub fn enable(enable: bool) {
     unsafe { RTC_Enable(enable) }
 }
@@ -92,3 +85,5 @@ pub fn init(init: &Init) {
 pub fn counter_reset() {
     unsafe { RTC_CounterReset() }
 }
+
+pub const RTC_IEN_COMP0: u32 = (0x1 << 1);

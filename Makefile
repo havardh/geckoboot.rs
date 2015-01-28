@@ -21,6 +21,7 @@ SRCS = \
   $(LIB_PATH)/emlib/src/em_cmu.c \
   $(LIB_PATH)/emlib/src/em_emu.c \
   $(LIB_PATH)/emlib/src/em_gpio.c \
+  $(LIB_PATH)/emlib/src/em_rtc.c \
   $(LIB_PATH)/emlib/src/em_system.c \
   $(LIB_PATH)/emlib/src/em_int.c \
   $(LIB_PATH)/kits/common/drivers/retargetio.c \
@@ -41,6 +42,7 @@ SRCS += emlib/gpio.c \
 	emlib/emu.c \
 	emlib/chip.c \
 	cmsis/cmsis.c \
+	emlib/rtc.c \
 	emlib/swo.c \
 	emdrv/gpiointerrupt.c \
 

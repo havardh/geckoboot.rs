@@ -1,7 +1,7 @@
-#include "em_cmu.h"
+#include "em_rtc.h"
 
 uint32_t STATIC_INLINE_RTC_CounterGet(void) {
-    RTC_CounterGet();
+    return RTC_CounterGet();
 }
 
 void STATIC_INLINE_RTC_IntClear(uint32_t flags) {
