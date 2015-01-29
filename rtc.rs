@@ -1,5 +1,7 @@
 #![no_std]
+#![no_main]
 #![allow(unstable)]
+#![feature(lang_items)]
 
 extern crate core;
 
@@ -71,9 +73,14 @@ pub extern fn main() {
 }
 
 #[no_mangle]
+#[allow(non_snake_case)]
 pub extern fn RTC_IRQHandler() {
     /* Clear interrupt source */
     rtc::int_clear(rtc::RTC_IEN_COMP0);
 
     gpio::pin_out_toggle(gpio::Port::E, 2);
 }
+
+#[lang = "stack_exhausted"] extern fn stack_exhausted() {}
+#[lang = "eh_personality"] extern fn eh_personality() {}
+#[lang = "panic_fmt"] fn panic_fmt() -> ! { loop {} }
