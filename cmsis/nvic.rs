@@ -1,4 +1,3 @@
-
 #[repr(C)]
 pub enum IRQn {
 /******  Cortex-M3 Processor Exceptions Numbers *******************************************/

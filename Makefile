@@ -1,3 +1,5 @@
+-include Makefile.user
+
 DEVICE=EFM32GG990F1024
 TARGET=thumbv7m-none-eabi
 
