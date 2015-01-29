@@ -6,6 +6,7 @@ use emlib::chip;
 use emlib::cmu;
 use emlib::gpio;
 use emlib::timer;
+use emlib::timer::Timer;
 use cmsis::nvic;
 
 use core::default::Default;
@@ -25,8 +26,8 @@ static TOP: u32 = 27342;
 
 #[no_mangle]
 pub extern fn TIMER0_IRQHandler() {
-    let timer0 = timer::Timer::new(timer::Idx::Timer0);
-    timer::int_clear(timer0, timer::TIMER_IF_OF);
+    let mut timer0 = Timer::timer0();
+    timer0.int_clear(timer::TIMER_IF_OF);
 
     gpio::pin_out_toggle(gpio::Port::E, 2);
 }
@@ -44,27 +45,18 @@ pub extern fn main() {
     gpio::pin_out_clear(gpio::Port::E, 2);
 
     let timer_init = timer::Init {
-        enable:       true,
-        debug_run:    false,
+        debug_run:    true,
         prescale:     timer::Prescale::Prescale1024,
-        clk_sel:      timer::ClkSel::HFPerClk,
-        count_2x:     false,
-        ati:          false,
-        fall_action:  timer::InputAction::None,
-        rise_action:  timer::InputAction::None,
-        mode:         timer::Mode::Up,
-        dma_clr_act:  false,
-        quad_mode_x4: false,
-        one_shot:     false,
-        sync:         false
+        ..Default::default()
     };
 
-    let timer0 = timer::Timer::new(timer::Idx::Timer0);
 
-    timer::int_enable(timer0, timer::TIMER_IF_OF);
+    let mut timer0 = Timer::timer0();
+
+    timer0.int_enable(timer::TIMER_IF_OF);
     nvic::enable_IRQ(nvic::IRQn::TIMER0);
-    timer::top_set(timer0, TOP);
-    timer::init(timer0, &timer_init);
+    timer0.top_set(TOP);
+    timer0.init(&timer_init);
 
     loop {}
 }
