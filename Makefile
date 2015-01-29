@@ -1,3 +1,5 @@
+-include Makefile.user
+
 DEVICE=EFM32GG990F1024
 TARGET=thumbv7m-none-eabi
 
@@ -21,6 +23,7 @@ SRCS = \
   $(LIB_PATH)/emlib/src/em_cmu.c \
   $(LIB_PATH)/emlib/src/em_emu.c \
   $(LIB_PATH)/emlib/src/em_gpio.c \
+  $(LIB_PATH)/emlib/src/em_rtc.c \
   $(LIB_PATH)/emlib/src/em_system.c \
   $(LIB_PATH)/emlib/src/em_timer.c \
   $(LIB_PATH)/emlib/src/em_int.c \
@@ -42,6 +45,7 @@ SRCS += emlib/gpio.c \
 	emlib/emu.c \
 	emlib/chip.c \
 	cmsis/cmsis.c \
+	emlib/rtc.c \
 	emlib/swo.c \
 	emlib/timer.c \
 	emdrv/gpiointerrupt.c \
