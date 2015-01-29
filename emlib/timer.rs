@@ -11,14 +11,16 @@ pub const TIMER_IF_ICBOF1: u32 = (0x1 << 9);
 pub const TIMER_IF_ICBOF2: u32 = (0x1 << 10);
 
 #[repr(C)]
+#[allow(non_snake_case)]
 pub struct CC {
     pub CTRL: u32,
     pub CCV: u32,
     pub CCVP: u32,
-    pub CCVN: u32,
+    pub Ccvn: u32,
 }
 
 #[repr(C)]
+#[allow(non_snake_case)]
 pub struct Timer {
     pub CTRL: u32,
     pub CMD: u32,
