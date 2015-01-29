@@ -8,7 +8,6 @@ use cmsis::nvic;
 use emlib::cmu;
 use emlib::chip;
 use emlib::gpio;
-use emlib::emu;
 use emlib::rtc;
 
 mod emlib;
@@ -22,7 +21,8 @@ pub mod std {
     pub use core::default;
 }
 
-const RTC_FREQ: u32 = 32768;
+const LFXO_FREQ: u32 = 32768;
+const RTC_TIMEOUT_S: u32 = 2;
 
 fn rtc_setup() {
     // let rtc_init = rtc::Init { enable: false, .. rtc::Init::default() };
@@ -34,16 +34,13 @@ fn rtc_setup() {
     /* Enable LFXO as LFACLK in CMU. This will also start LFXO */
     cmu::clock_select_set(cmu::Clock::LFA, cmu::Select::LFXO);
 
-    /* Set a clock divisor of 32 to reduce power conumption. */
-    cmu::clock_div_set(cmu::Clock::RTC, 32);
-
     /* Enable RTC clock */
     cmu::clock_enable(cmu::Clock::RTC, true);
 
     rtc::init(&rtc_init);
 
     /* Interrupt every second */
-    rtc::compare_set(0, ((RTC_FREQ / 32)) - 1 );
+    rtc::compare_set(0, LFXO_FREQ * RTC_TIMEOUT_S);
 
     /* Enable interrupt */
     nvic::enable_IRQ(nvic::IRQn::RTC);
@@ -68,6 +65,8 @@ pub extern fn main() {
     rtc_setup();
 
     gpio_setup();
+
+    loop { }
 }
 
 #[no_mangle]
