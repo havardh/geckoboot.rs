@@ -1,4 +1,5 @@
 #![no_std]
+#![allow(unstable)]
 
 extern crate core;
 
