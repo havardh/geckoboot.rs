@@ -1,4 +1,5 @@
 #![no_std]
+#![start]
 #![feature(lang_items)]
 
 extern crate core;
@@ -58,8 +59,8 @@ fn gpio_setup() {
 
 }
 
-#[no_mangle]
-pub extern fn main() {
+#[start]
+fn start(_argc: isize, _argv: *const *const u8) -> isize {
 
     chip::init();
 
@@ -71,4 +72,6 @@ pub extern fn main() {
     loop {}
 }
 
-
+#[lang = "stack_exhausted"] extern fn stack_exhausted() {}
+#[lang = "eh_personality"] extern fn eh_personality() {}
+#[lang = "panic_fmt"] fn panic_fmt() -> ! { loop {} }

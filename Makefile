@@ -50,30 +50,35 @@ PROJ_NAME=blinky
 # Normally you shouldn't need to change anything below this line!
 #######################################################################################
 
-RUSTC=$(RUSTC_PATH)rustc
+RUSTC=/usr/local/bin/rustc
 CC=$(ARM_GCC_TOOLCHAIN)/bin/arm-none-eabi-gcc
+AR=$(ARM_GCC_TOOLCHAIN)/bin/arm-none-eabi-ar
 GDB=$(ARM_GCC_TOOLCHAIN)/bin/arm-none-eabi-gdb
 OBJCOPY=$(ARM_GCC_TOOLCHAIN)/bin/arm-none-eabi-objcopy
 FLASH=eACommander
 
-CFLAGS  = -O0 -Wall -T$(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/efm32gg.ld
+AFLAGS = -mthumb -mcpu=cortex-m3 
+
+CFLAGS	= -O0 -Wall -T$(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/efm32gg.ld
 CFLAGS += -mthumb -mcpu=cortex-m3
 CFLAGS += $(INCLUDEPATHS)
 CFLAGS += -D$(DEVICE)
-CFLAGS += -std=c99 --specs=nano.specs
+CFLAGS += -std=c99
 CFLAGS += -Wl,--start-group -lgcc -lc -lnosys -Wl,--end-group
 
-#CFLAGS += -nostartfiles
-
 RUSTFLAGS = --target $(TARGET) \
-	--crate-type lib -g \
-	-L $(LIB_DIR) --emit asm \
+	-g \
+	-L$(LIB_DIR) \
+    -C link-args="$(LDFLAGS)" \
 	--out-dir $(OUT_DIR) \
 	-A non_camel_case_types \
 	-A dead_code \
-	-A non_snake_case
+	-A non_snake_case --verbose \
+	-Z print-link-args
 
 RUSTLIBFLAGS = -O -g --target $(TARGET) -L $(LIB_DIR) --cfg stage0 --out-dir $(LIB_DIR)
+
+LDFLAGS = -T$(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/efm32gg.ld $(AFLAGS) -v
 
 # Note: A bug in the OSX eACommander requires at least two flags to run in cli mode
 FLASHFLAGS = --verify --reset
@@ -81,40 +86,40 @@ FLASHFLAGS = --verify --reset
 # add startup file to build
 SRCS += $(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/startup_efm32gg.S
 OBJS = $(SRCS:.c=.o)
+OBJS := $(OBJS:.s=.o)
+
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $@
+
+.s.o:
+	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: proj
 
 all: clean proj
 
-proj: $(OUT_DIR)/$(PROJ_NAME).elf
+proj: $(OUT_DIR)/$(PROJ_NAME).hex $(OUT_DIR)/$(PROJ_NAME).bin
 
-$(OUT_DIR)/$(PROJ_NAME).s: $(PROJ_NAME).rs #$(OUT_DIR)/libcore.rlib $(OUT_DIR)/libcollections.rlib
-	$(RUSTC) $(RUSTFLAGS) $(PROJ_NAME).rs
+$(LIB_DIR)/libcompiler-rt.a: $(OBJS)
+	$(AR) rcs $@ $(OBJS)
 
-$(OUT_DIR)/$(PROJ_NAME).elf: $(SRCS) $(OUT_DIR)/$(PROJ_NAME).s
-	$(CC) -O0 $(CFLAGS) $^ -o $@
+$(OUT_DIR)/$(PROJ_NAME).elf: $(PROJ_NAME).rs $(LIB_DIR)/libcompiler-rt.a #$(OUT_DIR)/libcore.rlib 
+	$(RUSTC) $(RUSTFLAGS) $(PROJ_NAME).rs -o $@
+
+$(OUT_DIR)/$(PROJ_NAME).hex: $(OUT_DIR)/$(PROJ_NAME).elf
 	$(OBJCOPY) -O ihex $(OUT_DIR)/$(PROJ_NAME).elf $(OUT_DIR)/$(PROJ_NAME).hex
+
+$(OUT_DIR)/$(PROJ_NAME).bin: $(OUT_DIR)/$(PROJ_NAME).elf
 	$(OBJCOPY) -O binary $(OUT_DIR)/$(PROJ_NAME).elf $(OUT_DIR)/$(PROJ_NAME).bin
 
 # Building Rust library
 
 .PHONY: librust
-librust: $(OUT_DIR)/libcore.rlib $(OUT_DIR)/libcollections.rlib
+librust: $(OUT_DIR)/libcore.rlib
 
 $(OUT_DIR)/libcore.rlib: $(RUST_SRC_HOME)/src/libcore/lib.rs
 	$(RUSTC) $(RUSTLIBFLAGS) $(RUST_SRC_HOME)/src/libcore/lib.rs
 
-$(OUT_DIR)/libcollections.rlib: $(RUST_SRC_HOME)/src/libcollections/lib.rs $(OUT_DIR)/libunicode.rlib $(OUT_DIR)/liballoc.rlib
-	$(RUSTC) $(RUSTLIBFLAGS) $(RUST_SRC_HOME)/src/libcollections/lib.rs
-
-$(OUT_DIR)/libunicode.rlib: $(RUST_SRC_HOME)/src/libunicode/lib.rs
-	$(RUSTC) $(RUSTLIBFLAGS) $(RUST_SRC_HOME)/src/libunicode/lib.rs
-
-$(OUT_DIR)/liballoc.rlib: $(RUST_SRC_HOME)/src/liballoc/lib.rs $(OUT_DIR)/liblibc.rlib
-	$(RUSTC) $(RUSTLIBFLAGS) $(RUST_SRC_HOME)/src/liballoc/lib.rs
-
-$(OUT_DIR)/liblibc.rlib: $(RUST_SRC_HOME)/src/liblibc/lib.rs
-	$(RUSTC) $(RUSTLIBFLAGS) $(RUST_SRC_HOME)/src/liblibc/lib.rs
 # Rust Library
 
 .PHONY: flash
@@ -127,6 +132,3 @@ debug:
 
 clean:
 	rm -f out/*
-
-test.elf: test.c
-	arm-none-eabi-gcc -g $(INCLUDEPATHS) --specs=nosys.specs -D$(DEVICE) -mthumb -mcpu=cortex-m3 -mlittle-endian -T$(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/efm32gg.ld $(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/system_efm32gg.c  $(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/startup_efm32gg.s test.c -o test.elf
