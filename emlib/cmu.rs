@@ -1,14 +1,20 @@
 #[repr(C)]
 pub enum Clock {
-    LFA = 0x60002,
-    CORE = 262176,
-    HFPER = 164112,
-    GPIO = 184832,
-    CORELE = 279296,
-    HF = 81,
-    TIMER0 = 152064,
-    RTC = 529456
+    LFA    = 0x60002,
+    CORE   = 0x40020,
+    HFPER  = 0x28110,
+    GPIO   = 0x2d200,
+    CORELE = 0x44300,
+    HF     = 0x51,
+    TIMER0 = 0x25200,
+    RTC    = 0x81430,
 }
+
+
+
+
+
+
 
 /** High frequency RC bands. */
 #[repr(C)]
@@ -24,12 +30,12 @@ pub enum HFRCOBand {
 /** Oscillator types. */
 #[repr(C)]
 pub enum Osc {
-  LFXO,
-  LFRCO,
-  HFXO,
-  HFRCO,
-  AUXHFRCO,
-  ULFRCO,
+    LFXO,
+    LFRCO,
+    HFXO,
+    HFRCO,
+    AUXHFRCO,
+    ULFRCO,
 }
 
 /** Selectable clock sources. */
