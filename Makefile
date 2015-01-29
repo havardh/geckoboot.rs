@@ -3,7 +3,6 @@
 DEVICE=EFM32GG990F1024
 TARGET=thumbv7m-none-eabi
 
-ARM_GCC_TOOLCHAIN=$(SIMPLICITY_STUDIO_HOME)/developer/toolchains/gnu_arm/4.8_2013q4/
 LIB_PATH=$(SIMPLICITY_STUDIO_HOME)/developer/sdks/efm32/v2
 
 RUSTC=/usr/local/bin/rustc
