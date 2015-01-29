@@ -1,5 +1,7 @@
 use core::default::Default;
 
+pub const RTC_IEN_COMP0: u32 = (0x1 << 1);
+
 #[repr(C)]
 pub struct Init {
     pub enable: bool,
@@ -85,5 +87,3 @@ pub fn init(init: &Init) {
 pub fn counter_reset() {
     unsafe { RTC_CounterReset() }
 }
-
-pub const RTC_IEN_COMP0: u32 = (0x1 << 1);
