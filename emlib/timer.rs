@@ -1,6 +1,15 @@
 use core::intrinsics::transmute;
 use core::default::Default;
 
+pub const TIMER_IF_OF: u32     = (0x1 << 0);
+pub const TIMER_IF_UF: u32     = (0x1 << 1);
+pub const TIMER_IF_CC0: u32    = (0x1 << 4);
+pub const TIMER_IF_CC1: u32    = (0x1 << 5);
+pub const TIMER_IF_CC2: u32    = (0x1 << 6);
+pub const TIMER_IF_ICBOF0: u32 = (0x1 << 8);
+pub const TIMER_IF_ICBOF1: u32 = (0x1 << 9);
+pub const TIMER_IF_ICBOF2: u32 = (0x1 << 10);
+
 #[repr(C)]
 pub struct CC {
     pub CTRL: u32,
@@ -152,8 +161,6 @@ impl Timer {
         unsafe { STATIC_INLINE_TIMER_Unlock(self) }
     }
 
-
-    
 }
 
 #[repr(u8)]
@@ -389,38 +396,29 @@ extern {
     #[inline]
     fn GET_TIMER3() -> *mut Timer;
 
-    pub fn STATIC_INLINE_TIMER_CaptureGet(timer: &Timer, ch: u32) -> u32;
-    pub fn STATIC_INLINE_TIMER_CompareBufSet(timer: &Timer, ch: u32, val: u32);
-    pub fn STATIC_INLINE_TIMER_CompareSet(timer: &Timer, ch: u32, val: u32);
-    pub fn STATIC_INLINE_TIMER_CounterGet(timer: &Timer) -> u32;
-    pub fn STATIC_INLINE_TIMER_CounterSet(timer: &Timer, val: u32);
-    pub fn STATIC_INLINE_TIMER_Enable(timer: &Timer, enable: bool);
-    pub fn TIMER_Init(timer: &Timer, init: &Init);
-    pub fn TIMER_InitCC(timer: &Timer, ch: u32, init: &InitCC);
-    pub fn TIMER_InitDTI(timer: &Timer, init: &InitDTI);
-    pub fn STATIC_INLINE_TIMER_EnableDTI(timer: &Timer, enable: bool);
-    pub fn STATIC_INLINE_TIMER_GetDTIFault(timer: &Timer) -> u32;
-    pub fn STATIC_INLINE_TIMER_ClearDTIFault(timer: &Timer, flags: u32);
-    pub fn STATIC_INLINE_TIMER_IntClear(timer: &Timer, flags: u32);
-    pub fn STATIC_INLINE_TIMER_IntDisable(timer: &Timer, flags: u32);
-    pub fn STATIC_INLINE_TIMER_IntEnable(timer: &Timer, flags: u32);
-    pub fn STATIC_INLINE_TIMER_IntGet(timer: &Timer) -> u32;
-    pub fn STATIC_INLINE_TIMER_IntGetEnabled(timer: &Timer) -> u32;
-    pub fn STATIC_INLINE_TIMER_IntSet(timer: &Timer, flags: u32);
-    pub fn STATIC_INLINE_TIMER_Lock(timer: &Timer);
-    pub fn TIMER_Reset(timer: &Timer);
-    pub fn STATIC_INLINE_TIMER_TopBufSet(timer: &Timer, val: u32);
-    pub fn STATIC_INLINE_TIMER_TopGet(timer: &Timer) -> u32;
-    pub fn STATIC_INLINE_TIMER_TopSet(timer: &Timer, val: u32);
-    pub fn STATIC_INLINE_TIMER_Unlock(timer: &Timer);
+    fn STATIC_INLINE_TIMER_CaptureGet(timer: &Timer, ch: u32) -> u32;
+    fn STATIC_INLINE_TIMER_CompareBufSet(timer: &Timer, ch: u32, val: u32);
+    fn STATIC_INLINE_TIMER_CompareSet(timer: &Timer, ch: u32, val: u32);
+    fn STATIC_INLINE_TIMER_CounterGet(timer: &Timer) -> u32;
+    fn STATIC_INLINE_TIMER_CounterSet(timer: &Timer, val: u32);
+    fn STATIC_INLINE_TIMER_Enable(timer: &Timer, enable: bool);
+    fn TIMER_Init(timer: &Timer, init: &Init);
+    fn TIMER_InitCC(timer: &Timer, ch: u32, init: &InitCC);
+    fn TIMER_InitDTI(timer: &Timer, init: &InitDTI);
+    fn STATIC_INLINE_TIMER_EnableDTI(timer: &Timer, enable: bool);
+    fn STATIC_INLINE_TIMER_GetDTIFault(timer: &Timer) -> u32;
+    fn STATIC_INLINE_TIMER_ClearDTIFault(timer: &Timer, flags: u32);
+    fn STATIC_INLINE_TIMER_IntClear(timer: &Timer, flags: u32);
+    fn STATIC_INLINE_TIMER_IntDisable(timer: &Timer, flags: u32);
+    fn STATIC_INLINE_TIMER_IntEnable(timer: &Timer, flags: u32);
+    fn STATIC_INLINE_TIMER_IntGet(timer: &Timer) -> u32;
+    fn STATIC_INLINE_TIMER_IntGetEnabled(timer: &Timer) -> u32;
+    fn STATIC_INLINE_TIMER_IntSet(timer: &Timer, flags: u32);
+    fn STATIC_INLINE_TIMER_Lock(timer: &Timer);
+    fn TIMER_Reset(timer: &Timer);
+    fn STATIC_INLINE_TIMER_TopBufSet(timer: &Timer, val: u32);
+    fn STATIC_INLINE_TIMER_TopGet(timer: &Timer) -> u32;
+    fn STATIC_INLINE_TIMER_TopSet(timer: &Timer, val: u32);
+    fn STATIC_INLINE_TIMER_Unlock(timer: &Timer);
 
 }
-
-pub const TIMER_IF_OF: u32     = (0x1 << 0);
-pub const TIMER_IF_UF: u32     = (0x1 << 1);
-pub const TIMER_IF_CC0: u32    = (0x1 << 4);
-pub const TIMER_IF_CC1: u32    = (0x1 << 5);
-pub const TIMER_IF_CC2: u32    = (0x1 << 6);
-pub const TIMER_IF_ICBOF0: u32 = (0x1 << 8);
-pub const TIMER_IF_ICBOF1: u32 = (0x1 << 9);
-pub const TIMER_IF_ICBOF2: u32 = (0x1 << 10);
