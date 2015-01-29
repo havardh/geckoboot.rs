@@ -25,6 +25,7 @@ SRCS = \
   $(LIB_PATH)/emlib/src/em_gpio.c \
   $(LIB_PATH)/emlib/src/em_rtc.c \
   $(LIB_PATH)/emlib/src/em_system.c \
+  $(LIB_PATH)/emlib/src/em_timer.c \
   $(LIB_PATH)/emlib/src/em_int.c \
   $(LIB_PATH)/kits/common/drivers/retargetio.c \
   $(LIB_PATH)/emdrv/gpiointerrupt/src/gpiointerrupt.c
@@ -46,6 +47,7 @@ SRCS += emlib/gpio.c \
 	cmsis/cmsis.c \
 	emlib/rtc.c \
 	emlib/swo.c \
+	emlib/timer.c \
 	emdrv/gpiointerrupt.c \
 
 # Binaries will be generated with this name (.elf, .bin, .hex, etc)

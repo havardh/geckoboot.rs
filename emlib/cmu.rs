@@ -10,12 +10,6 @@ pub enum Clock {
     RTC    = 0x81430,
 }
 
-
-
-
-
-
-
 /** High frequency RC bands. */
 #[repr(C)]
 pub enum HFRCOBand {
