@@ -3,6 +3,8 @@
 
 extern crate core;
 
+use std::default::Default;
+
 use cmsis::nvic;
 
 use emlib::cmu;
@@ -10,8 +12,8 @@ use emlib::chip;
 use emlib::gpio;
 use emlib::rtc;
 
-mod emlib;
 mod cmsis;
+mod emlib;
 
 pub mod std {
     pub use core::cmp;
@@ -25,8 +27,7 @@ const LFXO_FREQ: u32 = 32768;
 const RTC_TIMEOUT_S: u32 = 2;
 
 fn rtc_setup() {
-    // let rtc_init = rtc::Init { enable: false, .. rtc::Init::default() };
-    let rtc_init = rtc::Init { enable: false, debug_run: false, comp0_top: true };
+    let rtc_init = rtc::Init { enable: false, .. Default::default() };
 
     /* Enable LE domain registers */
     cmu::clock_enable(cmu::Clock::CORELE, true);
