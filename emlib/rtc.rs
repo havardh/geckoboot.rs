@@ -18,20 +18,20 @@ impl Default for Init {
 }
 
 extern {
-    pub fn RTC_CompareGet(comp: u32) -> u32;
-    pub fn RTC_CompareSet(comp: u32, value: u32);
-    pub fn STATIC_INLINE_RTC_CounterGet();
-    pub fn STATIC_INLINE_RTC_IntClear(flags: u32);
-    pub fn STATIC_INLINE_RTC_IntDisable(flags: u32);
-    pub fn STATIC_INLINE_RTC_IntEnable(flags: u32);
-    pub fn STATIC_INLINE_RTC_IntGet() -> u32;
-    pub fn STATIC_INLINE_RTC_IntSet(flags: u32);
-    pub fn RTC_Reset();
+    fn RTC_CompareGet(comp: u32) -> u32;
+    fn RTC_CompareSet(comp: u32, value: u32);
+    fn STATIC_INLINE_RTC_CounterGet();
+    fn STATIC_INLINE_RTC_IntClear(flags: u32);
+    fn STATIC_INLINE_RTC_IntDisable(flags: u32);
+    fn STATIC_INLINE_RTC_IntEnable(flags: u32);
+    fn STATIC_INLINE_RTC_IntGet() -> u32;
+    fn STATIC_INLINE_RTC_IntSet(flags: u32);
+    fn RTC_Reset();
 
-    pub fn RTC_Enable(enable: bool);
-    pub fn RTC_FreezeEnable(enable: bool);
-    pub fn RTC_Init(init: &Init);
-    pub fn RTC_CounterReset();
+    fn RTC_Enable(enable: bool);
+    fn RTC_FreezeEnable(enable: bool);
+    fn RTC_Init(init: &Init);
+    fn RTC_CounterReset();
 }
 
 pub fn compare_get(comp: u32) -> u32 {
