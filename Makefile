@@ -20,7 +20,7 @@ proj:   $(OUT).elf $(OUT).hex $(OUT).bin
 
 
 include Makefile.emlib
-include Makefile.corelib
+include Makefile.rustlib
 
 
 LDFLAGS  = $(AFLAGS) -T$(LIB_PATH)/Device/SiliconLabs/EFM32GG/Source/GCC/efm32gg.ld
