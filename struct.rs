@@ -1,4 +1,6 @@
 #![no_std]
+#![no_main]
+#![allow(unstable)]
 #![feature(lang_items)]
 
 extern crate core;
@@ -12,7 +14,14 @@ use core::intrinsics::{volatile_load, volatile_store};
 
 mod emlib;
 mod cmsis;
-mod zero { pub mod zero; }
+
+pub mod std {
+  pub use core::cmp;  // used for #[derive(Eq)] until fixed in rust.
+  pub use core::option;
+  pub use core::num;
+  pub use core::marker;
+}
+
 
 static mut msTicks: u32 = 0;
 
@@ -29,11 +38,6 @@ fn delay(dlyTicks: u32) {
         let curTicks = volatile_load(&msTicks as *const u32);
         while volatile_load(&msTicks as *const u32) - curTicks < dlyTicks {}
     }
-}
-
-#[no_mangle]
-pub unsafe extern fn _start() {
-    main()
 }
 
 const LED0: u32 = 2;
@@ -75,7 +79,7 @@ fn init() {
 }
 
 #[no_mangle]
-pub unsafe extern fn main() {
+pub extern fn main() {
 
     init();
 
@@ -97,3 +101,6 @@ pub unsafe extern fn main() {
 }
 
 
+#[lang = "stack_exhausted"] extern fn stack_exhausted() {}
+#[lang = "eh_personality"] extern fn eh_personality() {}
+#[lang = "panic_fmt"] fn panic_fmt() -> ! { loop {} }

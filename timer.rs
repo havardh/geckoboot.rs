@@ -1,5 +1,7 @@
 #![no_std]
+#![no_main]
 #![allow(unstable)]
+#![feature(lang_items)]
 
 extern crate core;
 
@@ -26,6 +28,7 @@ pub mod std {
 static TOP: u32 = 27342;
 
 #[no_mangle]
+#[allow(non_snake_case)]
 pub extern fn TIMER0_IRQHandler() {
     let timer0 = Timer::timer0();
     timer0.int_clear(timer::TIMER_IF_OF);
@@ -61,3 +64,7 @@ pub extern fn main() {
 
     loop {}
 }
+
+#[lang = "stack_exhausted"] extern fn stack_exhausted() {}
+#[lang = "eh_personality"] extern fn eh_personality() {}
+#[lang = "panic_fmt"] fn panic_fmt() -> ! { loop {} }

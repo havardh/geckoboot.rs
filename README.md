@@ -16,7 +16,7 @@ Setup:
 ------
 
 The `rustc` command must be available on your path.
-Add the environment variables `SIMPLICITY_STUDIO_HOME` and `RUST_SRC_HOME` pointing to Silicon Labs Simplicity Studio and the Rust Source respectivly.
+Add the environment variables `SIMPLICITY_STUDIO_HOME` and `RUST_SRC_HOME` pointing to Silicon Labs Simplicity Studio and the Rust Source respectivly. And the arm-gcc-toolchain must be on your path.
 For the `make flash` command to work the utility eACommander must be on your path.
 
 Compiling:

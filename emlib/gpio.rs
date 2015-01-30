@@ -86,8 +86,8 @@ pub fn dbg_location_set(location: u32) {
     unsafe { GPIO_DbgLocationSet(location) }
 }
 
-pub fn int_config(port: Port, pin: u32, risingEdge: bool, fallingEdge: bool, enable: bool) {
-    unsafe { GPIO_IntConfig(port, pin, risingEdge, fallingEdge, enable) }
+pub fn int_config(port: Port, pin: u32, rising_edge: bool, falling_edge: bool, enable: bool) {
+    unsafe { GPIO_IntConfig(port, pin, rising_edge, falling_edge, enable) }
 }
 
 pub fn pin_mode_set(port: Port, pins: u32, mode: Mode, out: u32) {
@@ -98,35 +98,35 @@ pub fn drive_mode_set(port: Port, mode: DriveMode) {
     unsafe { GPIO_DriveModeSet(port, mode) }
 }
 
-pub fn dbg_SWD_Clk_Enable(enable: bool) {
+pub fn dbg_swd_clk_enable(enable: bool) {
     unsafe { STATIC_INLINE_GPIO_DbgSWDClkEnable(enable) }
 }
 
-pub fn dbg_SWDIO_enable(enable: bool) {
+pub fn dbg_swdio_enable(enable: bool) {
     unsafe { STATIC_INLINE_GPIO_DbgSWDIOEnable(enable) }
 }
 
-pub fn dbg_SWO_enable(enable: bool) {
+pub fn dbg_swo_enable(enable: bool) {
     unsafe { STATIC_INLINE_GPIO_DbgSWOEnable(enable) }
 }
 
-pub fn EM4_disable_pin_wakeup(pinmask: u32) {
+pub fn em4_disable_pin_wakeup(pinmask: u32) {
     unsafe { STATIC_INLINE_GPIO_EM4DisablePinWakeup(pinmask) }
 }
 
-pub fn EM4_enable_pin_wakeup(pinmask: u32, polaritymask: u32) {
+pub fn em4_enable_pin_wakeup(pinmask: u32, polaritymask: u32) {
     unsafe { STATIC_INLINE_GPIO_EM4EnablePinWakeup(pinmask, polaritymask) }
 }
 
-pub fn EM4_get_pin_wakeup_cause() -> u32 {
+pub fn em4_get_pin_wakeup_cause() -> u32 {
     unsafe { STATIC_INLINE_GPIO_EM4GetPinWakeupCause() }
 }
 
-pub fn EM4_set_pin_retention(enable: bool) {
+pub fn em4_set_pin_retention(enable: bool) {
     unsafe { STATIC_INLINE_GPIO_EM4SetPinRetention(enable) }
 }
 
-pub fn input_sense_Set(val: u32, mask: u32) {
+pub fn input_sense_set(val: u32, mask: u32) {
     unsafe { STATIC_INLINE_GPIO_InputSenseSet(val, mask) }
 }
 

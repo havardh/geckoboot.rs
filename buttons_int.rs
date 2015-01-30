@@ -1,5 +1,8 @@
 #![no_std]
+#![no_main]
+#![allow(unstable)]
 #![feature(lang_items)]
+
 
 extern crate core;
 
@@ -7,12 +10,9 @@ use emlib::chip;
 use emlib::cmu;
 use emlib::gpio;
 use emdrv::gpioint;
-use cmsis::nvic;
-use core::iter::range;
 
 mod emlib;
 mod emdrv;
-mod cmsis;
 
 pub mod std {
   pub use core::cmp;  // used for #[derive(Eq)] until fixed in rust.
@@ -55,7 +55,6 @@ fn gpio_setup() {
 
     gpio::int_config(gpio::Port::B, PB0, false, true, true);
     gpio::int_config(gpio::Port::B, PB1, false, true, true);
-
 }
 
 #[no_mangle]
@@ -71,4 +70,6 @@ pub extern fn main() {
     loop {}
 }
 
-
+#[lang = "stack_exhausted"] extern fn stack_exhausted() {}
+#[lang = "eh_personality"] extern fn eh_personality() {}
+#[lang = "panic_fmt"] fn panic_fmt() -> ! { loop {} }
